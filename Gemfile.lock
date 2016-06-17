@@ -134,6 +134,7 @@ DEPENDENCIES
   mini_magick (= 3.8.0)
   minitest
   mysql2 (~> 0.3.18)
+  rack (= 1.5.5)
   rails (= 4.1.4)
   rake (~> 0.9.6)
   sass-rails (~> 4.0.3)

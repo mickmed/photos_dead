@@ -65,7 +65,7 @@ GEM
       subexec (~> 0.2.1)
     minitest (5.9.0)
     multi_json (1.12.1)
-    mysql2 (0.4.4)
+    mysql2 (0.3.21)
     polyglot (0.3.5)
     rack (1.5.5)
     rack-test (0.6.3)
@@ -130,7 +130,7 @@ DEPENDENCIES
   jquery-turbolinks
   mini_magick (= 3.8.0)
   minitest
-  mysql2
+  mysql2 (~> 0.3.18)
   rails (= 4.1.4)
   rake (~> 0.9.6)
   sass-rails (~> 4.0.3)

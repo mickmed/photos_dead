@@ -2,6 +2,7 @@ source 'https://rubygems.org'
 
 gem 'rails', '4.1.4'
 gem 'carrierwave',             '0.10.0'
+gem 'fog',                     '1.36.0'
 gem 'jquery-turbolinks'
 gem 'mini_magick',             '3.8.0'
 gem 'sprockets', '2.11'

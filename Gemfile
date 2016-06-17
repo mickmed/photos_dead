@@ -4,6 +4,7 @@ gem 'rails', '4.1.4'
 gem 'carrierwave',             '0.10.0'
 gem 'jquery-turbolinks'
 gem 'mini_magick',             '3.8.0'
+gem 'sprockets'
 ### OpenShift Online changes:
 
 # Fix the conflict with the system 'rake':

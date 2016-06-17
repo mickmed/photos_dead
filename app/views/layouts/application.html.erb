@@ -5,7 +5,9 @@
     
     <%= csrf_meta_tags %>
     <%= render 'layouts/shim' %>
-
+<%= stylesheet_link_tag 'application', media: 'all',
+                                           'data-turbolinks-track' => true %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
 	<!-- <link rel="stylesheet" href="/assets/stylesheets/superslides.css">  -->
 	<!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/jquery.superslides/0.6.2/stylesheets/superslides.css"> -->
  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>

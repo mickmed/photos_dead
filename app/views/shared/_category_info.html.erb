@@ -1,0 +1,32 @@
+<tr>
+    
+    <td class = 'category_user_info' width = '200px'>
+        
+       
+    </td>
+    
+    
+    
+	   
+  	
+  </tr>
+  <tr><td colspan = 3><%= @category.name %></td></tr>
+ <tr><td colspan = 3>
+          <%= link_to "delete", @category, method: :delete,
+                                           data: { confirm: "You sure?" } %>
+          <%= link_to "edit", edit_category_path(@category.id) %>
+        
+        </tr>
+
+
+<%# link_to item.title, item %>
+
+<%# link_to "Reply", new_message_path(:parent_id => i) %> 
+
+
+
+
+	
+
+
+

@@ -1,0 +1,24 @@
+<div class="row">
+  
+  
+   
+
+  <% if @photos %>
+  
+   
+   <%= render @photos %>
+   
+  <% else %>
+ <%= render @r %>
+  <% end %>  
+     
+     
+   
+</div>
+ 
+ <% if @photos %>
+
+     <li><%= will_paginate @photos%></li>
+  
+ <% end %>
+     <%# render 'shared/aside' %>

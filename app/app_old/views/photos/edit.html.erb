@@ -1,0 +1,36 @@
+
+
+<h1>Update Photo</h1>
+
+    <%= form_for(@photo, html: { multipart: true }) do |f| %>
+    <%= render 'shared/error_messages', object: f.object %>
+    
+    <%# f.collection_select(:category_id, @main_cats, :id, :name, {:prompt=>true}, {:id=>'parent'}) %>
+    
+    <%= f.label :title %>
+    <%= f.text_field :title, class: 'form-control' %>
+
+
+  <%= f.label "categories" %><br /><br />
+  <%= f.collection_check_boxes :category_ids, @cats, :id, :name do |b| %>
+  <div class="collection-check-box">
+   <%# b.check_box %>
+   <%= b.label %>
+   <%= b.label(class: "check_box") { b.check_box(class: "check_box") } %>
+   </div>  
+  <% end %>
+    
+   
+  
+   
+   <span class="picture">
+   <%= f.file_field :picture %>
+  </span>
+
+   
+   <%= f.submit "Save changes", class: "btn btn-primary" %>
+    
+	
+  	<% end %>
+  	
+  

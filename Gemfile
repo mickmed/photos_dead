@@ -45,10 +45,10 @@ group :development, :test do
   gem 'minitest'
   gem 'thor'
   gem 'spring'
-  gem 'mysql2'
+  
 end
 
 # Add support for the MySQL
 group :production, :mysql do
-  gem 'mysql2'
+  gem 'mysql2', '~> 0.3.18'
 end

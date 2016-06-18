@@ -2,29 +2,21 @@ class PictureUploader < CarrierWave::Uploader::Base
   storage :file
   
   include CarrierWave::MiniMagick
-  process resize_to_limit: [2000, 2000]
+  process resize_to_limit: [800, 800]
 
- if Rails.env.production?
-    storage :file
-  else
-    storage :file
-  end
+ 
 
   # Override the directory where uploaded files will be stored.
   # This is a sensible default for uploaders that are meant to be mounted:
   def store_dir
    
 
-  "#{ENV['OPENSHIFT_DATA_DIR']}uploads/#{model.class.to_s.underscore}/#{mounted_as}/#{model.id}"
+  "$OPENSHIFT_DATA_DIR/uploads/#{model.class.to_s.underscore}/#{mounted_as}/#{model.id}"
 
 
   end
 
 
-def url
-  return "/uploads/#{model.class.to_s.underscore}/#{mounted_as}/#{model.id}/#{File.basename(file.path)}" if ENV['OPENSHIFT_DATA_DIR'] && file
-  super
-end
 
 
 

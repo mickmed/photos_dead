@@ -19,24 +19,3 @@
 //= require_tree .
 
 
-$(document).ready(function() { 
-document.getElementById("demo").onclick = function() {myFunction()};
-
-function myFunction() {
-  
-   document.getElementById('slides').style.display = "block";
- 
-var windowHeight = $(window).height();
-var headerHeight = $("header").outerHeight();
-var calculatedHeight = windowHeight - headerHeight;
-var heightFill = $('.height-fill')
-$(heightFill).height(calculatedHeight);
-// superslides
-$(function()  {
-    $('#slides').superslides({
-        inherit_height_from: '.height-fill',
-        
-    });
-});
-};
-});

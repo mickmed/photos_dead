@@ -5,7 +5,7 @@ class PictureUploader < CarrierWave::Uploader::Base
   process resize_to_limit: [2000, 2000]
 
  if Rails.env.production?
-    storage :fog
+    storage :file
   else
     storage :file
   end
@@ -15,7 +15,7 @@ class PictureUploader < CarrierWave::Uploader::Base
   def store_dir
    
   prefix = ENV['OPENSHIFT_DATA_DIR'] ? "#{ENV['OPENSHIFT_DATA_DIR']}/" : ""
-  "#{prefix}uploads/#{model.class.to_s.underscore}/#{mounted_as}/#{model.id}"
+  "#{prefix}/uploads/#{model.class.to_s.underscore}/#{mounted_as}/#{model.id}"
 
 
   end

@@ -57,7 +57,7 @@ end
 group :production, :mysql do
   gem 'mysql2', '~> 0.3.18'
 end
-
-group :develpment do
-  gem 'spring'
+group :production, :postgresql do
+  gem 'pg'
 end
+gem 'spring',        group: :development

@@ -1,3 +1,7 @@
+
 CarrierWave.configure do |config|
-  config.cache_dir = File.join(Rails.root, 'tmp', 'uploads', Rails.env)
+  config.permissions = 0666
+  config.directory_permissions = 0777
+  config.storage = :file
 end
+

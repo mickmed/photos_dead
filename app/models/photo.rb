@@ -4,12 +4,11 @@ class Photo < ActiveRecord::Base
  mount_uploader :picture, PictureUploader
  validate  :picture_size
 
-  private
-
-    # Validates the size of an uploaded picture.
-    def picture_size
-      if picture.size > 7.megabytes
-        errors.add(:picture, "should be less than 7MB")
-      end
-    end
-end
+ private
+ # Validates the size of an uploaded picture.
+  def picture_size
+   if picture.size > 7.megabytes
+    errors.add(:picture, "should be less than 7MB")
+   end
+  end
+ end

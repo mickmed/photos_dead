@@ -1,20 +1,13 @@
 <div class='divcenter'>
+ <%= @photo.title %>
+ <%= image_tag @photo.picture, :class=>"img-responsive center-bldock", :id => 'demo', :width => '600', :alt =>"photo pic", :onclick=>"myFunction()" %></div>
 
+ <br><br>
+  <%= @photo.description %>
+  <!-- <span id="demo">full screen</span> -->
 
-<%= @photo.title %>
-<%= image_tag @photo.picture, :class=>"img-responsive center-bldock", :id => 'demo', :width => '600', :alt =>"photo pic", :onclick=>"myFunction()" %></div>
-
-
-
-<br><br>
-<%= @photo.description %>
- <!-- <span id="demo">full screen</span> -->
- 
-
-
-<%= link_to "delete", @photo, method: :delete,data: { confirm: "You sure?" } %>
-<%= link_to "edit", edit_photo_path(@photo.id) %>
-      
+ <%= link_to "delete", @photo, method: :delete,data: { confirm: "You sure?" } %>
+ <%= link_to "edit", edit_photo_path(@photo.id) %>
 </div>
 
 

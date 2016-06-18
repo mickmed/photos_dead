@@ -15,7 +15,7 @@ end
 def index
  
  if Rails.env.production?
-    @r=Photo.all.order("RAND()")
+    @r=Photo.all.order("RANDOM()")
   else
     @r = Photo.all.order("RANDOM()")
   end

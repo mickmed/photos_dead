@@ -162,10 +162,10 @@ GEM
     minitest (5.9.0)
     multi_json (1.12.1)
     mysql2 (0.3.21)
+    net-ssh (2.9.2)
     nokogiri (1.6.8)
       mini_portile2 (~> 2.1.0)
       pkg-config (~> 1.1.7)
-    pg (0.18.4)
     pkg-config (1.1.7)
     polyglot (0.3.5)
     rack (1.5.5)
@@ -225,7 +225,7 @@ PLATFORMS
 DEPENDENCIES
   bootstrap-sass (= 3.2.0.0)
   bootstrap-will_paginate (= 0.0.10)
-  carrierwave
+  carrierwave (= 0.10.0)
   coffee-rails (~> 4.0.0)
   fog (= 1.29.0)
   jbuilder (~> 2.0)
@@ -234,7 +234,7 @@ DEPENDENCIES
   mini_magick (= 3.8.0)
   minitest
   mysql2 (~> 0.3.18)
-  pg
+  net-ssh
   rack (= 1.5.5)
   rails (= 4.1.4)
   rake (~> 0.9.6)

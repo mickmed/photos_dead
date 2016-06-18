@@ -60,7 +60,7 @@ end
   
  def create
    
-       @photo = Photo.new(photo_params)
+       @photo = Photo.new
     if @photo.save
       
       flash[:info] = "Please check your email to activate your account."

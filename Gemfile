@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
 gem 'rails', '4.1.4'
-gem 'carrierwave',             
+gem 'carrierwave'         
 gem 'fog',                     '1.29.0'
 gem 'jquery-turbolinks'
 gem 'mini_magick',             '3.8.0'

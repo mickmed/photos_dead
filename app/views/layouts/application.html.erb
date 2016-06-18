@@ -22,7 +22,25 @@
 
 
 
-
+<% if @r %>
+  <div id="slides" style="display:none;">	 
+   <div class = "height-fill">
+    <div class="slides-container">
+    <% @r.each do |photo| %>
+   	<%= photo.title %>
+  	<%= link_to image_tag(photo.picture), {action: 'show', controller: 'photos', id: photo.id} %>
+  <% end %>
+    </div>
+  </div>
+ <div id="fullNav">
+  <nav class="slides-navigation">
+  	
+   <a href="#" class="next">Next</a>
+   <a href="#" class="prev">Previous</a>
+  </nav>
+  </div>
+ </div>
+ <% end %>
 
 
   

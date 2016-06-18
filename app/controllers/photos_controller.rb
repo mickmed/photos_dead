@@ -15,7 +15,7 @@ end
 def index
  
  if Rails.env.production?
-    @r=Photo.all.order("RANDOM()")
+    @r=Photo.all.order("RAND()")
   else
     @r = Photo.all.order("RANDOM()")
   end
@@ -60,10 +60,10 @@ end
   
  def create
    
-       @photo = Photo.new
+       @photo = Photo.new(photo_params)
     if @photo.save
       
-      flash[:info] = "Please check your email to activate your account."
+      flash[:info] = "saved"
       redirect_to root_url
     else
       render 'new'

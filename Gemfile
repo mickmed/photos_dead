@@ -50,8 +50,9 @@ group :development, :test do
   gem 'spring'
   
 end
+gem 'pg', :group => [:production]
 
 # Add support for the MySQL
 group :production, :mysql do
-  gem 'mysql2', '~> 0.3.18'
+  gem 'mysql2'
 end

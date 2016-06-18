@@ -185,6 +185,7 @@ GEM
     nokogiri (1.6.8)
       mini_portile2 (~> 2.1.0)
       pkg-config (~> 1.1.7)
+    pg (0.18.4)
     pkg-config (1.1.7)
     polyglot (0.3.5)
     rack (1.5.5)
@@ -253,7 +254,8 @@ DEPENDENCIES
   jquery-turbolinks
   mini_magick (= 3.8.0)
   minitest
-  mysql2 (~> 0.3.18)
+  mysql2
+  pg
   rack (= 1.5.5)
   rails (= 4.1.4)
   rake (~> 0.9.6)

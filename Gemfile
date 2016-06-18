@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
 gem 'rails', '4.1.4'
-gem 'carrierwave',             '0.10.0'
+gem 'carrierwave',             
 gem 'fog',                     '1.36.0'
 gem 'jquery-turbolinks'
 gem 'mini_magick',             '3.8.0'
@@ -54,5 +54,5 @@ gem 'pg', :group => [:production]
 
 # Add support for the MySQL
 group :production, :mysql do
-  gem 'mysql'
+  gem 'mysql2', '~> 0.3.18'
 end

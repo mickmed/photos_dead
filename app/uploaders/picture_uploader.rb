@@ -15,7 +15,7 @@ class PictureUploader < CarrierWave::Uploader::Base
   def store_dir
    
   prefix = ENV['OPENSHIFT_DATA_DIR'] ? "#{ENV['OPENSHIFT_DATA_DIR']}/" : ""
-  "#{prefix}/uploads/#{model.class.to_s.underscore}/#{mounted_as}/#{model.id}"
+  "#{prefix}uploads/#{model.class.to_s.underscore}/#{mounted_as}/#{model.id}"
 
 
   end

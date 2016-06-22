@@ -2,7 +2,7 @@ class PictureUploader < CarrierWave::Uploader::Base
   storage :file
   permissions 0700
   include CarrierWave::MiniMagick
-  process resize_to_limit: [800, 800]
+  process resize_to_limit: [4000, 4000]
 
   # Override the directory where uploaded files will be stored.
   # This is a sensible default for uploaders that are meant to be mounted:

@@ -12,10 +12,12 @@ end
 
 def index
  if Rails.env.production?
-  @r = Photo.all.order("RAND()")
+  @r = Photo.where.not(categories: {id: 1}).includes(:categories).order("RAND()").limit(8)
  else
-  @r = Photo.all.order("RANDOM()")
+  @r = Photo.where.not(categories: {id: 1}).includes(:categories).order("RANDOM()").limit(8)
  end
+
+   
     
  @cats = Category.all
   

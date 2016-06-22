@@ -12,9 +12,9 @@ end
 
 def index
  if Rails.env.production?
-  @r=Photo.all.order("RANDOM()")
+  @r = Photo.all.where.not(category_id: 2).order("RANDOM()")
  else
-  @r = Photo.all.order("RANDOM()")
+  #@r = Photo.all.where.not(photo.category: "smog").order("RANDOM()")
  end
     
  @cats = Category.all

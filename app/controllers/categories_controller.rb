@@ -11,7 +11,7 @@ end
  
  
 def index
-  @cats = Category.all
+  @cats = Category.where.not(id: 1)
   @categories = Category.all.paginate(page: params[:page])
 end
 
@@ -27,11 +27,11 @@ end
  
  def new
   @category = Category.new
-  @cats = Category.all
+  @cats = Category.where.not(id: 1)
  end
   
  def create
-   @cats = Category.all
+   @cats = Category.where.not(id: 1)
   @category = Category.new(category_params)
   if params[:title].nil?
     if @category.save
@@ -45,7 +45,7 @@ end
   
   
 def edit
-  @cats = Category.all
+  @cats = Category.where.not(id: 1)
   @category = Category.find(params[:id])
 end
 
@@ -61,7 +61,7 @@ def update
 end
   
 def destroy
-  @cats = Category.all
+  @cats = Category.where.not(id: 1)
   Category.find(params[:id]).destroy
   flash[:success] = "photo deleted"
   redirect_to root_url

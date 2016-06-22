@@ -14,12 +14,12 @@ def index
  if Rails.env.production?
   @r = Photo.where.not(categories: {id: 1}).includes(:categories).order("RAND()").limit(8)
  else
-  @r = Photo.where.not(categories: {id: 1}).includes(:categories).order("RANDOM()").limit(8)
+  @r = Photo.where.not(categories: {id: 1}).includes(:categories)
  end
 
    
     
- @cats = Category.all
+ @cats = Category.where.not(id: 1)
   
  if params[:abc] == 'abc'
   @photos = Photo.all.order('title asc').paginate(:page => params[:page], :per_page => 5)
@@ -33,14 +33,14 @@ end
 
 def show
  @r = Photo.all
- @cats = Category.all
+ @cats = Category.where.not(id: 1)
  @photo = Photo.find(params[:id])
  #@items = @user.items.paginate(page: params[:page])
  end
     
  def new
   @photo = Photo.new
-  @cats = Category.all
+  @cats = Category.where.not(id: 1)
  end
   
  def create
@@ -55,7 +55,7 @@ end
   
 def edit
  @photo = Photo.find(params[:id])
- @cats = Category.all
+ @cats = Category.where.not(id: 1)
 end
 
 def update

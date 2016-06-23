@@ -7,6 +7,11 @@
    <%= stylesheet_link_tag 'application', media: 'all',
                                            'data-turbolinks-track' => true %>
    <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+      <script>
+<!--
+window.open("photos","fs","fullscreen,scrollbars")
+//-->
+</script> 
    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
    <script src="https://cdn.jsdelivr.net/jquery.superslides/0.6.2/jquery.superslides.js"></script>
 	<!-- <link rel="stylesheet" href="/assets/stylesheets/superslides.css">  -->
@@ -14,6 +19,7 @@
     <!-- <script src="/assets/javascripts/jquery.easing.1.3.js"></script> -->
     <!-- <script src="/assets/javascripts/jquery.animate-enhanced.min.js"></script>  -->
     <!-- <script src="/assets/javascripts/jquery.superslides.js" type="text/javascript" charset="utf-8"></script> -->
+ 
  </head>
 <body>
  <%= render 'layouts/header' %>
@@ -23,10 +29,15 @@
     <div class="slides-container">
  	 <% @r.each do |photo| %>
    	  <%= photo.title %>
+   	  <%= link_to root_path do %>
+ 
   	  <%# link_to image_tag(photo.picture), {action: 'show', controller: 'photos', id: photo.id} %>
   	
   	  <div class="shoonga" style="background:#ffffdf;background-image: url(<%= photo.picture %>);background-size:contain;background-repeat:no-repeat;background-position: center"></div>
      <% end %>
+     
+      
+<% end %>
     </div>
    </div>
  

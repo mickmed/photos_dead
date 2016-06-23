@@ -55,7 +55,7 @@ end
   
 def edit
  @photo = Photo.find(params[:id])
- @cats = Category.where.not(id: 1)
+ @cats = Category
 end
 
 def update

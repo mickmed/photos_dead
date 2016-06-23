@@ -40,7 +40,7 @@ def show
     
  def new
   @photo = Photo.new
-  @cats = Category.where.not(id: 1)
+  @cats = Category.all
  end
   
  def create

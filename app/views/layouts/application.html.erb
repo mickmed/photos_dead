@@ -23,21 +23,26 @@
     <div class="slides-container">
  	 <% @r.each do |photo| %>
    	  <%= photo.title %>
-  	  <%= link_to image_tag(photo.picture), {action: 'show', controller: 'photos', id: photo.id} %>
+  	  <%# link_to image_tag(photo.picture), {action: 'show', controller: 'photos', id: photo.id} %>
+  	
+  	  <div class="shoonga" style="background:#ffffdf;background-image: url(<%= photo.picture %>);background-size:contain;background-repeat:no-repeat;background-position: center"></div>
      <% end %>
     </div>
    </div>
  
   <div id="fullNav">
    <nav class="slides-navigation">
-    <a href="#" class="next">Next</a>
-    <a href="#" class="prev">Previous</a>
+    <a href="#" class="next">>></a>
+    <a href="#" class="prev"><<</a>
    </nav>
   </div>
  </div>
  <% end %>
 
+ 	
+ 	
  <div class="container">
+ 	
   <%= yield %> 
   <%= render 'layouts/footer' %>
  </div>

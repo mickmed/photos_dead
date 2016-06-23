@@ -55,7 +55,7 @@ end
   
 def edit
  @photo = Photo.find(params[:id])
- @cats = Category
+ @cats = Category.all
 end
 
 def update

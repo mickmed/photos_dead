@@ -1,17 +1,21 @@
-<div class='divcenter'>
- <%= @photo.title %>
- <%= image_tag @photo.picture, :class=>"img-responsive center-bldock", :id => 'fullscreen', :width => '600', :alt =>"photo pic" %></div>
+<br><%= @photo.title %><br>
 
- <br><br>
-  <%= @photo.description %>
-  <!-- <span id="demo">full screen</span> -->
-
-
-
-
-
-
+<div class='menu row' style="-moz-column-width: 490px;">
+ 	
+ <span>
+  
+  <%= image_tag @photo.picture, :class=>"list-group-item img-responsive center-bldock", :id => 'fullscreen', :alt =>"photo pic" %>
+  <div class="list-group-item">
+   <%=@photo.description%>
+  </div>
+ 
+ 
+ </span>
 </div>
+
+
+
+
 
 
 

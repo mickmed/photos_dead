@@ -2,7 +2,7 @@ class PhotosController < ApplicationController
 
 
 before_action :authenticate, except: [:index, :show]
-
+before_filter :random, :except => [:create, :update, :destroy]
 
 def authenticate
  @shoonga = authenticate_or_request_with_http_basic do |username, password|
@@ -10,13 +10,12 @@ def authenticate
  end
 end
 
-def index
- if Rails.env.production?
-  @r = Photo.where.not(categories: {id: 1}).includes(:categories).order("RAND()").limit(8)
- else
-  @r = Photo.where.not(categories: {id: 1}).includes(:categories)
- end
 
+
+
+def index
+
+ 
    
     
  @cats = Category.where.not(id: 1)
@@ -32,7 +31,7 @@ def index
 end
 
 def show
- @r = Photo.where.not(categories: {id: 1}).includes(:categories)
+
  @cats = Category.where.not(id: 1)
  @photo = Photo.find(params[:id])
  @r=@r.unshift(@photo)
@@ -76,11 +75,16 @@ def destroy
  redirect_to root_path
 end
 
-
 private
 
-def photo_params
-      params.require(:photo).permit(:title, :description, :picture, category_ids:[])
-    end
-
+ def photo_params
+  params.require(:photo).permit(:title, :description, :picture, category_ids:[])
+ end
+ def random
+  if Rails.env.production?
+   @r = Photo.where.not(categories: {id: 1}).includes(:categories).order("RAND()").limit(8)
+  else
+   @r = Photo.where.not(categories: {id: 1}).includes(:categories).order("RANDOM()").limit(8)
+  end
+ end
 end

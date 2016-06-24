@@ -1,10 +1,10 @@
-<br><%= @photo.title %><br>
 
-<div class='menu row' style="-moz-column-width: 390px;">
- 	
+
+<div class='menu row' style="-moz-column-width: 400px;width:90%;margin: 0 auto">
+ 	<%= @photo.title %>
  <span>
   
-  <%= image_tag @photo.picture, :class=>"list-group-item img-responsive center-bldock", :id => 'fullscreen', :alt =>"photo pic" %>
+  <%= image_tag @photo.picture, :class=>"list-group-item img-responsive center-bldock", :id => 'fullscreen', :alt =>"photo pic" %><br>
   <div class="list-group-item">
    <%=@photo.description%>
   </div>

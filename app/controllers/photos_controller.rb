@@ -32,7 +32,7 @@ def index
 end
 
 def show
- @r = Photo.all.where.not(categories: {id: 1})
+ @r = Photo.where.not(categories: {id: 1}).includes(:categories)
  @cats = Category.where.not(id: 1)
  @photo = Photo.find(params[:id])
  @r=@r.unshift(@photo)

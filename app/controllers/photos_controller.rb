@@ -35,6 +35,7 @@ def show
  @r = Photo.all
  @cats = Category.where.not(id: 1)
  @photo = Photo.find(params[:id])
+ @r=@r.unshift(@photo)
  #@items = @user.items.paginate(page: params[:page])
  end
     

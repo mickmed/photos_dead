@@ -7,7 +7,7 @@
    <%= stylesheet_link_tag 'application', media: 'all',
                                            'data-turbolinks-track' => true %>
    <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
- 
+   
    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
    <script src="https://cdn.jsdelivr.net/jquery.superslides/0.6.2/jquery.superslides.js"></script>
 	<!-- <link rel="stylesheet" href="/assets/stylesheets/superslides.css">  -->
@@ -19,19 +19,21 @@
  </head>
 <body>
  <%= render 'layouts/header' %>
-  <% if @r %>
+  
   <div id="slides" style="display:none;">	 
    <div class = "height-fill">
     <div class="slides-container">
+    	
  	 <% @r.each do |photo| %>
+ 	
    	  <%= photo.title %>
-   	  <%= link_to root_path do %>
- 
-  	  <%# link_to image_tag(photo.picture), {action: 'show', controller: 'photos', id: photo.id} %>
-  	
-  	  <div class="shoonga" style="background:#ffffdf;background-image: url(<%= photo.picture %>)"></div>
+   	  <% if @photo %>
+   	   <%= link_to photo_path(id: @photo.id) do %>
+ 	    <div class="shoonga" style="background-image: url(<%= photo.picture %>)"></div>
+ 	    <%# link_to image_tag(photo.picture), {action: 'show', controller: 'photos', id: photo.id} %>
+       <% end %>
+      
      <% end %>
-     
       
 <% end %>
     </div>
@@ -44,7 +46,7 @@
    </nav>
   </div>
  </div>
- <% end %>
+
 
  	
  	

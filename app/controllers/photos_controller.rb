@@ -1,7 +1,7 @@
 class PhotosController < ApplicationController
 
 before_action :authenticate, except: [:index, :show]
-before_filter :random, :except => [:create, :update, :destroy]
+before_filter :random, :except => [:create, :update, :destroy, :show]
 
 def authenticate
  @shoonga = authenticate_or_request_with_http_basic do |username, password|
@@ -18,13 +18,18 @@ def index
  end
   
  if params[:category_id]
-  #@photos = Photo.joins("inner join categories on photositems.category_id=categories.id").reorder(@sort).where(category_id: params[:category_id]).paginate(page: params[:page])
+
    @photos = Photo.where(categories: {id: params[:category_id]}).includes(:categories).paginate(:page => params[:page], :per_page => 10)
  end
+ 
+ Rails.cache.write("phot",@photos)  
+  
 end
 
 
 def show
+ @photos = Rails.cache.read("phot",@photos) 
+
  @cats = Category.where.not(id: 1)
  @photo = Photo.find(params[:id])
  @photos=@photos.unshift(@photo)

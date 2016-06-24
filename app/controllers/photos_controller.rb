@@ -1,6 +1,5 @@
 class PhotosController < ApplicationController
 
-
 before_action :authenticate, except: [:index, :show]
 before_filter :random, :except => [:create, :update, :destroy]
 
@@ -11,13 +10,7 @@ def authenticate
 end
 
 
-
-
 def index
-
- 
-   
-    
  @cats = Category.where.not(id: 1)
   
  if params[:abc] == 'abc'
@@ -26,15 +19,15 @@ def index
   
  if params[:category_id]
   #@photos = Photo.joins("inner join categories on photositems.category_id=categories.id").reorder(@sort).where(category_id: params[:category_id]).paginate(page: params[:page])
-   @photos = Photo.where(categories: {id: params[:category_id]}).includes(:categories).paginate(:page => params[:page], :per_page => 30)
+   @photos = Photo.where(categories: {id: params[:category_id]}).includes(:categories).paginate(:page => params[:page], :per_page => 10)
  end
 end
 
-def show
 
+def show
  @cats = Category.where.not(id: 1)
  @photo = Photo.find(params[:id])
- @r=@r.unshift(@photo)
+ @photos=@photos.unshift(@photo)
  #@items = @user.items.paginate(page: params[:page])
  end
     
@@ -82,9 +75,9 @@ private
  end
  def random
   if Rails.env.production?
-   @r = Photo.where.not(categories: {id: 1}).includes(:categories).order("RAND()").limit(8)
+   @photos = Photo.where.not(categories: {id: 1}).includes(:categories).order("RAND()").limit(8).paginate(:page => params[:page], :per_page => 5)
   else
-   @r = Photo.where.not(categories: {id: 1}).includes(:categories).order("RANDOM()").limit(8)
+   @photos = Photo.where.not(categories: {id: 1}).includes(:categories).order("RANDOM()").limit(8).paginate(:page => params[:page], :per_page => 5)
   end
  end
 end

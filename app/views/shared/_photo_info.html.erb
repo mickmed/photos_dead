@@ -1,5 +1,30 @@
 
-
+<div id="slides" style="display:none;">	 
+   <div class = "height-fill">
+    <div class="slides-container">
+    
+     <% @photos.each do |photo| %>
+ 	
+   	  <%= photo.title %>
+   	   
+   	   <%= link_to photo_path(id: @photo.id) do %>
+ 	    <div class="shoonga" style="background-image: url(<%= photo.picture %>)"></div>
+ 	   
+       
+      
+       <% end %>
+      
+      <% end %>
+    </div>
+   </div>
+ 
+  <div id="fullNav">
+   <nav class="slides-navigation">
+    <a href="#" class="next">>></a>
+    <a href="#" class="prev"><<</a>
+   </nav>
+  </div>
+ </div>
 <div class='menu row' style="-moz-column-width: 400px;width:90%;margin: 0 auto">
  	<%= @photo.title %>
  <span>

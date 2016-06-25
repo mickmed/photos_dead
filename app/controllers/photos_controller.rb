@@ -37,13 +37,13 @@ def show
  end
     
  def new
-  @photo = Photo.new
+  @photo_new = Photo.new
   @cats = Category.all
  end
   
  def create
-  @photo = Photo.new(photo_params)
-  if @photo.save
+  @photo_new = Photo.new(photo_params)
+  if @photo_new.save
    flash[:info] = "saved"
    redirect_to root_url
   else

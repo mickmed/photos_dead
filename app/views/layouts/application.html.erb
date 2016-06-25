@@ -20,7 +20,32 @@
 <body>
  <%= render 'layouts/header' %>
   
-  
+  <div id="slides" style="display:none;">	 
+   <div class = "height-fill">
+    <div class="slides-container">
+    
+     <% @photos.each do |photo| %>
+ 	
+   	  <%= photo.title %>
+   	   <% if @photo %>
+   	   <%= link_to photo_path(id: @photo.id) do %>
+ 	    <div class="shoonga" style="background-image: url(<%= photo.picture %>)"></div>
+ 	   
+       <% end %>
+      
+       <% end %>
+      
+      <% end %>
+    </div>
+   </div>
+ 
+  <div id="fullNav">
+   <nav class="slides-navigation">
+    <a href="#" class="next">>></a>
+    <a href="#" class="prev"><<</a>
+   </nav>
+  </div>
+ </div>
    
 
  	

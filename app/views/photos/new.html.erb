@@ -2,7 +2,7 @@
  <%= render 'shared/photo_form' %>
 </section>
 
-<%= form_for(@photo, html: { multipart: true }) do |f| %>
+<%= form_for(@photo_new, html: { multipart: true }) do |f| %>
  <%= f.collection_check_boxes :category_ids, @cats, :id, :name do |b| %>
   <div class="collection-check-box">
    <%# b.check_box %>

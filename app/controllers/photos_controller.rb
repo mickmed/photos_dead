@@ -32,9 +32,28 @@ def show
 
  @cats = Category.where.not(id: 1)
  @photo = Photo.find(params[:id])
- @photos=@photos.unshift(@photo)
+ #@photos=@photos.unshift(@photo)
  #@items = @user.items.paginate(page: params[:page])
- end
+  
+ @i = @photos.index(@photo)
+ 
+ #@h = @photos.drop(@i)
+ #@photos = @h
+ 
+ #@i = @photos.values_at(@photo.id)
+ 
+ 
+# @photos.find_all { |x| x = @i}       # => ["a", "b", "c", "d"]
+ # @photos_back = @photos.find_all { |x| x > "5" }         # => ["e", "f", "g", "h"]
+ 
+ @i = @i 
+ @from_id = @photos[@i..-1]
+ @i = @i -1
+ @to_id = @photos[0..@i]
+ 
+ @photos = @from_id + @to_id
+ 
+end
     
  def new
   @photo_new = Photo.new

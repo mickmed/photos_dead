@@ -12,24 +12,25 @@ end
 
 def index
  @cats = Category.where.not(id: 1)
-  
+
+ 
  if params[:abc] == 'abc'
-  @photos = Photo.all.order('title asc').paginate(:page => params[:page], :per_page => 5)
+  @photos = Photo.all.order('title asc').paginate(:page => params[:page], :per_page => 3)
  end
   
  if params[:category_id]
-
-   @photos = Photo.where(categories: {id: params[:category_id]}).includes(:categories).paginate(:page => params[:page], :per_page => 10)
+   @photos = Photo.where(categories: {id: params[:category_id]}).includes(:categories).paginate(:page => params[:page], :per_page => 3)
  end
  
  Rails.cache.write("phot",@photos)  
-  
 end
 
 
 def show
- @photos = Rails.cache.read("phot",@photos) 
+  
 
+ @photos = Rails.cache.read("phot",@photos) 
+ 
  @cats = Category.where.not(id: 1)
  @photo = Photo.find(params[:id])
  #@photos=@photos.unshift(@photo)
@@ -46,7 +47,7 @@ def show
 # @photos.find_all { |x| x = @i}       # => ["a", "b", "c", "d"]
  # @photos_back = @photos.find_all { |x| x > "5" }         # => ["e", "f", "g", "h"]
  
- @i = @i 
+ #@i = @i 
  @from_id = @photos[@i..-1]
  @i = @i -1
  @to_id = @photos[0..@i]
@@ -99,9 +100,9 @@ private
  end
  def random
   if Rails.env.production?
-   @photos = Photo.where.not(categories: {id: 1}).includes(:categories).order("RAND()").limit(8).paginate(:page => params[:page], :per_page => 5)
+   @photos = Photo.all.where.not(categories: {id: 1}).includes(:categories).order("RAND()").limit(3)
   else
-   @photos = Photo.where.not(categories: {id: 1}).includes(:categories).order("RANDOM()").limit(8).paginate(:page => params[:page], :per_page => 5)
+   @photos = Photo.all.where.not(categories: {id: 1}).includes(:categories).order("RANDOM()").limit(3)
   end
  end
 end

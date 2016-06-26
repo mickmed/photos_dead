@@ -14,7 +14,7 @@
    
 </div>
  
- <% if @photos %>
+ <% if @photos.count > 3 %>
 
      <li><%= will_paginate @photos%></li>
   

@@ -27,12 +27,12 @@
      <% @photos.each do |photo| %>
  	
    	  <%= photo.title %>
-   	   <% if @photo %>
+   	  
    	   <%= link_to photo_path(id: @photo.id) do %>
  	    <div class="shoonga" style="background-image: url(<%= photo.picture %>)"></div>
  	   
        <% end %>
-      <% end %>
+      
        <% end %>
       
       <% end %>

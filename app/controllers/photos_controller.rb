@@ -15,11 +15,11 @@ def index
 
  
  if params[:abc] == 'abc'
-  @photos = Photo.all.order('title asc').paginate(:page => params[:page], :per_page => 3)
+  @photos = Photo.all.order('title asc').paginate(:page => params[:page], :per_page => 5)
  end
   
  if params[:category_id]
-   @photos = Photo.where(categories: {id: params[:category_id]}).includes(:categories).paginate(:page => params[:page], :per_page => 3)
+   @photos = Photo.where(categories: {id: params[:category_id]}).includes(:categories).paginate(:page => params[:page], :per_page => 5)
  end
  
  Rails.cache.write("phot",@photos)  
@@ -42,7 +42,7 @@ def show
  #@photos = @h
  
  #@i = @photos.values_at(@photo.id)
- 
+ #just a trick
  
 # @photos.find_all { |x| x = @i}       # => ["a", "b", "c", "d"]
  # @photos_back = @photos.find_all { |x| x > "5" }         # => ["e", "f", "g", "h"]

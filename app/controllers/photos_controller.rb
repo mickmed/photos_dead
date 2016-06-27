@@ -48,6 +48,9 @@ def show
  # @photos_back = @photos.find_all { |x| x > "5" }         # => ["e", "f", "g", "h"]
  
  #@i = @i 
+ 
+
+  
  @from_id = @photos[@i..-1]
  @i = @i -1
  @to_id = @photos[0..@i]

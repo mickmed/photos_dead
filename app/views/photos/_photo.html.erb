@@ -3,6 +3,8 @@
   <span>
    <a href = "photos/<%= photo.id %>" class="list-group-item"><%= image_tag(photo.picture, width: '100%', alt:'') %></a>
    <%= link_to photo.title, photo %>
+   <%= link_to photo.id, photo %>
+   
    <!-- <div class="menu-category-name list-group-item active"><%= link_to photo.title, photo %></div> -->
   </span>
  </div>

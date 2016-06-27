@@ -109,9 +109,9 @@ private
  
  def random
   if Rails.env.production?
-   @photos = Photo.all.where.not(categories: {id: 1}).includes(:categories).order("RAND()").limit(5).paginate(:page => params[:page], :per_page => 5)
+   @photos = Photo.all.where.not(categories: {id: 1}).includes(:categories).order("RAND()").limit(5)
   else
-   @photos = Photo.all.where.not(categories: {id: 1}).includes(:categories).order("RANDOM()").limit(5).paginate(:page => params[:page], :per_page => 5)
+   @photos = Photo.all.where.not(categories: {id: 1}).includes(:categories).order("RAND()").limit(5)
   end 
  end
 end

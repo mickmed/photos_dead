@@ -11,27 +11,37 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160607213130) do
+ActiveRecord::Schema.define(version: 20160627203403) do
 
-  create_table "categories", force: true do |t|
+  create_table "categories", force: :cascade do |t|
     t.text     "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  create_table "categories_photos", force: true do |t|
+  create_table "categories_photos", force: :cascade do |t|
     t.integer  "photo_id"
     t.integer  "category_id"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
   end
 
-  create_table "photos", force: true do |t|
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
-    t.string   "picture"
+  create_table "photos", force: :cascade do |t|
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
+    t.string   "picture",     limit: 255
     t.text     "title"
     t.text     "description"
   end
+
+  create_table "sessions", force: :cascade do |t|
+    t.string   "session_id", null: false
+    t.text     "data"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "sessions", ["session_id"], name: "index_sessions_on_session_id", unique: true
+  add_index "sessions", ["updated_at"], name: "index_sessions_on_updated_at"
 
 end

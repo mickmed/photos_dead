@@ -1,7 +1,8 @@
 class PhotosController < ApplicationController
 
 before_action :authenticate, except: [:index, :show]
-before_filter :random, :except => [:create, :update, :destroy, :show]
+#before_action :random, :except => [:create, :update, :destroy, :show]
+
 
 def authenticate
  @shoonga = authenticate_or_request_with_http_basic do |username, password|
@@ -11,52 +12,59 @@ end
 
 
 def index
- @cats = Category.where.not(id: 1)
-
+  
+ if Rails.env.production?
+   @photos = Photo.all.where.not(categories: {id: 1}).includes(:categories).order("RAND()").limit(5).paginate(:page => params[:page], :per_page => 5)
+  else
+   @photos = Photo.all.where.not(categories: {id: 1}).includes(:categories).order("RANDOM()").limit(5).paginate(:page => params[:page], :per_page => 5)
+  end 
+  
+  
+  
+@cats = Category.where.not(id: 1)
+@photos = Photo.where.not(categories: {id: 1}).includes(:categories).order("RANDOM()").limit(5)
  
  if params[:abc] == 'abc'
   @photos = Photo.all.order('title asc').paginate(:page => params[:page], :per_page => 5)
  end
   
  if params[:category_id]
-   @photos = Photo.where(categories: {id: params[:category_id]}).includes(:categories).paginate(:page => params[:page], :per_page => 5)
+  @photos = Photo.where(categories: {id: params[:category_id]}).includes(:categories).paginate(:page => params[:page], :per_page => 5)
  end
  
- Rails.cache.write("phot",@photos)  
+ 
+ 
+#Rails.cache.write("phot",@photos)  
+
+
+
+
+session[:p] = @photos
 end
 
 
 def show
-  
+ #@photos = Rails.cache.read("phot",@photos)   
+ @photos = session[:p]
 
- @photos = Rails.cache.read("phot",@photos) 
- 
  @cats = Category.where.not(id: 1)
  @photo = Photo.find(params[:id])
+ photo_id = @photo.id
  #@photos=@photos.unshift(@photo)
- #@items = @user.items.paginate(page: params[:page])
-  
  @i = @photos.index(@photo)
- 
- #@h = @photos.drop(@i)
- #@photos = @h
- 
- #@i = @photos.values_at(@photo.id)
- #just a trick
- 
-# @photos.find_all { |x| x = @i}       # => ["a", "b", "c", "d"]
- # @photos_back = @photos.find_all { |x| x > "5" }         # => ["e", "f", "g", "h"]
- 
- #@i = @i 
- 
+#render :text => @photos
+
+#render :text => @photos
 
  @i = @i.to_i
  @from_id = @photos[@i..-1]
- @i = @i -1
+ @i = @i-1
  @to_id = @photos[0..@i]
  
  @photos = @from_id + @to_id
- 
+ #render :text => @from_id
+ #render :text => @photos
+
 end
     
  def new
@@ -75,7 +83,8 @@ end
 end
   
 def edit
- @photo = Photo.find(params[:id])
+ @photos = Photo.all
+ @photo_edit = Photo.find(params[:id])
  @cats = Category.all
 end
 
@@ -101,11 +110,7 @@ private
  def photo_params
   params.require(:photo).permit(:title, :description, :picture, category_ids:[])
  end
- def random
-  if Rails.env.production?
-   @photos = Photo.all.where.not(categories: {id: 1}).includes(:categories).order("RAND()").limit(5)
-  else
-   @photos = Photo.all.where.not(categories: {id: 1}).includes(:categories).order("RANDOM()").limit(5)
-  end
- end
+ # def random
+#   
+ # end
 end

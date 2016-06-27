@@ -2,7 +2,7 @@
 
 <h1>Update Photo</h1>
 
-    <%= form_for(@photo, html: { multipart: true }) do |f| %>
+    <%= form_for(@photo_edit, html: { multipart: true }) do |f| %>
     <%= render 'shared/error_messages', object: f.object %>
     
     <%# f.collection_select(:category_id, @main_cats, :id, :name, {:prompt=>true}, {:id=>'parent'}) %>

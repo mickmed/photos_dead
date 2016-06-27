@@ -50,7 +50,7 @@ def show
  #@i = @i 
  
 
-  
+ @i = @i.to_i
  @from_id = @photos[@i..-1]
  @i = @i -1
  @to_id = @photos[0..@i]

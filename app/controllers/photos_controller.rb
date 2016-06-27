@@ -1,7 +1,7 @@
 class PhotosController < ApplicationController
 
 before_action :authenticate, except: [:index, :show]
-#before_action :random, :except => [:create, :update, :destroy, :show]
+before_action :random, :except => [:create, :update, :destroy, :show]
 
 
 def authenticate
@@ -13,11 +13,7 @@ end
 
 def index
   
- if Rails.env.production?
-   @photos = Photo.all.where.not(categories: {id: 1}).includes(:categories).order("RAND()").limit(5).paginate(:page => params[:page], :per_page => 5)
-  else
-   @photos = Photo.all.where.not(categories: {id: 1}).includes(:categories).order("RANDOM()").limit(5).paginate(:page => params[:page], :per_page => 5)
-  end 
+ 
   
   
   
@@ -110,7 +106,12 @@ private
  def photo_params
   params.require(:photo).permit(:title, :description, :picture, category_ids:[])
  end
- # def random
-#   
- # end
+ 
+ def random
+  if Rails.env.production?
+   @photos = Photo.all.where.not(categories: {id: 1}).includes(:categories).order("RAND()").limit(5).paginate(:page => params[:page], :per_page => 5)
+  else
+   @photos = Photo.all.where.not(categories: {id: 1}).includes(:categories).order("RANDOM()").limit(5).paginate(:page => params[:page], :per_page => 5)
+  end 
+ end
 end

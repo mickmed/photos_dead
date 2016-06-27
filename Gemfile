@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'rails', '4.1.4'
+gem 'rails', '4.2.4'
 gem 'carrierwave', github: 'carrierwaveuploader/carrierwave'
 gem 'mini_magick',             '3.8.0'
 gem 'fog',                     '1.29.0'
@@ -8,14 +8,14 @@ gem 'jquery-turbolinks'
 gem 'will_paginate',           '3.0.7'
 gem 'bootstrap-will_paginate', '0.0.10'
 gem 'bcrypt',       '3.1.7'
-
+gem 'actionpack', '4.2.4'
 
 
 #gem 'fog', require: 'fog/aws'
 
 gem 'bootstrap-sass',       '3.2.0.0'
 gem 'sprockets', '2.11'
-gem 'rack', '1.5.5'
+gem 'rack'
 gem 'net-ssh'
 
 

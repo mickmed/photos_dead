@@ -1,18 +1,54 @@
 
 
-<div class='menu row' style="-moz-column-width: 400px;width:90%;margin: 0 auto">
+<div class='menu row' style="-moz-column-width: 400px;width:90%;margin: 0 auto;padding-top:10px">
  	<br>
  	<%= @photo.title %>
  	<br>
+
+
+
+
+
+
  <span>
   
   <%= image_tag @photo.picture, :class=>"list-group-item img-responsive center-bldock", :id => 'fullscreen', :alt =>"photo pic" %><br><br>
-  <div class="list-group-item">
+ 
+ 
+  <div class="list-group-item" style="margin:10px">
    <%=@photo.description%>
   </div>
- 
- 
- </span>
+
+  
+
+<% if @prev %>
+<%= link_to photo_path(id: @prev.id) do %>
+ 	    <%= image_tag @prev.picture, class: 'img-responsive center-bldock', style: 'float:right;margin-right:20px;max-width:120px;max-height:120px', alt:'' %>
+ 	   
+       <% end %>
+
+
+ <% end %>
+
+
+
+<% if @next %>
+<%= link_to photo_path(id: @next.id) do %>
+ 	    <%= image_tag @next.picture, class: 'img-responsive center-bldock', style: 'float:right;margin-right:20px;max-width:120px;max-height:120px', alt:'' %>
+ 	   
+       <% end %>
+
+
+ <% end %>
+
+</span>
+
+
+
+
+
+
+
 </div>
 
 

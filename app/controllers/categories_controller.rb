@@ -11,11 +11,13 @@ end
  
  
 def index
+  @photos = Photo.all.paginate(:page => params[:page], :per_page => 5)
   @cats = Category.where.not(id: 1)
   @categories = Category.all.paginate(page: params[:page])
 end
 
 def show
+  @photos = Photo.all.paginate(:page => params[:page], :per_page => 5)
   @cats = Category.all
   @category = Category.find(params[:id])
   #@items = @user.items.paginate(page: params[:page])
@@ -26,11 +28,14 @@ end
  
  
  def new
+   @photos = Photo.all.paginate(:page => params[:page], :per_page => 5)
   @category = Category.new
   @cats = Category.where.not(id: 1)
  end
   
  def create
+   
+   @photos = Photo.all.paginate(:page => params[:page], :per_page => 5)
    @cats = Category.where.not(id: 1)
   @category = Category.new(category_params)
   if params[:title].nil?
@@ -45,6 +50,7 @@ end
   
   
 def edit
+  @photos = Photo.all.paginate(:page => params[:page], :per_page => 5)
   @cats = Category.where.not(id: 1)
   @category = Category.find(params[:id])
 end

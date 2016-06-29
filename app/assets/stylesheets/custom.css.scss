@@ -210,24 +210,27 @@ input {
 }
 
 
-
+.navbar.container a:hover {
+    color: green;
+}
 
 
 .row {
- -moz-column-width: 290px;
+ -moz-column-width: 500px;
  -webkit-column-width: 18em;
  -moz-column-gap: 1em;
  -webkit-column-gap: 1em; 
- margin: 1px;
+ margin: 0 auto;
  padding-top: 0px;
   
 }
 
 .menu-category {
  display: inline-block;
- margin:  1px;
+ margin:  0 auto;
  padding:  5px;
  width:  100%; 
+ 
 }
 
 .pic_show{
@@ -250,6 +253,37 @@ display: inline-block;
   padding: 10px;
 }
 
+.cats a{
+  // unvisited link */
+a:link {
+    color: red;
+}
+
+/* visited link */
+a:visited {
+    color: green;
+}
+
+/* mouse over link */
+a:hover {
+    color: hotpink;
+}
+
+/* selected link */
+a:active {
+    color: blue;
+}
+  
+  
+  
+  
+  
+  
+  
+  
+  
+}
+
 .divcenter{
  //text-align:left;
 
@@ -264,7 +298,35 @@ display: inline-block;
  width: 500px;
   
 }
- 
+ .pagination li a{
+   
+   padding: 0px 10px;
+ }
+.pagination {
+  float: right;
+ margin: 0 auto;
+ border-radius: 0;
+ height:0px;
+  li a{background: transparent; color:green; border: none; }
+  .prev a{ background: transparent; color:green; border: none; }
+  //.prev.disabled{ background: transparent; color:green; border: none; }
+  //.prev.disabled li a{ background: transparent; color:green; border: none; }
+  //.previous_page { background: transparent; color:green; border: none; }  
+  //.previous_page li a{ background: transparent; color:green; border: none; }
+  //.previous_page.disabled{ background: transparent; color:green; border: none; }
+  //.previous_page.disabled a{ background: transparent; color:green; border: none; }
+  //.active { background: transparent; color:green; border:none;} 
+  .active a { background: transparent; color:orange; border: none; font-weight:bold;}
+  //.next { background: transparent; color:green; border: none; }  
+  .next a{ background: transparent; color:green; border: none; }
+  //.next.disabled{ background: transparent; color:green; border: none; }
+  //.next.disabled  a{ background: transparent; color:green; border: none; }
+ // .next_page { background: transparent; color:green; border: none; }  
+ // .next_page a{ background: transparent; color:green; border: none; }
+  //.next_page.disabled{ background: transparent; color:green; border: none; }
+  //.next_page.disabled a{ background: transparent; color:green; border: none; }
+}
+
 
 .shoonga{
    width: 100%;
@@ -275,4 +337,11 @@ display: inline-block;
     background-position: center;
   //background: url("MAM11bc.png");
   //background-size: contain;
+}
+
+
+.img-responsive{
+ 
+  
+  
 }

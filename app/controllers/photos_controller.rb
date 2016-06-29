@@ -1,5 +1,5 @@
 class PhotosController < ApplicationController
-
+require 'will_paginate/array'
 before_action :authenticate, except: [:index, :show]
 #before_action :random, :except => [:create, :update, :destroy, :show]
 
@@ -12,24 +12,30 @@ end
 
 
 def index
-  
+ session.delete(:current_cat) 
+ 
+ 
  if Rails.env.production?
-   @photos = Photo.all.where.not(categories: {id: 1}).includes(:categories).order("RAND()").limit(5).paginate(:page => params[:page], :per_page => 5)
+   @photos = Photo.all.where.not(categories: {id: 1}).includes(:categories).order("RAND()").limit(4)
   else
-   @photos = Photo.all.where.not(categories: {id: 1}).includes(:categories).order("RANDOM()").limit(5).paginate(:page => params[:page], :per_page => 5)
+   @photos = Photo.all.where.not(categories: {id: 1}).includes(:categories).order("RANDOM()").limit(4)
   end 
   
   
   
 @cats = Category.where.not(id: 1)
 
- 
+
+
  if params[:abc] == 'abc'
-  @photos = Photo.all.order('title asc').paginate(:page => params[:page], :per_page => 5)
+  @photos = Photo.all.order('title asc').paginate(:page => params[:page], :per_page => 4)
  end
   
  if params[:category_id]
-  @photos = Photo.where(categories: {id: params[:category_id]}).includes(:categories).paginate(:page => params[:page], :per_page => 5)
+  @photos = Photo.where(categories: {id: params[:category_id]}).includes(:categories).paginate(:page => params[:page], :per_page => 4)
+  
+  session[:current_cat] = Category.find(params[:category_id])
+  #session[:current_cat] = @current_cat.id
  end
  
  
@@ -59,15 +65,20 @@ def show
  @i = @i.to_i
  @from_id = @photos[@i..-1]
  @i = @i-1
+ @prev=@photos[@i]
  @to_id = @photos[0..@i]
+ @i = @i+2
+ @next= @photos[@i]
  
  @photos = @from_id + @to_id
+ @photos = @photos.paginate(:page => params[:page], :per_page => 5)
  #render :text => @from_id
  #render :text => @photos
 
 end
     
  def new
+   @photos = Photo.all.paginate(:page => params[:page], :per_page => 5)
   @photo_new = Photo.new
   @cats = Category.all
  end
@@ -83,7 +94,7 @@ end
 end
   
 def edit
- @photos = Photo.all
+ @photos = Photo.all.paginate(:page => params[:page], :per_page => 5)
  @photo_edit = Photo.find(params[:id])
  @cats = Category.all
 end

@@ -3,7 +3,8 @@ class PictureUploader < CarrierWave::Uploader::Base
   permissions 0700
   include CarrierWave::MiniMagick
   process resize_to_limit: [4000, 4000]
-
+  process :store_dimensions
+  
   # Override the directory where uploaded files will be stored.
   # This is a sensible default for uploaders that are meant to be mounted:
   
@@ -21,6 +22,17 @@ class PictureUploader < CarrierWave::Uploader::Base
  def extension_white_list
   %w(jpg jpeg gif png)
  end
+ 
+ 
+  private
+
+  def store_dimensions
+    if file && model
+      model.width, model.height = ::MiniMagick::Image.open(file.file)[:dimensions]
+    end
+  end
+ 
+ 
 end
 
 

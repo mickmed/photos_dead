@@ -1,4 +1,5 @@
 class Photo < ActiveRecord::Base
+require 'image_size'
  has_many :categories_photos
  has_and_belongs_to_many :categories
  mount_uploader :picture, PictureUploader

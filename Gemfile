@@ -10,6 +10,7 @@ gem 'bootstrap-will_paginate', '0.0.10'
 gem 'bcrypt',       '3.1.7'
 gem 'actionpack', '4.2.4'
 gem 'activerecord-session_store'
+gem 'image_size'
 
 #gem 'fog', require: 'fog/aws'
 

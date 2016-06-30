@@ -11,6 +11,8 @@
 
 
  <span>
+ <% @sz =  ImageSize.path('public'+ @photo.picture.url).size %>
+ 
   
   <%= image_tag @photo.picture, :class=>"list-group-item img-responsive center-bldock", :id => 'fullscreen', :alt =>"photo pic" %><br><br>
  
@@ -21,25 +23,22 @@
 
   
 
-<% if @prev %>
-<%= link_to photo_path(id: @prev.id) do %>
- 	    <%= image_tag @prev.picture, class: 'img-responsive center-bldock', style: 'float:right;margin-right:20px;max-width:120px;max-height:120px', alt:'' %>
- 	   
-       <% end %>
+<% if @current_cat %>
+<div>
+	&nbsp <%= @current_cat.name %> series <br><br>
 
 
+<% @s_photos.each do |photo| %>
+
+<%= link_to photo_path(id: photo.id) do %>
+ 	    <%= image_tag photo.picture, class: 'img-responsive center-bldock', style: 'float:right;margin:5px;max-width:120px;max-height:120px', alt:'' %>
+
+
+<% end %>
  <% end %>
-
-
-
-<% if @next %>
-<%= link_to photo_path(id: @next.id) do %>
- 	    <%= image_tag @next.picture, class: 'img-responsive center-bldock', style: 'float:right;margin-right:20px;max-width:120px;max-height:120px', alt:'' %>
- 	   
-       <% end %>
-
-
- <% end %>
+ </div>
+ 
+<% end %>
 
 </span>
 

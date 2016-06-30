@@ -45,11 +45,14 @@
       
       <%end%>
    
-  <% if @photos.count > 4 %>
+<% if session[:photos]%>  
+<% else %>
+  <% if @photos.count > 4 %>	
+  <%= @photos.count %>
 
      <%= will_paginate @photos, :previous_label=>"<", :next_label=>">" %>
      
-  
+  <% end %>
 
     
     <% end %>  

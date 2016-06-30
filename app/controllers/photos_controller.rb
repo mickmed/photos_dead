@@ -13,7 +13,10 @@ end
 
 def index
  session.delete(:current_cat) 
+ session.delete(:photos) 
  
+
+
  
  if Rails.env.production?
    @photos = Photo.all.where.not(categories: {id: 1}).includes(:categories).order("RAND()").limit(4)
@@ -40,27 +43,33 @@ def index
  
  
  
-#Rails.cache.write("phot",@photos)  
+
 
 
 
 
 session[:p] = @photos
 end
+ #Rails.cache.write("phot",@photos)  
+ #@photos=@photos.unshift(@photo) 
+ #@photos = Rails.cache.read("phot",@photos)   
+ #render :text => @photos
+ #render :text => @photos
+ #render :text => @from_id
+ #render :text => @photos
+
+
 
 
 def show
- #@photos = Rails.cache.read("phot",@photos)   
+ @current_cat = session[:current_cat]
  @photos = session[:p]
-
+ @s_photos = Photo.where(categories: {id: @current_cat}).includes(:categories)
  @cats = Category.where.not(id: 1)
  @photo = Photo.find(params[:id])
- photo_id = @photo.id
- #@photos=@photos.unshift(@photo)
+ ImageSize.path('public'+ @photo.picture.url).size
+ 
  @i = @photos.index(@photo)
-#render :text => @photos
-
-#render :text => @photos
 
  @i = @i.to_i
  @from_id = @photos[@i..-1]
@@ -72,10 +81,26 @@ def show
  
  @photos = @from_id + @to_id
  @photos = @photos.paginate(:page => params[:page], :per_page => 5)
- #render :text => @from_id
- #render :text => @photos
-
+ 
+ session[:photos] = @photos
 end
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
     
  def new
    @photos = Photo.all.paginate(:page => params[:page], :per_page => 5)

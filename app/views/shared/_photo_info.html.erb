@@ -1,36 +1,22 @@
-<span>	
-<% if @current_page %>	
- <%= link_to @current_cat.name, photos_path(category_id: @current_cat.id) %>
-  
- <% if @current_page > 1 %>
-  <% @previous = @current_page-1 %>
-  <%= link_to '<< ', photos_path(category_id: @current_cat.id, page: @previous) %> 
- <% end %>
-<%= @current_page %>	
-<% @next = @current_page+1 %>
- <%= link_to ' >>', photos_path(category_id: @current_cat.id, page: @next) %>
+
+
+
+<div class='menu row' style="-moz-column-width: 400px;width:90%;margin: 0 auto;padding-top:0px">
+<br>
+   <%= @photo.title %>
  
- <% end %>
- </span>
-
-
-<div class='menu row' style="-moz-column-width: 400px;width:90%;margin: 0 auto;padding-top:10px">
-
- <br>
-  <%= @photo.title %>
- <br>
 
  <span>
   <div style="display:inline-block"> 
    <%= image_tag @photo.picture, :class=>"list-group-item img-responsive center-bldock", :id => 'fullscreen', :alt =>"photo pic" %> 
    <p id="ede">full screen</p> 
-  </div>
-  <div class="list-group-item" style="margin:10px">
+  </div><br><br>
+  <div class="list-group-item" style="margin:20px">
    <%=@photo.description%>
   </div>
 
  <% if @current_cat %>
-  <div>
+  <div style="display:inline-block;float:right;width:100%">
    
    <% @photos.each do |photo| %>
     <%= link_to photo_path(id: photo.id) do %>
@@ -38,10 +24,33 @@
      <% end %>
     <% end %>
    </div>
+   
+   
+   
+   
+   
+    </span>
+   
+   
+   
+   <div style="float:right">
+	
+<% if @current_page && @current_cat %>	
+ <%= link_to @current_cat.name, photos_path(category_id: @current_cat.id) %>
+  
+ <% if @current_page > 1 %>
+  <% @previous = @current_page-1 %>
+  <%= link_to '<<', photos_path(category_id: @current_cat.id, page: @previous) %> 
+ <% end %>
+&nbsp<%= @current_page %>&nbsp
+<% @next = @current_page+1 %>
+ <%= link_to '>>', photos_path(category_id: @current_cat.id, page: @next) %>
  
+ <% end %>
+ </div>
 <% end %>
 
-</span>
+
 
 
 

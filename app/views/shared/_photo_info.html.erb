@@ -1,44 +1,43 @@
+<span>	
+<% if @current_page %>	
+ <%= link_to @current_cat.name, photos_path(category_id: @current_cat.id) %>
+  
+ <% if @current_page > 1 %>
+  <% @previous = @current_page-1 %>
+  <%= link_to '<< ', photos_path(category_id: @current_cat.id, page: @previous) %> 
+ <% end %>
+<%= @current_page %>	
+<% @next = @current_page+1 %>
+ <%= link_to ' >>', photos_path(category_id: @current_cat.id, page: @next) %>
+ 
+ <% end %>
+ </span>
 
 
 <div class='menu row' style="-moz-column-width: 400px;width:90%;margin: 0 auto;padding-top:10px">
- 	<br>
- 	<%= @photo.title %>
- 	<br>
 
-
-
-
-
+ <br>
+  <%= @photo.title %>
+ <br>
 
  <span>
-
-
- <div style="display:inline-block"> 
-  <%= image_tag @photo.picture, :class=>"list-group-item img-responsive center-bldock", :id => 'fullscreen', :alt =>"photo pic" %> 
-  
+  <div style="display:inline-block"> 
+   <%= image_tag @photo.picture, :class=>"list-group-item img-responsive center-bldock", :id => 'fullscreen', :alt =>"photo pic" %> 
    <p id="ede">full screen</p> 
- </div>
- 
+  </div>
   <div class="list-group-item" style="margin:10px">
    <%=@photo.description%>
   </div>
 
-  
-
-<% if @current_cat %>
-<div>
-	&nbsp <%= @current_cat.name %> series <br><br>
-
-
-<% @s_photos.each do |photo| %>
-
-<%= link_to photo_path(id: photo.id) do %>
- 	    <%= image_tag photo.picture, class: 'img-responsive center-bldock', style: 'float:right;margin:5px;max-width:120px;max-height:120px', alt:'' %>
-
-
-<% end %>
- <% end %>
- </div>
+ <% if @current_cat %>
+  <div>
+   
+   <% @photos.each do |photo| %>
+    <%= link_to photo_path(id: photo.id) do %>
+ 	 <%= image_tag photo.picture, class: 'img-responsive center-bldock', style: 'float:right;margin:5px;max-width:120px;max-height:120px', alt:'' %>
+     <% end %>
+    <% end %>
+   </div>
  
 <% end %>
 

@@ -31,14 +31,18 @@ def index
 
 
  if params[:abc] == 'abc'
-  @photos = Photo.all.order('title asc').paginate(:page => params[:page], :per_page => 4)
+  @photos = Photo.all.order('title asc').paginate(:page => params[:page], :per_page => 3)
  end
   
  if params[:category_id]
-  @photos = Photo.where(categories: {id: params[:category_id]}).includes(:categories).paginate(:page => params[:page], :per_page => 4)
+  @photos = Photo.where(categories: {id: params[:category_id]}).includes(:categories).paginate(:page => params[:page], :per_page => 3)
   
   session[:current_cat] = Category.find(params[:category_id])
   #session[:current_cat] = @current_cat.id
+  
+ 
+   session[:current_page] = @photos.current_page
+  
  end
  
  
@@ -50,6 +54,7 @@ def index
 
 session[:p] = @photos
 end
+
  #Rails.cache.write("phot",@photos)  
  #@photos=@photos.unshift(@photo) 
  #@photos = Rails.cache.read("phot",@photos)   
@@ -68,7 +73,7 @@ def show
  @cats = Category.where.not(id: 1)
  @photo = Photo.find(params[:id])
  #@size = ImageSize.path('public'+ @photo.picture.url).size
- 
+ @current_page = session[:current_page]
  
  
  
@@ -85,9 +90,10 @@ def show
  @next= @photos[@i]
  
  @photos = @from_id + @to_id
- @photos = @photos.paginate(:page => params[:page], :per_page => 5)
+ @photos = @photos.paginate(:page => params[:page], :per_page => 3)
  
  session[:photos] = @photos
+ 
 end
    
    

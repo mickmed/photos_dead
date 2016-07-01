@@ -27,7 +27,10 @@ textarea {
   resize: vertical;
 }
 
-
+a{
+  margin:0 auto;
+  
+}
 table {
   //border-collapse: separate;
 }
@@ -217,7 +220,7 @@ input {
   
 
 .row {
- -moz-column-width: 250px;
+ -moz-column-width: 330px;
  -webkit-column-width: 18em;
  -moz-column-gap: 1em;
  -webkit-column-gap: 1em; 
@@ -231,8 +234,10 @@ input {
  margin:  0 auto;
  padding:  5px;
  width:  100%; 
- 
+ text-align:center;
 }
+
+
 
 .pic_show{
 display: inline-block;

@@ -21,7 +21,7 @@
 
 $(document).ready(function() { 
  document.getElementById("fullscreen").onclick = function() {myFunction()};
-
+ document.getElementById("ede").onclick = function() {myFunction()};
  function myFunction() {
   document.getElementById('slides').style.display = "block";
   var windowHeight = $(window).height();
@@ -37,4 +37,7 @@ $(document).ready(function() {
     });
   });
  };
+ 
 });
+
+

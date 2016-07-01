@@ -19,9 +19,9 @@ def index
 
  
  if Rails.env.production?
-   @photos = Photo.all.where.not(categories: {id: 1}).includes(:categories).order("RAND()").limit(4)
+   @photos = Photo.all.where.not(categories: {id: 1}).includes(:categories).order("RAND()").limit(3)
   else
-   @photos = Photo.all.where.not(categories: {id: 1}).includes(:categories).order("RANDOM()").limit(4)
+   @photos = Photo.all.where.not(categories: {id: 1}).includes(:categories).order("RANDOM()").limit(3)
   end 
   
   
@@ -67,7 +67,12 @@ def show
  @s_photos = Photo.where(categories: {id: @current_cat}).includes(:categories)
  @cats = Category.where.not(id: 1)
  @photo = Photo.find(params[:id])
- ImageSize.path('public'+ @photo.picture.url).size
+ #@size = ImageSize.path('public'+ @photo.picture.url).size
+ 
+ 
+ 
+ 
+ 
  
  @i = @photos.index(@photo)
 

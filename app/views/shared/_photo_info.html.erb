@@ -11,11 +11,13 @@
 
 
  <span>
- <% @sz =  ImageSize.path('public'+ @photo.picture.url).size %>
- 
+
+
+ <div style="display:inline-block"> 
+  <%= image_tag @photo.picture, :class=>"list-group-item img-responsive center-bldock", :id => 'fullscreen', :alt =>"photo pic" %> 
   
-  <%= image_tag @photo.picture, :class=>"list-group-item img-responsive center-bldock", :id => 'fullscreen', :alt =>"photo pic" %><br><br>
- 
+   <p id="ede">full screen</p> 
+ </div>
  
   <div class="list-group-item" style="margin:10px">
    <%=@photo.description%>

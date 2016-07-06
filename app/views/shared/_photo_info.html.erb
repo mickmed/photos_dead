@@ -33,21 +33,7 @@
    
    
    
-   <div style="float:right">
-	
-<% if @current_page && @current_cat %>	
- <%= link_to @current_cat.name, photos_path(category_id: @current_cat.id) %>
-  
- <% if @current_page > 1 %>
-  <% @previous = @current_page-1 %>
-  <%= link_to '<<', photos_path(category_id: @current_cat.id, page: @previous) %> 
- <% end %>
-&nbsp<%= @current_page %>&nbsp
-<% @next = @current_page+1 %>
- <%= link_to '>>', photos_path(category_id: @current_cat.id, page: @next) %>
- 
- <% end %>
- </div>
+
 <% end %>
 
 

@@ -10,6 +10,14 @@
    
    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
    <script src="https://cdn.jsdelivr.net/jquery.superslides/0.6.2/jquery.superslides.js"></script>
+	<meta property="og:image" content="[url to image]" />
+	<meta property="og:title" content="[page name]" />
+	<meta property="og:description" content="[content description]" />
+	
+	
+	
+	
+	
 	<!-- <link rel="stylesheet" href="/assets/stylesheets/superslides.css">  -->
 	<!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/jquery.superslides/0.6.2/stylesheets/superslides.css"> -->
     <!-- <script src="/assets/javascripts/jquery.easing.1.3.js"></script> -->
@@ -18,40 +26,104 @@
  
  </head>
 <body>
- <%= render 'layouts/header' %>
+ <%= render 'layouts/header' %>	
   
-  <div id="slides" style="display:none;">	 
-   <div class = "height-fill">
-    <div class="slides-container">
-    <% if @photo %>
-     <% @photos.each do |photo| %>
- 	
-   	  <%= photo[:title] %>
-   	  
-   	   <%= link_to photo_path(id: @photo.id) do %>
- 	    <div class="shoonga" style="background-image: url(<%= photo.picture %>)"></div>
- 	   
-       <% end %>
-      
-       <% end %>
-      
-      <% end %>
-    </div>
-   </div>
- 
-  <div id="fullNav">
-   <nav class="slides-navigation">
-    <a href="#" class="next">>></a>
-    <a href="#" class="prev"><<</a>
-   </nav>
-  </div>
- </div>
+	  <div id="slides" style="display:none;">	 
+	   <div class = "height-fill">
+	    <div class="slides-container">
+	    <% if @photo %>
+	     <% @fullscreen_photos.each do |photo| %>
+	 	
+	   	  <%= photo[:title] %>
+	   	  
+	   	   <%= link_to photo_path(id: @photo.id) do %>
+	 	    <div class="shoonga" style="background-image: url(<%= photo.picture %>)"></div>
+	 	   
+	       <% end %>
+	      
+	       <% end %>
+	      
+	      <% end %>
+	    </div>
+	   </div>
+	 
+	  <div id="fullNav">
+	   <nav class="slides-navigation">
+	    <a href="#" class="next">>></a>
+	    <a href="#" class="prev"><<</a>
+	   </nav>
+	  </div>
+	 </div>
    
 
  	
  	
  <div class="container">
- 	
+  <div class = "">	
+   <% if @photo %>
+   
+  <% if session[:abc]%>
+   <%= link_to session[:abc], photos_path(abc: session[:abc]) %>
+  <% end %> 
+   
+	<% if @current_page && @current_cat %>	
+     <%= link_to @current_cat.name, photos_path(category_id: @current_cat.id) %>&nbsp
+  	
+     <% if @current_page > 1 %>
+      <% @previous = @current_page-1 %>
+      <%= link_to '<<..', photos_path(category_id: @current_cat.id, page: @previous) %> 
+      <%= link_to @current_page-1, photos_path(category_id: @current_cat.id, page: @previous) %> 
+     <% end %>
+	 <span style="color:orange">&nbsp&nbsp<%= @current_page %>&nbsp&nbsp</span>
+	  <% @next = @current_page+1 %>
+      <%= link_to @current_page+1, photos_path(category_id: @current_cat.id, page: @next) %>
+      <%= link_to '..>>', photos_path(category_id: @current_cat.id, page: @next) %>
+    <% end %>
+  
+   <%else%>
+  
+    <% @photos.count %>
+    <% if session[:current_cat] %>
+     <% session[:current_cat].name %>
+     <% if @photos.count > 3 %>
+	  <div style="display:inline-block"> 	
+	  <span style="line-height:16px">   <%= link_to session[:current_cat].name, photos_path(category_id: session[:current_cat].id) %></span>
+	  <%= will_paginate @photos, :previous_label=>"<", :next_label=>">" %>
+	  </div>  
+     <% end %>
+    <% else %>
+     <%if session[:abc]%>
+   	  <% if @photos.count > 3 %>
+	   <div style="display:inline-block"> 	
+	    <span style="line-height:16px">   <%= link_to session[:abc], photos_path(abc: session[:abc]) %></span>
+	    <%= will_paginate @photos, :previous_label=>"<", :next_label=>">" %>
+	   </div>  
+     <% end %>
+    <% end %>
+   <% end %>
+
+ 
+ 
+ <% end %>
+ </div>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
   <%= yield %> 
   <%= render 'layouts/footer' %>
  </div>

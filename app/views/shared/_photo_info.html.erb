@@ -1,13 +1,46 @@
 
 
+	
+  	 <% @size =  ImageSize.path('public'+ @photo.picture.url).size %>
+  	
+  	<% if @size %>
+  	
+  	 <% if @size[0]>@size[1]%>
+  	  <% @width = '500px' %> 	
+  	 <% else %>
+  	  <% @width = '350px' %>
+  	 <% end %>
+  	
+  	
+  	
+  	<%else%>
+  	
+  	<%end%>
 
-<div class='menu row' style="-moz-column-width: 400px;width:90%;margin: 0 auto;padding-top:0px">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class='menu row' style="-moz-column-width:<%= @width %>;width:90%;margin: 0 auto;padding-top:0px">
 <br>
-   <%= @photo.title %>
+   
  
 
  <span>
-  <div style="display:inline-block"> 
+  <div style="display:inline-block">
+  	<%= @photo.title %> 
    <%= image_tag @photo.picture, :class=>"list-group-item img-responsive center-bldock", :id => 'fullscreen', :alt =>"photo pic" %> 
    <p id="ede">full screen</p> 
   </div><br><br>

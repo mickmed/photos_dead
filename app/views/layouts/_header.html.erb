@@ -28,7 +28,7 @@
         <span class="cats"><%= link_to cat.name, photos_path(category_id: cat.id) %></span>
        <% end %>
       
-      &nbsp<span style="color:red"><%= @c.name %></span>&nbsp
+      &nbsp<span style="color:red"><%= @c.name +''+@c.count %></span>&nbsp
       
        <% @from_id.each do |cat| %>
         <span class="cats"><%= link_to cat.name, photos_path(category_id: cat.id) %></span>

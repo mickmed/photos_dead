@@ -6,6 +6,7 @@
       <%= link_to "abc", {:controller => "photos", :action => "index", :abc => 'abc' }%>
       
       <% if session[:current_cat] %>
+      <% @photos_count = Photo.where(categories: {id: session[:current_cat]}).includes(:categories).count.to_s %>
        <% @c = session[:current_cat] %>
        
        <% @ci = @cats.index(@c) %>
@@ -28,7 +29,7 @@
         <span class="cats"><%= link_to cat.name, photos_path(category_id: cat.id) %></span>
        <% end %>
       
-      &nbsp<span style="color:red"><%= @c.name +''+@c.count %></span>&nbsp
+      &nbsp<span style="color:red"><%= @c.name + ' [' + @photos_count + ']	' %></span>&nbsp
       
        <% @from_id.each do |cat| %>
         <span class="cats"><%= link_to cat.name, photos_path(category_id: cat.id) %></span>

@@ -14,6 +14,7 @@ def index
   @photos = Photo.all.paginate(:page => params[:page], :per_page => 5)
   @cats = Category.where.not(id: 1)
   @categories = Category.all.paginate(page: params[:page])
+  
 end
 
 def show

@@ -18,14 +18,14 @@
   	<%end%>
 
 <div class='menu row' style="-moz-column-width:<%= @width %>;width:90%;margin: 0 auto;padding-top:0px">
-<br>
+
    
  <span>
   <div style="display:inline-block">
    <%= @photo.title %> 
    <%= image_tag @photo.picture, :class=>"list-group-item img-responsive center-bldock", :style => 'cursor:pointer;cursor:hand', :id => 'fullscreen', :alt =>"photo pic" %> 
     
-  </div><br><br>
+  </div>
   <div class="list-group-item" style="margin:20px">
    <%=@photo.description%>
   </div>

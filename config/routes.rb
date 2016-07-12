@@ -1,8 +1,11 @@
 Rails.application.routes.draw do
 
 
-  root  'photos#index'
   
+  
+  root to: 'photos#index'
+  
+    
   resources :photos
   resources :categories
 end

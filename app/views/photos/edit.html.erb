@@ -10,6 +10,7 @@
     <%= f.label :title %>
     <%= f.text_field :title, class: 'form-control' %>
 	<%= f.text_field :description, class: 'form-control' %>
+	<%= f.text_field :date_taken, class: 'form-control' %>
 
   <%= f.label "categories" %><br /><br />
   <%= f.collection_check_boxes :category_ids, @cats, :id, :name do |b| %>

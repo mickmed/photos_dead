@@ -2,6 +2,8 @@
  <%= render 'shared/error_messages', object: f.object %>
   <div class="field">
    <%= f.text_area :title, placeholder: "title" %>
+   <%= f.text_area :description, placeholder: "description" %>
+   <%= f.text_area :date_taken, placeholder: "date_taken" %>
   </div>
   <%= f.submit "Post", class: "btn btn-primary" %>
   <span class="picture">

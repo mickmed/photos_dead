@@ -11,41 +11,69 @@ def authenticate
 end
 
 
+
+
 def index
- session.delete(:current_cat) 
- session.delete(:photos) 
- session.delete(:abc) 
+ session.delete(:current_cat)
+ session.delete(:photos)
+ session.delete(:abc)
+ session.delete(:color)
+ session.delete(:hard_cat)
 
 
- 
+@cats = Category.where.not(id: 1)
+
+if params[:hard_cat] == 'random'
  if Rails.env.production?
    @photos = Photo.all.where.not(categories: {id: 1}).includes(:categories).order("RAND()").limit(3)
   else
    @photos = Photo.all.where.not(categories: {id: 1}).includes(:categories).order("RANDOM()").limit(3)
-  end 
+  end
+  session[:hard_cat] = 'random'
   
-  
-  
-@cats = Category.where.not(id: 1)
+end
 
-
-
- if params[:abc] == 'abc'
+ if params[:hard_cat] == 'abc'
   @photos = Photo.all.order('title asc').paginate(:page => params[:page], :per_page => 3)
-  session[:abc] = 'abc'
+  session[:hard_cat] = 'abc'
+ 
  end
+    
+ if params[:hard_cat] == 'newest'
+  @photos = Photo.all.order('date_taken desc').paginate(:page => params[:page], :per_page => 3)
+  session[:hard_cat] = 'newest'
   
+  
+ end  
+ 
+ 
+ if params[:harc_cat] == 'oldest'
+  @photos = Photo.all.order('date_taken asc').paginate(:page => params[:page], :per_page => 3)
+  session[:hard_cat] = 'oldest'
+  
+ end  
+ 
+ if session[:hard_cat]
+    session[:color] = 'green'
+ end
+ 
  
  if params[:category_id]
   @photos = Photo.where(categories: {id: params[:category_id]}).includes(:categories).paginate(:page => params[:page], :per_page => 3)
   session[:current_cat] = Category.find(params[:category_id])
   #session[:current_cat] = @current_cat.id
   session[:current_page] = @photos.current_page
-  
+
  end
- 
+
  session[:p] = @photos
 end
+  
+
+
+ 
+ 
+
 
  #Rails.cache.write("phot",@photos)  
  #@photos=@photos.unshift(@photo) 
@@ -148,7 +176,7 @@ end
 private
 
  def photo_params
-  params.require(:photo).permit(:title, :description, :picture, category_ids:[])
+  params.require(:photo).permit(:title, :description, :picture, :date_taken, category_ids:[])
  end
  # def random
 #   

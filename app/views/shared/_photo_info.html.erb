@@ -17,12 +17,15 @@
   	
   	<%end%>
 
-<div class='menu row' style="-moz-column-width:<%= @width %>;width:90%;margin: 0 auto;padding-top:0px">
+<div class='menu row' style="-moz-column-width:<%= @width %>;-webkit-column-width: <%= @width %>;width:85%;margin: 0 auto;padding-top:0px">
 
    
  <span>
   <div style="display:inline-block">
    <%= @photo.title %> 
+    <% if @photo.date_taken%>
+     <div style="float:right"><%=@photo.date_taken.strftime("%m/%d/%y") %></div>
+    <% end %>
    <%= image_tag @photo.picture, :class=>"list-group-item img-responsive center-bldock", :style => 'cursor:pointer;cursor:hand', :id => 'fullscreen', :alt =>"photo pic" %> 
     
   </div>

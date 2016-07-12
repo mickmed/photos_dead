@@ -2,7 +2,7 @@
 
 <header class="navbar navbar-fixed-top">
   <div class="container">
-  <%= link_to image_tag('MAM11bc.png', :alt => 'mick medium', height: '46', id: 'logo', align: 'center', margin: '1px'), root_path, id: "logo" %>
+  <%= link_to image_tag('MAM11bc.png', :alt => 'mick medium', height: '46', id: 'logo', align: 'center', margin: '1px'), root_path(hard_cat: 'random'), id: "logo" %>
 <div style="font-family:boston traffic">
   
    <% @hard_cats = ['random','abc','newest']  %>

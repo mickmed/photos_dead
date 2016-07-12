@@ -2,27 +2,27 @@
 
 <header class="navbar navbar-fixed-top">
   <div class="container">
-  <%= link_to image_tag('MAM11bc.png', :alt => 'mick medium', height: '46', id: 'logo', align: 'center', margin: '1px'), root_path(hard_cat: 'random'), id: "logo" %>
+  <%= link_to image_tag('MAM11bc.png', :alt => 'mick medium', height: '46', id: 'logo', align: 'center', margin: '1px'), root_path, id: "logo" %>
 <div style="font-family:boston traffic">
   
-   <% @hard_cats = ['random','abc','newest']  %>
+   <% @hard_cats = ['newest','oldest','random','abc']  %>
    
    <% @hard_cats.each do |hard_cat| %>
    
-    <% if hard_cat == session[:hard_cat]%>
+    <% if hard_cat == session[:category]%>
     	<% @color = session[:color]%>
     <%else%>
     	<% @color = '' %>
     <% end %>
    
-     <a href = <%= photos_path(hard_cat: hard_cat)%> style='color:<%= @color %>'><%= hard_cat %></a>&nbsp&nbsp&nbsp
+     <a href = <%= photos_path(category: hard_cat)%> style='color:<%= @color %>'><%= hard_cat %></a>&nbsp&nbsp&nbsp
    <% end %>
     
 
       
-      <% if session[:current_cat] %>
-      <% @photos_count = Photo.where(categories: {id: session[:current_cat]}).includes(:categories).count.to_s %>
-       <% @c = session[:current_cat] %>
+      <% if session[:category_id] %>
+      <% @photos_count = Photo.where(categories: {id: session[:category_id]}).includes(:categories).count.to_s %>
+       <% @c = session[:category] %>
 
        <% @ci = @cats.index(@c) %>
        <% @ci = @ci.to_i %>

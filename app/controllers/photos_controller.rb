@@ -14,7 +14,8 @@ end
 
 
 def index
- session.delete(:current_cat)
+ session.delete(:category_id)
+ session.delete(:category)
  session.delete(:photos)
  session.delete(:abc)
  session.delete(:color)
@@ -23,50 +24,61 @@ def index
 
 @cats = Category.where.not(id: 1)
 
-if params[:hard_cat] == 'random'
+
+
+if params[:category] == 'random'
  if Rails.env.production?
    @photos = Photo.all.where.not(categories: {id: 1}).includes(:categories).order("RAND()").limit(3)
   else
    @photos = Photo.all.where.not(categories: {id: 1}).includes(:categories).order("RANDOM()").limit(3)
   end
-  session[:hard_cat] = 'random'
+  session[:category] = 'random'
   
 end
 
- if params[:hard_cat] == 'abc'
+ if params[:category] == 'abc'
   @photos = Photo.all.order('title asc').paginate(:page => params[:page], :per_page => 3)
-  session[:hard_cat] = 'abc'
+  session[:category] = 'abc'
  
  end
     
- if params[:hard_cat] == 'newest'
+ if params[:category] == 'newest'
   @photos = Photo.all.order('date_taken desc').paginate(:page => params[:page], :per_page => 3)
-  session[:hard_cat] = 'newest'
+  session[:category] = 'newest'
   
   
  end  
  
  
- if params[:harc_cat] == 'oldest'
+ if params[:category] == 'oldest'
   @photos = Photo.all.order('date_taken asc').paginate(:page => params[:page], :per_page => 3)
-  session[:hard_cat] = 'oldest'
+  session[:category] = 'oldest'
   
  end  
  
- if session[:hard_cat]
-    session[:color] = 'green'
- end
+ 
  
  
  if params[:category_id]
+   
   @photos = Photo.where(categories: {id: params[:category_id]}).includes(:categories).paginate(:page => params[:page], :per_page => 3)
-  session[:current_cat] = Category.find(params[:category_id])
+  session[:category] = Category.find(params[:category_id])
+  session[:category_id] = session[:category].id
+  
   #session[:current_cat] = @current_cat.id
-  session[:current_page] = @photos.current_page
-
  end
-
+ 
+ 
+ if session[:category]
+   session[:color] = 'green'
+ end
+ if session[:category_id] 
+    session[:current_page] = @photos.current_page
+    # session[:current_page] = @photos.current_page
+ end
+ 
  session[:p] = @photos
+
 end
   
 
@@ -87,7 +99,7 @@ end
 
 
 def show
- @current_cat = session[:current_cat]
+ @current_cat = session[:category_id]
  @photos = session[:p]
  #@s_photos = Photo.where(categories: {id: @current_cat}).includes(:categories)
  @cats = Category.where.not(id: 1)

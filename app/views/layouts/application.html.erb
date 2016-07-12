@@ -61,45 +61,53 @@
 
  <div class="container">
   <div style="font-family:boston traffic;color:green;margin-left:15px">
-        <br>&nbsp
+   <br>     
    <% if @photo %>
+	
 
 
-
-        <% if @current_page && @current_cat %>
-     <%= link_to @current_cat.name, photos_path(category_id: @current_cat.id) %>&nbsp
-
+     <% if (@current_page) || (session[:category_id]) %>
+      <% if session[:category_id] %>
+      
+      
+     	<% @name = session[:category].name %>
+      <% else %>
+        <% @name = session[:category] %>
+      <% end %>
+     <%= link_to @name, photos_path(category_id: session[:category_id]) %>
+	  <%= [@photos.count] %>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
      <% if @current_page > 1 %>
       <% @previous = @current_page-1 %>
-      <%= link_to '<< ..', photos_path(category_id: @current_cat.id, page: @previous) %>
-      <%= link_to @current_page-1, photos_path(category_id: @current_cat.id, page: @previous) %>
+      <%= link_to '< ', photos_path(category_id: @current_cat, page: @previous) %>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+      <%= link_to @current_page-1, photos_path(category_id: @current_cat, page: @previous) %>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
      <% end %>
-         <span style="color:orange">&nbsp&nbsp<%= @current_page %>&nbsp&nbsp</span>
+         <span style="color:orange"><%= @current_page %>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</span>
           <% @next = @current_page+1 %>
-      <%= link_to @current_page+1, photos_path(category_id: @current_cat.id, page: @next) %>
-      <%= link_to '.. >>', photos_path(category_id: @current_cat.id, page: @next) %>
+      <%= link_to @current_page+1, photos_path(category_id: @current_cat, page: @next) %>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+      <%= link_to ' >', photos_path(category_id: @current_cat, page: @next) %>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
     <% end %>
 
    <%else%>
 
     <% @photos.count %>
-    <% if session[:current_cat] %>
-     <% session[:current_cat].name %>
+    <% if session[:category_id].is_a? Numeric %>
+     
      <% if @photos.count > 3 %>
           <div style="display:inline-block">
           <span style="line-height:16px">   
-           <%= link_to session[:current_cat].name, photos_path(category_id: session[:current_cat].id) %>
+           <%= link_to session[:category].name, photos_path(category_id: session[:category_id]) %>
           </span>
           <%= [@photos.count] %>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
           <%= will_paginate @photos, :previous_label=>"<", :next_label=>">" %>
           </div>
      <% end %>
     <% else %>
-     <% if session[:hard_cat] %>
+     <% if session[:category] %>
      	
           <% if @photos.count > 3 %>
            <div style="display:inline-block">
-            <span style="line-height:16px">   <%= link_to session[:hard_cat], photos_path(hard_cat: session[:hard_cat]) %></span>
+            <span style="line-height:16px">   <%= link_to session[:category], photos_path(category_id: session[:category]) %></span>
+            <%= [@photos.count] %>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
             <%= will_paginate @photos, :previous_label=>"<", :next_label=>">" %>
            </div>
      <% end %>

@@ -3,7 +3,7 @@ Rails.application.routes.draw do
 
   
   
-  root to: 'photos#index'
+  root to: 'photos#index', category: 'newest'
   
     
   resources :photos

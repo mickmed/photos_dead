@@ -173,7 +173,7 @@ def update
  if @photo.update_attributes(photo_params)
   # Handle a successful update.
   flash[:success] = "Photo updated"
-  redirect_to photos_path
+  redirect_to photo_path
  else
   render 'edit'
  end

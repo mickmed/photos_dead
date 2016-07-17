@@ -15,8 +15,12 @@ $gray-medium-light: #eaeaea;
 
 
 @font-face {
-  font-family: "boston traffic";
-  src: url(/assets/Boston.ttf) format("truetype");
+    font-family: 'boston_trafficregular';
+    src: font-url('boston-webfont.woff2') format('woff2'),
+         font-url('boston-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+
 }
 
 

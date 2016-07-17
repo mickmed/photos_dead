@@ -1,7 +1,8 @@
 require File.expand_path('../boot', __FILE__)
 
 require 'rails/all'
-
+ config.assets.enabled = true  
+ config.assets.paths << "#{Rails.root}/app/assets/fonts"   
 # Require the gems listed in Gemfile, including any gems
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
@@ -22,6 +23,5 @@ module Rails4Example
   end
   
   
- config.assets.enabled = true  
- config.assets.paths << "#{Rails.root}/app/assets/fonts"    
+ 
 end

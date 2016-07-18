@@ -2,9 +2,12 @@
  <div class="menu-category list-group ">
   <span">
   	
-  	  	
+  	<% if @photos.nil? %>
   	
   	 <% @size =  ImageSize.path('public'+ photo.picture.url).size %>
+  	
+  	<% end %>
+  	
   	
   	<% if @size %>
   	

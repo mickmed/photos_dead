@@ -258,7 +258,7 @@ input {
 
 
 .pic_show{
-display: inline-block;
+   display: inline-block;
    margin-top: 15px;
    margin-bottom: 15px;
    margin-left: auto; //add this
@@ -269,12 +269,14 @@ display: inline-block;
 
 
 .photo_cell{
-  
   //width: 500px;
 }
+
+
 .cats{
-  font-family: boston traffic;
+  font-family: 'Stardos Stencil', cursive;
   padding: 10px;
+  font-size: 20px;
 }
 
 

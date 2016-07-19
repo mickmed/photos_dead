@@ -74,17 +74,18 @@ td {
 
 header{
   margin-bottom: 0px;
-  padding-top: 8px;
+  padding-top: 2px;
+  font-family: 'boston_trafficregular';
 }
 
 
 
 
 .container {
-  background: #ffffdf;
-  padding-left: 0px;
+  background: #fffff9;
+  padding-top: 8px;
   border-bottom: 1px solid black;
-  font-family: 'boston_trafficregular';
+  
   
 }
 
@@ -308,14 +309,28 @@ input {
 .slides-container{
   
  width: 500px;
+}
+
+
+.pagin{
+  font-family: 'boston_trafficregular';
+  color: green;
+  margin-left: 15px;
   
+
+
+
+
+
 }
  .pagination li a{
    
    padding: 0px 10px;
  }
+ 
+ 
 .pagination {
-  
+ 
  padding-top:0px;
  max-height:14px;
  //width: 100%;

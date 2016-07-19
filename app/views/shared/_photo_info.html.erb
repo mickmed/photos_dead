@@ -1,7 +1,10 @@
 
 
-	
-  	 <% @size =  ImageSize.path('public'+ @photo.picture.url).size %>
+	<% if @photos.nil? %>
+  	
+  	 <% @size =  ImageSize.path('public'+ photo.picture.url).size %>
+  	
+  	<% end %>
   	
   	<% if @size %>
   	

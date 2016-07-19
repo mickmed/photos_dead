@@ -69,80 +69,8 @@
  	
 
  <div class="container">
-  <div style="color:green;margin-left:15px">
-   <br>     
-   <% if @photo %>
-	
-
-
-     <% if (@current_page) || (session[:category_id]) %>
-      <% if session[:category_id] %>
-      
-      
-     	<% @name = session[:category].name %>
-      <% else %>
-        <% @name = session[:category] %>
-      <% end %>
-     <%= link_to @name, photos_path(category_id: session[:category_id]) %>
-	  <%= [@photos.count] %>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
-     <% if @current_page > 1 %>
-      <% @previous = @current_page-1 %>
-      <%= link_to '< ', photos_path(category_id: @current_cat, page: @previous) %>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
-      <%= link_to @current_page-1, photos_path(category_id: @current_cat, page: @previous) %>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
-     <% end %>
-         <span style="color:orange"><%= @current_page %>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</span>
-          <% @next = @current_page+1 %>
-      <%= link_to @current_page+1, photos_path(category_id: @current_cat, page: @next) %>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
-      <%= link_to ' >', photos_path(category_id: @current_cat, page: @next) %>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
-    <% end %>
-
-   <%else%>
-
-    <% @photos.count %>
-    <% if session[:category_id].is_a? Numeric %>
-     
-     <% if @photos.count > 3 %>
-          <div style="display:inline-block">
-          <span style="line-height:16px">   
-           <%= link_to session[:category].name, photos_path(category_id: session[:category_id]) %>
-          </span>
-          <%= [@photos.count] %>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
-          <%= will_paginate @photos, :previous_label=>"<", :next_label=>">" %>
-          </div>
-     <% end %>
-    <% else %>
-     <% if session[:category] %>
-     	
-          <% if @photos.count > 3 %>
-           <div style="display:inline-block">
-            <span style="line-height:16px">   <%= link_to session[:category], photos_path(category_id: session[:category]) %></span>
-            <%= [@photos.count] %>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
-            <%= will_paginate @photos, :previous_label=>"<", :next_label=>">" %>
-           </div>
-     <% end %>
-    <% end %>
-   <% end %>
-
- 
- 
- <% end %>
- </div>
+  <%= render 'layouts/paginator'%>
 	<br>
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	
 	
   <%= yield %> 

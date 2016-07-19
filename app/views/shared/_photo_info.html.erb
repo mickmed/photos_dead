@@ -1,6 +1,6 @@
 
 
-	<% if @photos %>
+	<% if File.exist?(photo.picture.url) %>
   	
   	 <% @size =  ImageSize.path('public'+ photo.picture.url).size %>
   	

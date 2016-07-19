@@ -3,11 +3,11 @@
 
 @font-face {
     font-family: 'boston_trafficregular';
-    src: asset_url('boston_traffic.eot');
-    src: asset_url('boston_traffic.eot?#iefix') format('embedded-opentype'),
-         asset_url('boston_traffic.woff') format('woff'),
-         asset_url('boston_traffic.ttf') format('truetype'),
-         asset_url('boston_traffic.svg#boston_trafficregular') format('svg');
+    src: font_url('boston_traffic.eot');
+    src: font_url('boston_traffic.eot?#iefix') format('embedded-opentype'),
+         font_url('boston_traffic.woff') format('woff'),
+         font_url('boston_traffic.ttf') format('truetype'),
+         font_url('boston_traffic.svg#boston_trafficregular') format('svg');
     font-weight: normal;
     font-style: normal;
 

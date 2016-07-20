@@ -1,41 +1,60 @@
 
 
 <div class="pagin">
-   <br>     
+   <br> 
+   <!--- this section for single photo, i.e., @photo -->    
    <% if @photo %>
 	
-
-
     <% if (@current_page) || (session[:category_id]) %>
-      
-      
+            
       <% if session[:category_id] %>
        	<% @name = session[:category].name %>
-      <% else %>
-        <% @name = session[:category] %>
-      <% end %>
-    
+       	 
     
     
      <%= link_to @name, photos_path(category_id: session[:category_id]) %>
-	  <%= -@photos.count %>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+	  
+	 <%= -@photos.count %>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+     
      <% if @current_page > 1 %>
       <% @previous = @current_page-1 %>
       <%= link_to '< ', photos_path(category_id: @current_cat, page: @previous) %>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
       <%= link_to @current_page-1, photos_path(category_id: @current_cat, page: @previous) %>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
      <% end %>
-         <span style="color:orange"><%= @current_page %>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</span>
-          <% @next = @current_page+1 %>
+     
+      <span style="color:orange"><%= @current_page %>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</span>
+      
+      <% @next = @current_page+1 %>
       <%= link_to @current_page+1, photos_path(category_id: @current_cat, page: @next) %>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
       <%= link_to ' >', photos_path(category_id: @current_cat, page: @next) %>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+   
+   <% else %>
+        <% @name = session[:category] %>
+      <%= link_to @name, photos_path(category: session[:category]) %>
+	  
+	 <%= -@photos.count %>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+     
+     <% if @current_page > 1 %>
+      <% @previous = @current_page-1 %>
+      <%= link_to '< ', photos_path(category: session[:category], page: @previous) %>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+      <%= link_to @current_page-1, photos_path(category: session[:category], page: @previous) %>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+     <% end %>
+     
+      <span style="color:orange"><%= @current_page %>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</span>
+      
+      <% @next = @current_page+1 %>
+      <%= link_to @current_page+1, photos_path(category: session[:category], page: @next) %>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+      <%= link_to ' >', photos_path(category: session[:category], page: @next) %>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+   
+      <% end %>
+   
     <% end %>
 
    
   
    <%else%>
-
-   
-   
+ <!-- this section for @photos ----------------------------->
+      
     <% @photos.count %>
     <% if session[:category_id].is_a? Numeric %>
      

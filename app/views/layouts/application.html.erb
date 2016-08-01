@@ -35,7 +35,30 @@
  
 
 <body>
+	
+	
+	
+
+
+
+
+
+
  <%= render 'layouts/header' %>	
+ 
+
+ <!-- The Modal -->
+<div id="myModal" class="modal">
+
+<!-- Modal content -->
+<div class="modal-content">
+  <span class="close">×</span>
+  <p>All of my photos are taken with a pocket point and shoot camera. There are no modifications to them other than watermarks. Some of them are one time shots, who's views are no longer available due to construction or deconstruction. Many are taken off suspension bridges while squeezing the lens between the holes in the fence, as the wind howls of the river in winter, and as the train goes past and shakes the bridge, making for a fun but often frustrating adventure. I am not afraid to take pictures of skyscrapers and tourist attractions since they are nothing more than the a part of my daily scenery. I do try to capture them with my own style however. Enjoy!</p>
+  <%= image_tag @photos[0].picture, :class=>"list-group-item img-responsive center-bldock", :style => 'cursor:pointer;cursor:hand', :id => 'fullscreen', :alt =>"photo pic" %>
+</div>
+
+</div>
+ 
   
 	  <div id="slides" style="display:none;">	 
 	   <div class = "height-fill">
@@ -78,3 +101,34 @@
  </div>
 </body>
 </html>
+
+
+
+<script>
+// Get the modal
+var modal = document.getElementById('myModal');
+
+// Get the button that opens the modal
+var btn = document.getElementById("myBtn");
+
+// Get the <span> element that closes the modal
+var span = document.getElementsByClassName("close")[0];
+
+// When the user clicks the button, open the modal 
+btn.onclick = function() {
+    modal.style.display = "block";
+}
+
+// When the user clicks on <span> (x), close the modal
+span.onclick = function() {
+    modal.style.display = "none";
+}
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+    if (event.target == modal) {
+        modal.style.display = "none";
+    }
+}
+</script>
+

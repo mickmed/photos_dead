@@ -61,7 +61,7 @@ end
  
  if params[:category_id]
    
-  @photos = Photo.where(categories: {id: params[:category_id]}).includes(:categories).paginate(:page => params[:page], :per_page => 11)
+  @photos = Photo.where(categories: {id: params[:category_id]}).includes(:categories).order('date_taken asc').paginate(:page => params[:page], :per_page => 6)
   session[:category] = Category.find(params[:category_id])
   session[:category_id] = session[:category].id
   

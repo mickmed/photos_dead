@@ -306,10 +306,7 @@ input {
     //overflow: auto;
 }
   
-.slides-container{
-  
- width: 500px;
-}
+
 
 
 .pagin{
@@ -386,7 +383,7 @@ input {
 .modal {
     display: none; /* Hidden by default */
     position: fixed; /* Stay in place */
-    z-index: 1; /* Sit on top */
+   // z-index: 1; /* Sit on top */
     padding-top: 120px; /* Location of the box */
     left: 0;
     top: 0;
@@ -394,8 +391,8 @@ input {
     width: 80%; /* Full width */
     height: 100%; /* Full height */
     overflow: auto; /* Enable scroll if needed */
-    background-color: transparent; /* Fallback color */
-    background-color: transparent; /* Black w/ opacity */
+    //background-color: transparent; /* Fallback color */
+    //background-color: transparent; /* Black w/ opacity */
 }
 /* Modal Content */
 .modal-content {
@@ -424,5 +421,8 @@ input {
     cursor: pointer;
 }
 
-
+.slides-container{
+  
+ width: 500px;
+}
 

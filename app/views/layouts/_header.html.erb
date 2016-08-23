@@ -1,3 +1,19 @@
+<ol>
+  <% (1..100).each do |i| %>
+   <% if i % 3 == 0 && i % 5 == 0%>
+    <li><%= 'CracklePop' %></li>
+   <% elsif i % 5 == 0 %>
+    <li><%= 'Pop' %></li>
+   <% elsif i % 3 == 0 %>
+    <li><%= 'Crackle' %></li>
+   <% else %>
+        <li><%= i %></li>
+  <% end %>
+ <% end %>
+</ol>
+<!---ddsdfd -->
+
+
 <header class="navbar navbar-fixed-top">
  <div class="container">
 	<%= link_to image_tag('MAM11bc.png', :alt => 'mick medium', height: '46', id: 'logo', align: 'center', margin: '1px'), root_path, id: "logo" %>

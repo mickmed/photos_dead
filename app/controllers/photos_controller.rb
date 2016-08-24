@@ -71,6 +71,7 @@ end
  
  if session[:category]
    session[:color] = 'green'
+   session[:current_page] = @photos.current_page
  end
  if session[:category_id] 
     session[:current_page] = @photos.current_page

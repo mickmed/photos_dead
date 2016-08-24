@@ -28,22 +28,22 @@ def index
 
 if params[:category] == 'random'
  if Rails.env.production?
-   @photos = Photo.all.where.not(categories: {id: 1}).includes(:categories).order("RAND()").limit(3)
+   @photos = Photo.all.where.not(categories: {id: 1}).includes(:categories).order("RAND()").limit(6)
   else
-   @photos = Photo.all.where.not(categories: {id: 1}).includes(:categories).order("RANDOM()").limit(3)
+   @photos = Photo.all.where.not(categories: {id: 1}).includes(:categories).order("RANDOM()").limit(6)
   end
   session[:category] = 'random'
   
 end
 
  if params[:category] == 'abc'
-  @photos = Photo.all.order('title asc').paginate(:page => params[:page], :per_page => 3)
+  @photos = Photo.all.order('title asc').paginate(:page => params[:page], :per_page => 6)
   session[:category] = 'abc'
  
  end
     
  if params[:category] == 'newest'
-  @photos = Photo.all.order('date_taken desc').paginate(:page => params[:page], :per_page => 3)
+  @photos = Photo.all.order('date_taken desc').paginate(:page => params[:page], :per_page => 6)
   session[:category] = 'newest'
   
   
@@ -51,7 +51,7 @@ end
  
  
  if params[:category] == 'oldest'
-  @photos = Photo.all.order('date_taken asc').paginate(:page => params[:page], :per_page => 3)
+  @photos = Photo.all.order('date_taken asc').paginate(:page => params[:page], :per_page => 6)
   session[:category] = 'oldest'
   
  end  
@@ -137,7 +137,7 @@ end
    
     
  def new
-   @photos = Photo.all.paginate(:page => params[:page], :per_page => 5)
+   @photos = Photo.all
   @photo_new = Photo.new
   @cats = Category.all
  end

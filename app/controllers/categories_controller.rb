@@ -5,7 +5,7 @@ before_action :authenticate, except: [:index, :show]
 
 def authenticate
   @shoonga = authenticate_or_request_with_http_basic do |username, password|
-    username == "trevor" && password == "trevor"
+    username == "4vght" && password == "we8vds"
   end
 end
  

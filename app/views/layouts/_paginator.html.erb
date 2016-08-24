@@ -25,9 +25,10 @@
       <span style="color:orange"><%= @current_page %>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</span>
       
       <% @next = @current_page+1 %>
+     <% if @photos.count/6 >= @current_page %>
       <%= link_to @current_page+1, photos_path(category_id: @current_cat, page: @next) %>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
       <%= link_to ' >', photos_path(category_id: @current_cat, page: @next) %>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
-   
+      <% end %>
    <% else %>
         <% @name = session[:category] %>
       <%= link_to @name, photos_path(category: session[:category]) %>

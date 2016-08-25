@@ -138,7 +138,7 @@ end
    
     
  def new
-   @photos = Photo.all
+   @photos = Photo.all.paginate(:page => params[:page], :per_page => 6)
   @photo_new = Photo.new
   @cats = Category.all
  end

@@ -5,7 +5,7 @@
    <!--- this section for single photo, i.e., @photo -->    
    <% if @photo %>
 	
-    <% if (@current_page) || (session[:category_id]) %>
+    <% if (@current_page) || (session[:category_id]) || (session) %>
             
       <% if session[:category_id] %>
        	<% @name = session[:category].name %>

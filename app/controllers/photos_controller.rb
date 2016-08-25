@@ -51,7 +51,7 @@ end
  
  
  if params[:category] == 'oldest'
-  @photos = Photo.all.order('date_taken asc').paginate(:page => params[:page], :per_page => 6)
+  @photos = Photo.all.where.not(categories: {id: 1}).includes(:categories).order('date_taken asc').paginate(:page => params[:page], :per_page => 6)
   session[:category] = 'oldest'
   
  end  

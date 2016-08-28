@@ -124,7 +124,7 @@ def show
  #@next= @photos[@i]
  
  @fullscreen_photos = @from_id + @to_id
- @fullscreen_photos = @fullscreen_photos.paginate(:page => params[:page], :per_page => 4)
+ @fullscreen_photos = @fullscreen_photos.paginate(:page => params[:page], :per_page => 6)
  
  session[:photos] = @photos
  

@@ -3,6 +3,22 @@
 	<%= link_to image_tag('MAM11bc.png', :alt => 'mick medium', height: '46', id: 'logo', align: 'center', margin: '1px'), root_path, id: "logo" %>
 <div style="">
    
+     <% @hard_cats = ['newest','oldest','random']  %>
+  
+  <% @hard_cats.each do |hard_cat| %>
+ 
+    <% if hard_cat == session[:category]%>
+      <% @color = session[:color]%>
+      <% @count = ' -' + @photos.count.to_s %>
+    <%else%>
+      <% @color = '' %>
+      <% @count = ''%>
+    <% end %>
+ 
+  <a href = <%= photos_path(category: hard_cat)%> style='color:<%= @color %>'><%= hard_cat + @count %></a>&nbsp&nbsp&nbsp
+  <% end %>
+   
+   
   <% if session[:category_id] %>
     <% @photos_count = Photo.where(categories: {id: session[:category_id]}).includes(:categories).count.to_s %>
     <% @c = session[:category] %>
@@ -32,20 +48,7 @@
     <% end %>
   <%end%>
   
-  <% @hard_cats = ['newest','oldest','random']  %>
-  
-  <% @hard_cats.each do |hard_cat| %>
- 
-    <% if hard_cat == session[:category]%>
-      <% @color = session[:color]%>
-      <% @count = ' -' + @photos.count.to_s %>
-    <%else%>
-      <% @color = '' %>
-      <% @count = ''%>
-    <% end %>
- 
-  <a href = <%= photos_path(category: hard_cat)%> style='color:<%= @color %>'><%= hard_cat + @count %></a>&nbsp&nbsp&nbsp
-  <% end %>
+
   <!-- Trigger/Open The Modal -->
 <span id="myBtn" style="cursor:pointer;cursor:hand">About</span>
 </div>

@@ -27,9 +27,9 @@ ActiveRecord::Schema.define(version: 20160711145615) do
   end
 
   create_table "photos", force: :cascade do |t|
-    t.datetime "created_at",              null: false
-    t.datetime "updated_at",              null: false
-    t.string   "picture",     limit: 255
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.string   "picture"
     t.text     "title"
     t.text     "description"
     t.date     "date_taken"

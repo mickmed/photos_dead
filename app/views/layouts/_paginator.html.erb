@@ -69,7 +69,7 @@
           </div>
      <% end %>
     <% else %>
-     <% if session[:category] %>
+     <% if session[:category] && session[:category] != 'random'%>
      	
           <% if @photos.count > 3 %>
            <div style="display:inline-block">

@@ -32,7 +32,7 @@ if params[:category] == 'random'
   else
    @photos = Photo.all.where.not(categories: {id: 1}).includes(:categories).order("RANDOM()").limit(6)
   end
-  session[:category] = 'abc'
+  session[:category] = 'random'
   
 end
 
@@ -70,9 +70,12 @@ end
  
  
  if session[:category]
-   session[:color] = 'green'
-   session[:current_page] = @photos.current_page
+   if session[:category] != 'random'
+    session[:color] = 'green'
+    session[:current_page] = @photos.current_page
+   end
  end
+ 
  if session[:category_id] 
     session[:current_page] = @photos.current_page
     # session[:current_page] = @photos.current_page

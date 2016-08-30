@@ -70,8 +70,8 @@ end
  
  
  if session[:category]
+   session[:color] = 'green'
    if session[:category] != 'random'
-    session[:color] = 'green'
     session[:current_page] = @photos.current_page
    end
  end

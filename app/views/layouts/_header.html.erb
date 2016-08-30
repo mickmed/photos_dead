@@ -2,18 +2,22 @@
  <div class="container">
 	<%= link_to image_tag('MAM11bc.png', :alt => 'mick medium', height: '46', id: 'logo', align: 'center', margin: '1px'), root_path, id: "logo" %>
 <div style="">
-  <% @hard_cats = ['newest','oldest','random']  %>
+  
+  <% @hard_cats = ['random', 'newest','oldest']  %>
   
   <% @hard_cats.each do |hard_cat| %>
  
     <% if hard_cat == session[:category]%>
       <% @color = session[:color]%>
       <% @count = ' -' + @photos.count.to_s %>
-    <%else%>
+    <% else %>
       <% @color = '' %>
-      <% @count = ''%>
+      <% @count = '' %>
     <% end %>
- 
+   
+    
+    
+    
   <a href = <%= photos_path(category: hard_cat)%> style='color:<%= @color %>'><%= hard_cat + @count %></a>&nbsp&nbsp&nbsp
   <% end %>
     

@@ -32,7 +32,7 @@ if params[:category] == 'random'
   else
    @photos = Photo.all.where.not(categories: {id: 1}).includes(:categories).order("RANDOM()").limit(6)
   end
-  
+  session[:category] = 'abc'
   
 end
 

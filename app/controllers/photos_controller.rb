@@ -104,6 +104,7 @@ end
 
 
 def show
+ @messages = Message.all 
  @current_cat = session[:category_id]
  @photos = session[:p]
  #@s_photos = Photo.where(categories: {id: @current_cat}).includes(:categories)

@@ -23,7 +23,7 @@ def index
 
 
 @cats = Category.where.not(id: 1)
-
+@messages = Message.all
 
 
 

@@ -21,22 +21,10 @@ def index
  session.delete(:color)
  session.delete(:hard_cat)
 
-    <% @messages = ['All of my photos are taken with a pocket point and shoot camera. There are no modifications to them other than watermarks. Some of them are one time shots, whose views are no longer available due to construction or deconstruction. Many are taken off suspension bridges while squeezing the lens between the holes in the fence, as the wind howls off the river in winter, and as the train goes past and shakes the bridge, making for a fun but often frustrating adventure. I am not afraid to take pictures of skyscrapers and tourist attractions since they are a part of my daily scenery. Enjoy!', '@Photo.count','oldest']  %>
-    
-    
-    
-    
-    
+
 @cats = Category.where.not(id: 1)
 
-if Rails.env.production?
-   @messages = @messages.all.includes(:categories).order("RAND()").limit(1)
-  else
-   @messages = @messages.order("RANDOM()").limit(1)
-  end
-  session[:category] = 'random'
-  
-end
+
 
 
 if params[:category] == 'random'

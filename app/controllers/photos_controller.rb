@@ -23,7 +23,11 @@ def index
 
 
 @cats = Category.where.not(id: 1)
-@messages = Message.all
+ if Rails.env.production?
+      @messages = Message.all.order("RAND()").limit(6)
+    else
+      @messages = Message.all.order("RANDOM()").limit(6)
+    end
 
 
 

@@ -1,52 +1,38 @@
 class MessagesController < ApplicationController
   before_action :set_message, only: [:show, :edit, :update, :destroy]
   before_action :authenticate, except: [:index, :show]
-  before_action :random
+  before_action :random_photos, :except => [:create, :update, :destroy, :show]
+  before_action :random_messages 
+  before_action :categories
   # GET /messages
   # GET /messages.json
   def index
-    @photos = Photo.all.paginate(:page => params[:page], :per_page => 5)
-    @cats = Category.where.not(id: 1)
-    if Rails.env.production?
-      @messages = Message.all.order("RAND()").limit(6)
-    else
-      @messages = Message.all.order("RANDOM()").limit(6)
-    end
+  
   end
 
-  # GET /messages/1
-  # GET /messages/1.json
+
   def show
     @messages = Message.all
-    @photos = Photo.all.paginate(:page => params[:page], :per_page => 5)
-    @cats = Category.where.not(id: 1)
   end
 
-  # GET /messages/new
   def new
     @messages = Message.all
-    @photos = Photo.all.paginate(:page => params[:page], :per_page => 5)
-    @cats = Category.where.not(id: 1)
-
+    
     @message = Message.new
-    @photos = Photo.all.paginate(:page => params[:page], :per_page => 5)
-    @cats = Category.where.not(id: 1)
+   
   end
 
   # GET /messages/1/edit
 
   def edit
     @messages = Message.all
-    @photos = Photo.all.paginate(:page => params[:page], :per_page => 5)
-    @cats = Category.where.not(id: 1)
+   
   end
 
-  # POST /messages
-  # POST /messages.json
+ 
   def create
     @messages = Message.all
-    @photos = Photo.all.paginate(:page => params[:page], :per_page => 5)
-    @cats = Category.where.not(id: 1)
+    
 
     @message = Message.new(message_params)
 
@@ -113,5 +99,33 @@ class MessagesController < ApplicationController
       @messages = Message.all.order("RANDOM()").limit(6)
     end
   end
-
+ def photo_params
+    params.require(:photo).permit(:title, :description, :picture, :date_taken, category_ids:[])
+  end
+  
+  def random_messages
+    if Rails.env.production?
+      @messages = Message.all.order("RAND()").limit(6)
+    else
+      @messages = Message.all.order("RANDOM()").limit(6)
+    end
+  end
+  
+  def random_photos
+    if Rails.env.production?
+      @photos = Photo.all.where.not(categories: {id: 1}).includes(:categories).order("RAND()").limit(6)
+    else
+      @photos = Photo.all.where.not(categories: {id: 1}).includes(:categories).order("RANDOM()").limit(6)
+    end
+  end
+  
+  def categories
+    @cats = Category.where.not(id: 1)
+  end
+  
+  def authenticate
+    @shoonga = authenticate_or_request_with_http_basic do |username, password|
+        username == "we8vds" && password == "4vght"
+    end
+  end
 end

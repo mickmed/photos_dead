@@ -1,12 +1,13 @@
 <footer class="footer">
-  <small>
-    the medium is the mess age</a>
-  </small>
+  <small> the medium is the mess age</a> </small>
   <nav>
     <ul>
-    
-     <%= @photos.count %>
-      <li><%# link_to "Contact", '#' %></li>
+      <% if @photos %>
+      <%= @photos.count %>
+      <% end %>
+      <li>
+        <%# link_to "Contact", '#' %>
+      </li>
     </ul>
   </nav>
 </footer>

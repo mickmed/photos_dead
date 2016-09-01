@@ -13,6 +13,29 @@ class PhotosController < ApplicationController
     session.delete(:color)
     session.delete(:hard_cat)
     
+    @messages.each do |message|
+      message.message
+      @messages = [message.message] 
+    end
+    
+    
+   
+     
+    @message = @messages.fetch(0)
+    
+    
+    @count = Photo.all.count.to_s
+    
+    
+    if @message == Message.find_by(id: 1).message
+      @message = @message 
+    elsif @message == Message.find_by(id: 2).message
+      @message =   @count + ' ' + @message 
+    elsif @message == Message.find_by(id: 3).message
+      @message =  @count + ' ' + @message
+    end
+    
+ 
     case
     when params[:category] == 'random'
     when params[:category] == 'abc'

@@ -38,6 +38,7 @@ class PhotosController < ApplicationController
  
     case
     when params[:category] == 'random'
+      session[:category] = params[:category]
     when params[:category] == 'abc'
       @photos = Photo.all.order('title asc').paginate(:page => params[:page], :per_page => 6)
       session[:category] = params[:category]

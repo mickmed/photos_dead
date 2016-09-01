@@ -4,14 +4,11 @@
     <% @messages.each do |message| %>
       <%# message.message %>
       <% @messages = [message.message] %>
-
     <% end %>
-<br>
-   <% @messages = @messages.fetch(0){|k|  puts k } %>
-  <% @messages %>
-  
-  
-  
+
+    <% @messages = @messages.fetch(0){|k|  puts k } %>
+    <%# @messages %>
+
     <title><%= full_title(yield(:title)) %></title>
 
     <%= csrf_meta_tags %>
@@ -26,9 +23,7 @@
     <meta property="og:image" content= <%= @photos[1] %> />
     <meta property="og:title" content="nyc snaps" />
     <meta property="og:description" content="<%= @messages %>"/>
-    
-    
- 
+
     <link rel="image_src" href="MAM11bc.png" />
 
     <!-- <link rel="stylesheet" href="/assets/stylesheets/superslides.css">
@@ -41,13 +36,6 @@
 
   <body>
 
-    
-
-
-    
-    
-    
-    
     <%= render 'layouts/header' %>
     <div id="slides" style="display:none;">
       <div class = "height-fill">

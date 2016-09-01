@@ -1,25 +1,17 @@
 class MessagesController < ApplicationController
   before_action :set_message, only: [:show, :edit, :update, :destroy]
   before_action :authenticate, except: [:index, :show]
-  def authenticate
-    @shoonga = authenticate_or_request_with_http_basic do |username, password|
-  username == "we8vds" && password == "4vght"
- end
-  end
-
+  before_action :random
   # GET /messages
   # GET /messages.json
   def index
     @photos = Photo.all.paginate(:page => params[:page], :per_page => 5)
     @cats = Category.where.not(id: 1)
-    @messages = Message.all
-
     if Rails.env.production?
       @messages = Message.all.order("RAND()").limit(6)
     else
       @messages = Message.all.order("RANDOM()").limit(6)
     end
-
   end
 
   # GET /messages/1
@@ -112,4 +104,14 @@ class MessagesController < ApplicationController
   def message_params
     params.require(:message).permit(:message)
   end
+
+  def random
+
+    if Rails.env.production?
+      @messages = Message.all.order("RAND()").limit(6)
+    else
+      @messages = Message.all.order("RANDOM()").limit(6)
+    end
+  end
+
 end

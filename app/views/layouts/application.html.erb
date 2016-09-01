@@ -65,8 +65,11 @@
     </div>
 
     <div class="container">
+     
+      <% if controller.action_name == "index"%>
+       
       <%= render 'layouts/paginator'%>
-
+      <% end %>
       <br>
 
       <%= yield %>

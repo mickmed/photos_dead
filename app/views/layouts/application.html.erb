@@ -1,7 +1,13 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <% @messages.each do |message| %>
+      <%# message.message %>
+      <% @messages = [message.message] %>
 
+    <% end %>
+<br>
+  
     <title><%= full_title(yield(:title)) %></title>
 
     <%= csrf_meta_tags %>
@@ -15,7 +21,7 @@
 
     <meta property="og:image" content= <%= @photos[1] %> />
     <meta property="og:title" content="nyc snaps" />
-    <meta property="og:description" content="<%= @messages[1] %>"/>
+    <meta property="og:description" content="<%= @messages.fetch(0){|k|  puts k } %>"/>
 
     <link rel="image_src" href="MAM11bc.png" />
 
@@ -28,7 +34,14 @@
   </head>
 
   <body>
-<%# @messages[1] %>
+
+    
+
+
+    
+    
+    
+    
     <%= render 'layouts/header' %>
     <div id="slides" style="display:none;">
       <div class = "height-fill">

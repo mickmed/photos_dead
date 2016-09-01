@@ -19,7 +19,6 @@ class MessagesController < ApplicationController
     else
       @messages = Message.all.order("RANDOM()").limit(6)
     end
-    
 
   end
 

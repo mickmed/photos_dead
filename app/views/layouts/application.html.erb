@@ -5,7 +5,7 @@
       <% @ogtitle = session[:category].name %>
       <% @message = @photos.count.to_s + ' snaps of nyc'%>
     <% else %>
-      <% @ogtitle = "nyc snaps"%
+      <% @ogtitle = "nyc snaps" %>
     <% end %>
     
     <title><%= full_title(yield(:title)) %></title>

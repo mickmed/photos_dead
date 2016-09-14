@@ -39,6 +39,12 @@
       <%= image_tag photo.picture, class: 'img-responsive center-bldock', style: 'float:right;margin:5px;max-width:120px;max-height:120px', alt:'' %>
       <% end %>
       <% end %>
+      
+      <% @photo_categories.each do |photo_cats| %>
+     
+      <%= link_to photo_cats.name, category_path(id: photo_cats.id) %>&nbsp&nbsp&nbsp&nbsp
+      
+      <% end %>
     </div> </span>
 
   <% end %>

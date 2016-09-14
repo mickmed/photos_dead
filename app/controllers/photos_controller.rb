@@ -69,6 +69,7 @@ class PhotosController < ApplicationController
 
   def show
     @photo = Photo.find(params[:id])
+    @photo_categories = @cats.where(photos: {id: params[:id]}).includes(:photos)
     @current_cat = session[:category_id]
     @photos = session[:p]
     @current_page = session[:current_page]

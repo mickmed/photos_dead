@@ -7,7 +7,7 @@
     <% else %>
       <% @ogtitle = "nyc snaps" %>
     <% end %>
-    <%= @ogtitle = @ogtitle.to_s %>
+    <% @ogtitle = @ogtitle.to_s %>
     <title><%= full_title(yield(:title)) %></title>
 
     <%= csrf_meta_tags %>
@@ -21,7 +21,7 @@
     <% if controller.action_name == "index"%>
       <meta property="og:image" content= <%= @photos[1] %> />
     <% end %>
-    <meta property="og:title" content= "<%= @ogtitle %>" />
+    <meta property="og:title" content= "nyc snaps" />
     <meta property="og:description" content="<%= @message %>"/>
 
     <link rel="image_src" href="MAM11bc.png" />

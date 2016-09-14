@@ -1,7 +1,11 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <%# @message %>
+    <% if session[:category_id] %>
+      <% @message ='"' + session[:category].name + '"' + @photos.count.to_s + ' snaps of nyc' %>
+      <%# @message %>
+    <% end %>
+    
     <title><%= full_title(yield(:title)) %></title>
 
     <%= csrf_meta_tags %>

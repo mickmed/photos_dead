@@ -18,9 +18,6 @@ class PhotosController < ApplicationController
       @messages = [message.message] 
     end
     
-    
-   
-     
     @message = @messages.fetch(0)
     
     

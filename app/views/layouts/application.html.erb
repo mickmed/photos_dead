@@ -2,8 +2,8 @@
 <html>
   <head>
     <% if session[:category_id] %>
-      <% @ogitle ='"' + session[:category].name + '"' + @photos.count.to_s + ' snaps of nyc' %>
-      <%# @message %>
+      <% @ogtitle = session[:category].name %>
+      <% @message = @photos.count.to_s + ' snaps of nyc'%>
     <% else %>
       <% @ogtitle = "nyc snaps"%
     <% end %>

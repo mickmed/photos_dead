@@ -8,12 +8,14 @@
       <% @title = "nyc snaps" %>
     <% end %>
   
-    <!-- <%= @title %>
+    <%= @title %>
     <%= @message %>
     <%= @photos.shuffle[1].picture %>
-    <%= photos_path %> -->
+    <%= photos_path %>
+    
+    
     <title><%= full_title(yield(:title)) %></title>
-
+    
     <%= csrf_meta_tags %>
     <%= render 'layouts/shim' %>
     <%= stylesheet_link_tag 'application', media: 'all',

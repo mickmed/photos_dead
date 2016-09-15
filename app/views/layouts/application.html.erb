@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <% if session[:category_id] %>
-      <% @ogtitle = session[:category].name %>
-      <% @message = @photos.count.to_s + ' snaps of nyc'%>
+     <% if session[:category_id] %>
+      <% @title = session[:category].name %>
+      <%# @message = @photos.count.to_s + ' snaps of nyc'%>
     <% else %>
-      <% @ogtitle = "nyc snaps" %>
+      <% @title = "nyc snaps" %>
     <% end %>
-    <% @ogtitle = @ogtitle.to_s %>
+ 
     <title><%= full_title(yield(:title)) %></title>
 
     <%= csrf_meta_tags %>
@@ -21,7 +21,7 @@
     <% if controller.action_name == "index"%>
       <meta property="og:image" content= <%= @photos[1] %> />
     <% end %>
-    <meta property="og:title" content= "nyc snaps" />
+    <meta property="og:title" content= "<%= @title %>" />
     <meta property="og:description" content="<%= @message %>"/>
 
     <link rel="image_src" href="MAM11bc.png" />

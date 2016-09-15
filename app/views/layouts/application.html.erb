@@ -7,7 +7,11 @@
     <% else %>
       <% @title = "nyc snaps" %>
     <% end %>
- 
+  
+    <!-- <%= @title %>
+    <%= @message %>
+    <%= @photos.shuffle[1].picture %>
+    <%= photos_path %> -->
     <title><%= full_title(yield(:title)) %></title>
 
     <%= csrf_meta_tags %>
@@ -19,7 +23,7 @@
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/jquery.superslides/0.6.2/jquery.superslides.js"></script>
     <% if controller.action_name == "index"%>
-      <meta property="og:image" content= <%= @photos[1] %> />
+      <meta property="og:image" content= <%= (@photos.shuffle[1].picture) %> />
     <% end %>
     <meta property="og:title" content= "<%= @title %>" />
     <meta property="og:description" content="<%= @message %>"/>

@@ -1,21 +1,31 @@
 <!DOCTYPE html>
 <html>
   <head>
-     <% if session[:category_id] %>
+    <% if session[:category_id] %>
       <% @title = session[:category].name %>
-      <%# @message = @photos.count.to_s + ' snaps of nyc'%>
+      <% @photoog = @photos.shuffle[1].picture %>
     <% else %>
       <% @title = "nyc snaps" %>
     <% end %>
-  
-    <!-- <%= @title %>
-    <%= @message %>
-    <%= @photos.shuffle[1].picture %>
-    <%= photos_path %> -->
-    
-    <% if controller.action_name == "show"%>
+
+    <% if controller.action_name == "show" %>
       <% @title = @photo.description %>
+      <% @photoog = 'http://mickmedium.com/public'+ @photo.picture.url %>
     <% end %>
+
+    
+    
+    
+    
+    <%= @title %><br>
+   
+    <%= @photoog %><br>
+    
+    <%# request.original_url %><br>
+    
+    <%# photos_path %>
+    
+   
     
     
     
@@ -35,7 +45,7 @@
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/jquery.superslides/0.6.2/jquery.superslides.js"></script>
    
-      <meta property="og:image" content= <%= (@photos.shuffle[1].picture) %> />
+      <meta property="og:image" content= <%= (@photoog) %> />
     
     <meta property="og:title" content= "<%= @title %>" />
     <meta property="og:description" content="<%= @message %>"/>

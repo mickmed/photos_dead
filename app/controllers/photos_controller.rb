@@ -89,7 +89,7 @@ class PhotosController < ApplicationController
     @current_page = session[:current_page]
     @ogtitle = @photo.description
     @ogphoto = @photo.picture.url
-    
+    @message = @messages.shuffle[1].message
     
     @i = @photos.index(@photo)
     @i = @i.to_i

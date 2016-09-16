@@ -13,9 +13,16 @@
     <%= @photos.shuffle[1].picture %>
     <%= photos_path %> -->
     
-    <% if @photo %>
+    <% if controller.action_name == "show"%>
       <% @title = @photo.description %>
     <% end %>
+    
+    
+    
+    <%= @title %>
+    
+    
+    
     
     <title><%= full_title(yield(:title)) %></title>
     

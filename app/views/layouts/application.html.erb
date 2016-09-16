@@ -2,14 +2,14 @@
 <html>
   <head>
     <% if session[:category_id] %>
-      <% @title = session[:category].name %>
+      <% @heading = session[:category].name %>
       <% @photoog = @photos.shuffle[1].picture %>
     <% else %>
-      <% @title = "nyc snaps" %>
+      <% @heading = "nyc snaps" %>
     <% end %>
 
     <% if controller.action_name == "show" %>
-      <% @title = @photo.description %>
+      <% @heading = @photo.description %>
       <% @photoog = 'http://mickmedium.com/public'+ @photo.picture.url %>
     <% end %>
 
@@ -17,7 +17,7 @@
     
     
     
-    <%# @title %><br>
+    <%= @heading %><br>
    
     <%# @photoog %><br>
     
@@ -47,8 +47,8 @@
    
       <meta property="og:image" content= <%= @photoog %> />
     
-    <meta property="og:title" content= "<%= @title %>" />
-    <meta property="og:description" content="<%= @message %>"/>
+    <meta property="og:title" content= <%= @heading %> />
+    <meta property="og:description" content= <%= @message %> />
 
     <link rel="image_src" href="MAM11bc.png" />
 

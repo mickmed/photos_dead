@@ -13,9 +13,9 @@
     <%= @photos.shuffle[1].picture %>
     <%= photos_path %> -->
     
-    <%= if @photo %>
+    <% if @photo %>
       <% @title = @photo.name %>
-    <%= end %>
+    <% end %>
     
     <title><%= full_title(yield(:title)) %></title>
     

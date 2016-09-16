@@ -13,6 +13,9 @@ class PhotosController < ApplicationController
     session.delete(:color)
     session.delete(:hard_cat)
     
+    
+      
+      
     @messages.each do |message|
       message.message
       @messages = [message.message] 
@@ -56,11 +59,25 @@ class PhotosController < ApplicationController
       if session[:category] != 'random'
         session[:current_page] = @photos.current_page
       end
-    elsif session[:category_id]
+    end 
+    
+    @ogtitle = "nyc snaps"
+    
+    if session[:category_id]
       session[:current_page] = @photos.current_page
+      @ogtitle = session[:category].name 
     end
     
     session[:p] = @photos
+    
+    
+    
+      @ogphoto = @photos.shuffle[1].picture 
+    
+    
+    
+    
+   
   end
 
 
@@ -70,7 +87,10 @@ class PhotosController < ApplicationController
     @current_cat = session[:category_id]
     @photos = session[:p]
     @current_page = session[:current_page]
-  
+    @ogtitle = @photo.description
+    @ogphoto = @photo.picture.url
+    
+    
     @i = @photos.index(@photo)
     @i = @i.to_i
     @from_id = @photos[@i..-1]
@@ -83,6 +103,12 @@ class PhotosController < ApplicationController
     @fullscreen_photos = @fullscreen_photos.paginate(:page => params[:page], :per_page => 6)
   
     session[:photos] = @photos
+    
+    
+    
+    
+    
+    
   end
   
   def new

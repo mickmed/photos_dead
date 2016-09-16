@@ -13,6 +13,9 @@
     <%= @photos.shuffle[1].picture %>
     <%= photos_path %> -->
     
+    <%= if @photo %>
+      <% @title = @photo.name %>
+    <%= end %>
     
     <title><%= full_title(yield(:title)) %></title>
     
@@ -24,9 +27,9 @@
 
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/jquery.superslides/0.6.2/jquery.superslides.js"></script>
-    <% if controller.action_name == "index"%>
+   
       <meta property="og:image" content= <%= (@photos.shuffle[1].picture) %> />
-    <% end %>
+    
     <meta property="og:title" content= "<%= @title %>" />
     <meta property="og:description" content="<%= @message %>"/>
 

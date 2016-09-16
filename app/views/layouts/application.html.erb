@@ -14,7 +14,7 @@
     <%= photos_path %> -->
     
     <% if @photo %>
-      <% @title = @photo.name %>
+      <% @title = @photo.description %>
     <% end %>
     
     <title><%= full_title(yield(:title)) %></title>

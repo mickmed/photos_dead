@@ -71,7 +71,7 @@ class PhotosController < ApplicationController
     session[:p] = @photos
     
     @ogphoto = @photos.shuffle[1].picture 
-    
+    @ogtype = "website"
     
     
     
@@ -123,6 +123,7 @@ class PhotosController < ApplicationController
     end
     
      @ogtitle = "nyc snaps"
+     @ogtype = "article"
     
     
   end

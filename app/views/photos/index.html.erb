@@ -1,18 +1,10 @@
 <div class="row">
-  <span>
+  <span> <% if @photos %>
 
+    <%= render @photos %>
 
+    <% end %> </span>
 
-  <% if @photos %>
-  
-   
-   <%= render @photos %>
-
-  <% end %>  
-     
-   </span>  
-   
 </div>
 
-
-  <%# render 'shared/aside' %>
+<% # render 'shared/aside' %>

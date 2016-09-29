@@ -16,11 +16,11 @@ class PhotosController < ApplicationController
     
       
       
-    @messages.each do |message|
-      message.message
-      @messages = [message.message] 
-    end
-    
+    # @messages.each do |message|
+      # message.message
+      # @messages = [message.message] 
+    # end
+#     
     @message = @messages.fetch(0)
     
     
@@ -70,9 +70,7 @@ class PhotosController < ApplicationController
     
     session[:p] = @photos
     
-    
-    
-      @ogphoto = @photos.shuffle[1].picture 
+    @ogphoto = @photos.shuffle[1].picture 
     
     
     

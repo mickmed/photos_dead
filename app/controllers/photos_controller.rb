@@ -122,7 +122,7 @@ class PhotosController < ApplicationController
       @message =  @count + ' ' + @message
     end
     
-    
+     @ogtitle = "nyc snaps"
     
     
   end

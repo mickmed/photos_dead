@@ -4,10 +4,7 @@
    
 
 
-    
-<%= @ogphoto %>
-    
-<%= @message %>
+
     
 
     
@@ -42,7 +39,9 @@
   </head>
 
   <body>
+    <%= @ogphoto %>
     
+<%= @message %>
     <%= render 'layouts/header' %>
     <div id="slides" style="display:none;">
       <div class = "height-fill">
@@ -79,6 +78,9 @@
       <br>
 
       <%= yield %>
+      
+      
+
       <%= render 'layouts/footer' %>
     </div>
     <!-- The Modal -->

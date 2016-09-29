@@ -1,3 +1,6 @@
+
+    
+
 <div class="menu-category list-group ">
   <span">
 
@@ -21,19 +24,15 @@
 
   <div class="list-group">
 
-  <a href = "photos/<%= photo.id %>" class="img-responsive center-bldock list-group-item" style="max-width:<%= @width %>;max-height:<%= @width %>"><%= image_tag(photo.picture, width: '100%', alt:'') %></a>
+    <a href = "photos/<%= photo.id %>" class="img-responsive center-bldock list-group-item" style="max-width:<%= @width %>;max-height:<%= @width %>"><%= image_tag(photo.picture, width: '100%', alt:'') %></a>
+  
+    <a href = "photos/<%= photo.id %>" class="img-responsive center-bldock list-group-item" style="max-width:<%= @width%>;max-height:<%= @width%>;text-align:left;background:transparent;border:none">
+    <div style="float:left"><%= photo.title %></div>
+    <div style="float:right"><%# photo.date_taken.strftime("%m/%d/%y") %></div></a>
 
-  <a href = "photos/<%= photo.id %>" class="img-responsive center-bldock list-group-item" style="max-width:<%= @width%>;max-height:<%= @width%>;text-align:left;background:transparent;border:none">
-  <div style="float:left">
-    <%= photo.title %>
   </div>
-  <div style="float:right">
-    <%#photo.date_taken.strftime("%m/%d/%y") %>
-  </div></a>
 
-</div>
 
-<!--- <div class="menu-category-name list-group-item active"><%= link_to photo.title, photo %></div> -->
-</span>
+  </span>
 </div>
 

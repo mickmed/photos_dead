@@ -79,8 +79,7 @@
       <br>
 
       <%= yield %>
-      
-      
+
 
       <%= render 'layouts/footer' %>
     </div>
@@ -91,11 +90,12 @@
       <div class="modal-content">
         <span class="close">×</span>
         <p>
-          All of my photos are taken with a pocket point and shoot camera. There are no modifications to them other than watermarks. Some of them are one time shots, whose views are no longer available due to construction or deconstruction. Many are taken off suspension bridges while squeezing the lens between the holes in the fence, as the wind howls off the river in winter, and as the train goes past and shakes the bridge, making for a fun but often frustrating adventure. I am not afraid to take pictures of skyscrapers and tourist attractions since they are a part of my daily scenery. Enjoy!
+          <%= @about_message %>
+         
         </p>
-        <% if @photos %>
-        <% image_tag @photos[1].picture, :class=>"list-group-item img-responsive center-bldock", :style => 'cursor:pointer;cursor:hand', :id => 'fullscreen', :alt =>"photo pic" %>
-        <% end %>
+       
+        <%= image_tag @photos[1].picture, :class=>"list-group-item img-responsive center-bldock", :style => 'cursor:pointer;cursor:hand', :id => 'fullscreen', :alt =>"photo pic" %>
+         <% if @photos %><% end %>
       </div>
     </div>
 

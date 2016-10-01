@@ -72,7 +72,7 @@ class PhotosController < ApplicationController
     
     @ogphoto = @photos.shuffle[1].picture 
     @ogtype = "website"
-    
+    @about_message = Message.find_by(id: 1).message
     
     
    
@@ -116,6 +116,7 @@ class PhotosController < ApplicationController
     
     if @message == Message.find_by(id: 1).message
       @message = @message 
+     
     elsif @message == Message.find_by(id: 2).message
       @message =   @count + ' ' + @message 
     elsif @message == Message.find_by(id: 3).message
@@ -124,7 +125,7 @@ class PhotosController < ApplicationController
     
      @ogtitle = "nyc snaps"
      @ogtype = "article"
-    
+     @about_message = Message.find_by(id: 1).message
     
   end
   

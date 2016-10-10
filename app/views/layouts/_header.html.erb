@@ -1,53 +1,55 @@
 <header class="navbar navbar-fixed-top">
   <div class="container">
     <%= link_to image_tag('MAM11bc.png', :alt => 'mick medium', height: '46', id: 'logo', align: 'center', margin: '1px'), root_path, id: "logo" %>
-    <div style="">
+    <div><a href = <%= root_path %> style='color:orange;font-size: 35px;float:left;padding-top:0px'>nyc snaps</a></div> 
+    <div style="padding-top:0px">
 
+      &nbsp&nbsp 
       <% @hard_cats = ['random', 'newest','oldest']  %>
 
       <% @hard_cats.each do |hard_cat| %>
 
       <% if hard_cat == session[:category]%>
-      <% @color = session[:color]%>
-      <% @count = ' -' + @photos.count.to_s %>
+        <% @color = session[:color]%>
+        <% @count = ' -' + @photos.count.to_s %>
+        <% else %>
+        <% @color = '' %>
+        <% @count = '' %>
+        <% end %>
+  
+        <a href = <%= photos_path(category: hard_cat)%> style='color:<%= @color %>'><%= hard_cat + @count %></a>&nbsp&nbsp&nbsp
+        <% end %>
+  
+        <% if session[:category_id] %>
+        <% @photos_count = Photo.where(categories: {id: session[:category_id]}).includes(:categories).count.to_s %>
+        <% @c = session[:category] %>
+        <% @ci = @cats.index(@c) %>
+        <% @ci = @ci.to_i %>
+        <% @to_id = @cats[0..@ci] %>
+        <% @to_id = @to_id.reverse.drop(1).reverse %>
+        <%# @ci %>
+        <% @ci = @ci+1   %>
+        <% @from_id = @cats[@ci..-1] %>
+        <% @from_id = @from_id.drop(0) %>
+        <% @cats = @to_id + @from_id %>
+  
+        <% @to_id.each do |cat| %>
+        <span class="cats"><%= link_to cat.name, photos_path(category_id: cat.id) %></span>
+        <% end %>
+  
+        &nbsp<span class = "cats" style="color:green"><%= @c.name + ' -' + @photos_count %></span>&nbsp
+  
+        <% @from_id.each do |cat| %>
+        <span class="cats"><%= link_to cat.name, photos_path(category_id: cat.id) %></span>
+        <% end %>
+
       <% else %>
-      <% @color = '' %>
-      <% @count = '' %>
-      <% end %>
-
-      <a href = <%= photos_path(category: hard_cat)%> style='color:<%= @color %>'><%= hard_cat + @count %></a>&nbsp&nbsp&nbsp
-      <% end %>
-
-      <% if session[:category_id] %>
-      <% @photos_count = Photo.where(categories: {id: session[:category_id]}).includes(:categories).count.to_s %>
-      <% @c = session[:category] %>
-      <% @ci = @cats.index(@c) %>
-      <% @ci = @ci.to_i %>
-      <% @to_id = @cats[0..@ci] %>
-      <% @to_id = @to_id.reverse.drop(1).reverse %>
-      <%# @ci %>
-      <% @ci = @ci+1   %>
-      <% @from_id = @cats[@ci..-1] %>
-      <% @from_id = @from_id.drop(0) %>
-      <% @cats = @to_id + @from_id %>
-
-      <% @to_id.each do |cat| %>
-      <span class="cats"><%= link_to cat.name, photos_path(category_id: cat.id) %></span>
-      <% end %>
-
-      &nbsp<span class = "cats" style="color:green"><%= @c.name + ' -' + @photos_count %></span>&nbsp
-
-      <% @from_id.each do |cat| %>
-      <span class="cats"><%= link_to cat.name, photos_path(category_id: cat.id) %></span>
-      <% end %>
-
-      <% else %>
-      <% @cats.each do |cat| %>
-      <span class="cats"><%= link_to cat.name, photos_path(category_id: cat.id) %></span>
-      <% end %>
+        <% @cats.each do |cat| %>
+        <span class="cats"><%= link_to cat.name, photos_path(category_id: cat.id) %></span>
+        <% end %>
       <%end%>
-      <!-- Trigger/Open The Modal -->
-      <span id="myBtn" style="cursor:pointer;cursor:hand">About</span>
+        <!-- Trigger/Open The Modal -->
+        <span id="myBtn" style="cursor:pointer;cursor:hand">About</span>
     </div>
   </div>
 

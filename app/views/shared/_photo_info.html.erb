@@ -27,6 +27,7 @@
         <%= @photo.date_taken.strftime("%m/%d/%y") %>
       </div>
       <% end %>
+      
       <%= image_tag @photo.picture, :class=>"list-group-item img-responsive center-bldock", :style => 'cursor:pointer;cursor:hand', :id => 'fullscreen', :alt =>"photo pic" %>
 
     </div>

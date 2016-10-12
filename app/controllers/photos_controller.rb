@@ -136,7 +136,7 @@ class PhotosController < ApplicationController
     @i = @i+2
     
     @fullscreen_photos = @from_id + @to_id
-    @fullscreen_photos = @fullscreen_photos.paginate(:page => params[:page], :per_page => 6)
+    @fullscreen_photos = @fullscreen_photos.paginate(:page => params[:page], :per_page => 200)
   
     session[:photos] = @photos
     

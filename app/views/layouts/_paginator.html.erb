@@ -85,12 +85,12 @@
 
 
   <% elsif controller.action_name == "show"%>
-          <div class = "pagination">
+          <!-- <div class = "pagination">
            <%= session[:category_name] + '- ' +  @photos.count.to_s %>&nbsp
             <%= link_to "<---    ", photo_path(id: @photoback), :style => "margin-left:55px" %>&nbsp
              
              <%= @indexnext.to_s %>&nbsp
             <%= link_to "    --->", photo_path(id: @photonext) %>
-          </div>
+          <!-- </div> --> -->
         <% end %>
  

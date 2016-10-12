@@ -292,6 +292,7 @@ input {
   //font-family: 'Stardos Stencil', cursive;
   padding: 10px;
   //font-size: 14px;
+  color: green;
   //
 }
 
@@ -309,17 +310,7 @@ input {
 
 
 
-.pagin{
-  font-family: 'boston_trafficregular';
-  color: green;
-  margin-left: 15px;
-  
 
-
-
-
-
-}
  .pagination li a{
    
    padding: 0px 10px;
@@ -327,9 +318,12 @@ input {
  
  
 .pagination {
- 
+   font-family: 'boston_trafficregular';
+  color: green;
+  margin-left: 15px;
+  font-size: 15px;
  padding-top:0px;
- max-height:14px;
+ max-height:15px;
  //width: 100%;
  //float: left;
  margin: 0 auto;
@@ -425,4 +419,5 @@ input {
   
  width: 500px;
 }
+
 

@@ -5,6 +5,7 @@ class PhotosController < ApplicationController
   before_action :random_messages 
   before_action :categories
 
+
   def index
     session.delete(:category_id)
     session.delete(:category)
@@ -12,20 +13,15 @@ class PhotosController < ApplicationController
     session.delete(:abc)
     session.delete(:color)
     session.delete(:hard_cat)
+    session.delete(:category_name)
     
-    
-      
-      
     @messages.each do |message|
       message.message
       @messages = [message.message] 
     end
     
     @message = @messages.fetch(0)
-    
-    
     @count = Photo.all.count.to_s
-    
     
     if @message == Message.find_by(id: 1).message
       @message = @message 
@@ -35,55 +31,97 @@ class PhotosController < ApplicationController
       @message =  @count + ' ' + @message
     end
     
- 
-    case
-    when params[:category] == 'random'
-      session[:category] = params[:category]
-    when params[:category] == 'abc'
-      @photos = Photo.all.order('title asc').paginate(:page => params[:page], :per_page => 6)
-      session[:category] = params[:category]
-    when params[:category] == 'newest'
-      @photos = Photo.all.where.not(categories: {id: 1}).includes(:categories).order('date_taken desc').paginate(:page => params[:page], :per_page => 6)
-      session[:category] = params[:category]
-    when params[:category] == 'oldest'
-      @photos = Photo.all.where.not(categories: {id: 1}).includes(:categories).order('date_taken asc').paginate(:page => params[:page], :per_page => 6)
-      session[:category] = params[:category]
+  @photo_flick = photo_flick_random 
+    if params[:category] 
+        
+        if params[:category] == 'newest'
+           newest
+           @photo_flick = photo_flick_newest
+        end
+        session[:category] = params[:category]
+        session[:category_name] = params[:category]
+    
     else params[:category_id]
-      @photos = Photo.where(categories: {id: params[:category_id]}).includes(:categories).order('date_taken asc').paginate(:page => params[:page], :per_page => 6)
-      session[:category] = Category.find(params[:category_id])
-      session[:category_id] = session[:category].id
+        photo_category
+        session[:category] = Category.find(params[:category_id])
+        session[:category_id] = session[:category].id
+        session[:category_name] = session[:category].name
+        @photo_flick = photo_flick_category
     end
-
-    if session[:category]
-      session[:color] = 'green'
-      if session[:category] != 'random'
+    
+    
+    if session[:category] && session[:category] != 'random'
         session[:current_page] = @photos.current_page
-      end
-    end 
-    
-    @ogtitle = "nyc snaps"
-    
-    if session[:category_id]
-      session[:current_page] = @photos.current_page
-      @ogtitle = session[:category].name 
     end
-    
-    session[:p] = @photos
+    session[:photo_flick] = @photo_flick
+    session[:color] = 'green'
+
     
     @ogphoto = @photos.shuffle[1].picture 
     @ogtype = "website"
     @about_message = Message.find_by(id: 1).message
+    @ogtitle = "nyc snaps"
     
-    
-   
+  
   end
 
 
   def show
+    @photos = session[:photo_flick]
     @photo = Photo.find(params[:id])
+   
+    
+  
+    
+    @photos.each_with_index do |(photo, key, value), index| 
+        "#{index}: #{key} => #{value}" + photo.id.to_s 
+        #IF SELECTED PHOTO ID MATCHES ID OF PHOTO IN ARRAY @PHOTOS
+         if @photo.id == photo.id 
+             "#{index}: #{key} => #{value}" + photo.id.to_s
+             #THEN SET @INDEX TO THE THE NEXT INDEX IN THE ARRAY 
+             @indexnext = index + 1
+             
+         end 
+         #SELECT NEXT IN ARRAY
+         if index == @indexnext 
+             @photonext = photo.id 
+         end 
+         
+         if !Photo.exists?(@photonext) 
+             @photonext = @photo.id
+         end
+    end 
+    
+    
+    
+    @photos.reverse.each_with_index do |(photo, key, value), index| 
+          "#{index}: #{key} => #{value}" + photo.id.to_s 
+          #IF SELECTED PHOTO ID MATCHES ID OF PHOTO IN ARRAY @PHOTOS
+           if @photo.id == photo.id 
+               "#{index}: #{key} => #{value}" + photo.id.to_s
+               #THEN SET @INDEX TO THE THE NEXT INDEX IN THE ARRAY 
+               @indexback = index+1
+           end 
+           #SELECT NEXT IN ARRAY
+           if index == @indexback 
+               @photoback = photo.id 
+           end 
+           if !Photo.exists?(@photoback) 
+               @photoback = @photo.id
+           end
+     end   
+    
+  
+    
+    
+    
+    
+ 
     @photo_categories = @cats.where(photos: {id: params[:id]}).includes(:photos)
     @current_cat = session[:category_id]
-    @photos = session[:p]
+    
+    
+    
     @current_page = session[:current_page]
     @ogtitle = @photo.description
     @ogphoto = @photo.picture.url
@@ -194,6 +232,29 @@ class PhotosController < ApplicationController
     @shoonga = authenticate_or_request_with_http_basic do |username, password|
         username == "we8vds" && password == "4vght"
     end
+  end
+  def newest
+    @photos = Photo.all.where.not(categories: {id: 1}).includes(:categories).order('date_taken desc').paginate(:page => params[:page], :per_page => 6)
+  end
+  
+  def photo_category
+     @photos = Photo.where(categories: {id: params[:category_id]}).includes(:categories).order('date_taken desc').paginate(:page => params[:page], :per_page => 6)
+  end
+  def photo_flick_random
+    if Rails.env.production?
+      Photo.all.where.not(categories: {id: 1}).includes(:categories).order("RAND()")
+    else
+      Photo.all.where.not(categories: {id: 1}).includes(:categories).order("RANDOM()")
+    end
+  end
+  
+  
+  def photo_flick_newest
+    Photo.all.where.not(categories: {id: 1}).includes(:categories).order('date_taken desc')
+  end
+  
+  def photo_flick_category
+     Photo.where(categories: {id: params[:category_id]}).includes(:categories).order('date_taken desc')
   end
 end
   

@@ -39,8 +39,8 @@ $gray-medium-light: #eaeaea;
 /* universal */
 
 body {
-  padding-top: 60px;
- 
+  padding-top: 0px;
+  
   
 }
 
@@ -69,6 +69,7 @@ td {
  
  .navbar-fixed-top{
   margin-bottom: 0px !important;   
+  margin: 0 auto;
    
  }
 
@@ -76,6 +77,8 @@ header{
   margin-bottom: 0px;
   padding-top: 2px;
   font-family: 'boston_trafficregular';
+  margin: 0 auto;
+  border-bottom:1px solid black;
 }
 
 
@@ -85,7 +88,7 @@ header{
   background: #fffff9 ;
   padding-top: 3px;
   border-bottom: 1px solid black;
-  
+
   
 }
 
@@ -128,7 +131,13 @@ p {
   line-height: 1.7em;
 }
 
-
+hr {
+ 
+  background-color:black;
+  border-color:black;
+  
+  
+}
 /* header */
 
 #logo {

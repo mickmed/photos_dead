@@ -36,18 +36,18 @@
     <%= @message %>
     <%= @ogtype %> -->
     <%= render 'layouts/header' %>
-    <%= render 'layouts/slides'%>
-
+    
     <div class="container">
      
        <%= render 'layouts/paginator'%>
-       <br><br>
+           
        <%= yield %>
   
        <%= render 'layouts/footer' %>
     </div>
     
     <%= render 'layouts/modal' %>
+    <%= render 'layouts/slides'%>
 
   </body>
 </html>

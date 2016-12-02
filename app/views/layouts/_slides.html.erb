@@ -8,7 +8,7 @@
 	          <%= photo[:title] %>
 	
 		          <%= link_to photo_path(id: photo.id) do %>
-		          	<div onclick="toggleFullScreen()" class="shoonga" style="background-image: url(<%= photo.picture %>)"></div>
+		          	<div onclick="untoggle()" class="shoonga" style="background-image: url(<%= photo.picture %>)"></div>
 		
 		          <% end %>
 	

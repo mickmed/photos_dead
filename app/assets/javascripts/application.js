@@ -19,6 +19,7 @@
 //= require_tree .
 
  function slider(){ var windowHeight = $(window).height();
+ 	document.getElementById('slides').style.display = "block";
 	  var headerHeight = $("header").outerHeight();
 	  var calculatedHeight = windowHeight - headerHeight;
 	  var heightFill = $('.height-fill')
@@ -32,6 +33,21 @@
 	  });
 	  }
 	
+function untoggle(){
+	
+	if (document.cancelFullScreen) {  
+      document.cancelFullScreen();  
+    } else if (document.mozCancelFullScreen) {  
+      document.mozCancelFullScreen();  
+    } else if (document.webkitCancelFullScreen) {  
+      document.webkitCancelFullScreen();  
+    }  
+	
+}
+
+
+
+
 
 function toggleFullScreen() {
   if ((document.fullScreenElement && document.fullScreenElement !== null) ||    
@@ -43,15 +59,8 @@ function toggleFullScreen() {
     } else if (document.documentElement.webkitRequestFullScreen) {  
       document.documentElement.webkitRequestFullScreen(Element.ALLOW_KEYBOARD_INPUT);  
     }  
-  } else {  
-    if (document.cancelFullScreen) {  
-      document.cancelFullScreen();  
-    } else if (document.mozCancelFullScreen) {  
-      document.mozCancelFullScreen();  
-    } else if (document.webkitCancelFullScreen) {  
-      document.webkitCancelFullScreen();  
-    }  
-  }  
+  } 
+    
 
 
 	document.addEventListener("webkitfullscreenchange", function () {
@@ -64,9 +73,9 @@ function toggleFullScreen() {
 	   slider();
 	}, false);
 	document.addEventListener("mozfullscreenchange", function () {
-	      document.getElementById('slides').style.display = "block";
+	     
 	  slider();
-	}, true);
+	}, false);
 
 }
 

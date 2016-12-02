@@ -64,8 +64,9 @@ function toggleFullScreen() {
 	   slider();
 	}, false);
 	document.addEventListener("mozfullscreenchange", function () {
-	    slider();
-	}, false);
+	      document.getElementById('slides').style.display = "block";
+	  slider();
+	}, true);
 
 }
 

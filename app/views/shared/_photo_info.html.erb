@@ -28,7 +28,9 @@
       </div>
       <% end %>
       
-      <%= image_tag @photo.picture, :class=>"list-group-item img-responsive center-bldock", :style => 'cursor:pointer;cursor:hand', :id => 'fullscreen', :alt =>"photo pic" %>
+      <%= image_tag @photo.picture, :class=>"list-group-item img-responsive center-bldock", :style => 'cursor:pointer;cursor:hand', :onclick=>"toggleFullScreen()", :id => 'fullmscreen', :alt =>"photo pic" %>
+
+
 
     </div>
     <div class="list-group-item" style="margin:20px">

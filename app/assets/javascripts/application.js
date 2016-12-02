@@ -27,9 +27,18 @@
 	  // superslides
 	  $(function()  {
 	    $('#slides').superslides({
-	        inherit_height_from: '.height-fill'
-	        
+	        inherit_height_from: '.height-fill',
+	        hashchange: true,
+        play: 2000
 	    });
+	    $('#slides').on('mouseenter', function() {
+        $(this).superslides('stop');
+        console.log('Stopped')
+      });
+      $('#slides').on('mouseleave', function() {
+        $(this).superslides('start');
+        console.log('Started')
+      });
 	  });
 	  }
 	

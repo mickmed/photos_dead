@@ -29,7 +29,8 @@
 	    $('#slides').superslides({
 	        inherit_height_from: '.height-fill',
 	        hashchange: true,
-        play: 3000
+        	play: 10000,
+        	animation: 'fade'
 	    });
 	    $('#slides').on('mouseenter', function() {
         $(this).superslides('stop');

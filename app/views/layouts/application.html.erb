@@ -32,20 +32,19 @@
   </head>
 
   <body>
+  		 
   	
-    <!-- <%= @ogphoto %>
-    <%= @ogtitle %>
-    <%= @message %>
-    <%= @ogtype %> -->
-    <%= render 'layouts/header' %>
+     <%= render 'layouts/header' %>
+
     <%= render 'layouts/slides'%>
     
     <div class="container">
-     
+    <% if session[:category] !=	 'newest'%>
        <%= render 'layouts/paginator'%>
+    <% end %>
         <br>   
        <%= yield %>
-  
+
        <%= render 'layouts/footer' %>
     </div>
     

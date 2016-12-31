@@ -11,11 +11,11 @@
 
 
 
-      <% @hard_cats = ['random', 'newest']  %>
+      <% @hard_cats = ['newest']  %>
       <% @hard_cats.each do |hard_cat| %>
           <% if hard_cat == session[:category]%>
               <% @color = session[:color]%>
-              <% @count = ' -' + @photos.count.to_s %>
+              <% @count = ' -' + '' %>
           <% else %>
               <% @color = '' %>
               <% @count = '' %>
@@ -60,8 +60,10 @@
       	<%= link_to "contact", "http://facebook.com/mickmedium", class: "black" %>
       	&nbsp&nbsp&nbsp
       	  <span id="myBtn" class="black" style="cursor:pointer;cursor:hand">About</span>
-      	
+      	 <%# current_visit %>
+  	 
     </div>
+    
   </div>
 
 </header>

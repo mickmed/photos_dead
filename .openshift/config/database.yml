@@ -21,8 +21,8 @@ postgresql: &postgresql
   reconnect: false
 
 defaults: &defaults
-  pool: 5
-  timeout: 5000
+  pool: 20
+  timeout: 50000
   encoding: utf8
   <<: *<%= ENV['RAILS_DB'] || "sqlite" %>
 

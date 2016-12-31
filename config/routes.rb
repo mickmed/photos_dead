@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   
   
   resources :messages
-  root to: 'photos#index', category: 'random'
+  root to: 'photos#index', category: 'newest'
   
     
   resources :photos

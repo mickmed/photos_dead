@@ -1,6 +1,9 @@
 class Photo < ActiveRecord::Base
-require 'image_size'
- has_many :categories_photos
+
+ is_impressionable
+ require 'image_size'
+ #has_many :categories_photos
+ has_many :impressions, foreign_key: "impressionable_id"
  has_and_belongs_to_many :categories
  mount_uploader :picture, PictureUploader
  validate  :picture_size

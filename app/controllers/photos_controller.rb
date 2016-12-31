@@ -1,12 +1,14 @@
 class PhotosController < ApplicationController
+  impressionist :actions=>[:show,:index]
   require 'will_paginate/array'
   before_action :authenticate, except: [:index, :show]
-  before_action :random_photos, :except => [:create, :update, :destroy, :show]
   before_action :random_messages 
   before_action :categories
 
 
   def index
+    
+    
     session.delete(:category_id)
     session.delete(:category)
     session.delete(:photos)
@@ -14,28 +16,36 @@ class PhotosController < ApplicationController
     session.delete(:color)
     session.delete(:hard_cat)
     session.delete(:category_name)
+    # ahoy.track "Home Views", title: "Home page viewed"
+    # @home_views = Ahoy::Event.where(name: "Home Views").count
     
-    @messages.each do |message|
-      message.message
-      @messages = [message.message] 
-    end
     
-    @message = @messages.fetch(0)
+    
+    @imp=Impression.all.where(action_name: "index").count.to_i
+   
+   
+    
+    
     @count = Photo.all.count.to_s
     
-    if @message == Message.find_by(id: 1).message
-      @message = @message 
-    elsif @message == Message.find_by(id: 2).message
-      @message =   @count + ' ' + @message 
-    elsif @message == Message.find_by(id: 3).message
-      @message =  @count + ' ' + @message
-    end
     
-  @photo_flick = photo_flick_random 
+    
+ 
     if params[:category] 
         
         if params[:category] == 'newest'
            newest
+           @photos = Photo.all.joins(:impressions).group('photos.id').order('count(photos.id) desc').paginate(:page => params[:page], :per_page => 60) 
+       
+       
+   @photos = Photo.select("photos.id, title, picture, count(impressions.impressionable_id) AS listens_count").
+    joins("LEFT OUTER JOIN impressions ON impressions.impressionable_id = photos.id AND impressions.impressionable_type = 'Photo'").
+    group("photos.id").
+    order("listens_count DESC").
+    paginate(:page => params[:page], :per_page => 60)
+
+       
+       
            @photo_flick = photo_flick_newest
         end
         session[:category] = params[:category]
@@ -59,7 +69,7 @@ class PhotosController < ApplicationController
     
     @ogphoto = @photos.shuffle[1].picture 
     @ogtype = "website"
-    @about_message = Message.find_by(id: 1).message
+    @about_message = @messages.shuffle[1].message
     @ogtitle = "nyc snaps"
     
   
@@ -69,9 +79,8 @@ class PhotosController < ApplicationController
   def show
     @photos = session[:photo_flick]
     @photo = Photo.find(params[:id])
-   
-    
   
+    
     
     @photos.each_with_index do |(photo, key, value), index| 
         "#{index}: #{key} => #{value}" + photo.id.to_s 
@@ -216,13 +225,7 @@ class PhotosController < ApplicationController
     end
   end
   
-  def random_photos
-    if Rails.env.production?
-      @photos = Photo.all.where.not(categories: {id: 1}).includes(:categories).order("RAND()").limit(6)
-    else
-      @photos = Photo.all.where.not(categories: {id: 1}).includes(:categories).order("RANDOM()").limit(6)
-    end
-  end
+
   
   def categories
     @cats = Category.where.not(id: 1)
@@ -240,13 +243,7 @@ class PhotosController < ApplicationController
   def photo_category
      @photos = Photo.where(categories: {id: params[:category_id]}).includes(:categories).order('date_taken desc').paginate(:page => params[:page], :per_page => 6)
   end
-  def photo_flick_random
-    if Rails.env.production?
-      Photo.all.where.not(categories: {id: 1}).includes(:categories).order("RAND()")
-    else
-      Photo.all.where.not(categories: {id: 1}).includes(:categories).order("RANDOM()")
-    end
-  end
+
   
   
   def photo_flick_newest

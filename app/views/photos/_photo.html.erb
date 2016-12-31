@@ -1,38 +1,33 @@
+<div class="menu-category list-group">
+	<span>
+	<% if File.exist?('public'+photo.picture.url) %>
+		<% @size =  ImageSize.path('public'+ photo.picture.url).size %>
+	<% end %>
+	<% if @size %>
+		<% if @size[0]>@size[1]%>
+		<% @width = '100%' %>
+		<% else %>
+		<% @width = '65%' %>
+		<% end %>
+	<%else%>
+	<%end%>
 
-    
+	<div class="list-group">
+	<a href = "photos/<%= photo.id %>" class="img-responsive center-bldock list-group-item" style="max-width:<%= @width %>;max-height:<%= @width %>"><%= image_tag(photo.picture, width: '100%', alt:'') %></a>
 
-<div class="menu-category list-group ">
-  <span">
+	<a href = "photos/<%= photo.id %>" class="img-responsive center-bldock list-group-item" style="max-width:<%= @width%>;max-height:<%= @width%>;text-align:left;background:transparent;border:none">
+	<div style="float:left">
+		<%= photo.title %>
+	</div>
+	<div style="float:right">
+		<%# photo.impressionist_count(:filter=>:ip_address) %>
+		<%= photo.impressionist_count() %>
+		
+		
+	</div></a>
+	
+</div>
 
-  <% if File.exist?('public'+photo.picture.url) %>
-
-  <% @size =  ImageSize.path('public'+ photo.picture.url).size %>
-
-  <% end %>
-
-  <% if @size %>
-
-  <% if @size[0]>@size[1]%>
-  <% @width = '100%' %>
-  <% else %>
-  <% @width = '65%' %>
-  <% end %>
-
-  <%else%>
-
-  <%end%>
-
-  <div class="list-group">
-
-    <a href = "photos/<%= photo.id %>" class="img-responsive center-bldock list-group-item" style="max-width:<%= @width %>;max-height:<%= @width %>"><%= image_tag(photo.picture, width: '100%', alt:'') %></a>
-  
-    <a href = "photos/<%= photo.id %>" class="img-responsive center-bldock list-group-item" style="max-width:<%= @width%>;max-height:<%= @width%>;text-align:left;background:transparent;border:none">
-    <div style="float:left"><%= photo.title %></div>
-    <div style="float:right"><%# photo.date_taken.strftime("%m/%d/%y") %></div></a>
-
-  </div>
-
-
-  </span>
+</span>
 </div>
 

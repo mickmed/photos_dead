@@ -11,6 +11,9 @@ gem 'bcrypt',       '3.1.7'
 gem 'actionpack', '4.2.4'
 gem 'activerecord-session_store'
 gem 'image_size'
+gem 'impressionist'
+gem 'ahoy_matey'
+gem 'activeuuid', '>= 0.5.0'
 
 #gem 'fog', require: 'fog/aws'
 

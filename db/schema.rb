@@ -50,7 +50,7 @@ ActiveRecord::Schema.define(version: 20161230004558) do
     t.string   "session_hash"
     t.string   "message"
     t.string   "referrer"
-    t.text     "params"
+    t.string    "params"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

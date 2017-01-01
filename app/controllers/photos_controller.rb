@@ -37,9 +37,9 @@ class PhotosController < ApplicationController
           
            @photos = Photo.all.joins(:impressions).group('photos.id').order('count(photos.id) desc').paginate(:page => params[:page], :per_page => 60) 
            @photos = Photo.select("photos.id, title, picture, count(impressions.impressionable_id) AS listens_count").
-    joins("LEFT OUTER JOIN impressions ON impressions.impressionable_id = photos.id AND impressions.impressionable_type = 'Photo'").group("photos.id").order("listens_count DESC").paginate(:page => params[:page], :per_page => 8)
+    joins("LEFT OUTER JOIN impressions ON impressions.impressionable_id = photos.id AND impressions.impressionable_type = 'Photo'").group("photos.id").order("listens_count DESC").paginate(:page => params[:page], :per_page => 6)
 
-          
+          @photo_flick = photo_flick_newest
         end
         
         if params[:category] == 'newest'
@@ -244,7 +244,9 @@ class PhotosController < ApplicationController
      @photos = Photo.where(categories: {id: params[:category_id]}).includes(:categories).order('date_taken desc').paginate(:page => params[:page], :per_page => 6)
   end
 
-  
+  def photo_flick_favorites
+    Photo.all.where.not(categories: {id: 1}).includes(:categories).order('date_taken desc')
+  end
   
   def photo_flick_newest
     Photo.all.where.not(categories: {id: 1}).includes(:categories).order('date_taken desc')

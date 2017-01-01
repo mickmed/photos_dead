@@ -11,7 +11,7 @@
 
 
 
-      <% @hard_cats = ['newest']  %>
+      <% @hard_cats = ['favorites', 'newest']  %>
       <% @hard_cats.each do |hard_cat| %>
           <% if hard_cat == session[:category]%>
               <% @color = session[:color]%>

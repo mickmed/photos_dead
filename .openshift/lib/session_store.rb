@@ -15,3 +15,8 @@ Rails.application.config.session_store :active_record_store, :key => '_my_app_se
 # which shouldn't be used to store highly confidential information
 # (create the session table with "rails generate session_migration")
 # RailsApp::Application.config.session_store :active_record_store
+
+
+
+
+ActiveRecord::SessionStore::Session.delete_all

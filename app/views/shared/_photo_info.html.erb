@@ -1,8 +1,6 @@
 
 <% if File.exist?('public'+@photo.picture.url) %>
-
-<% @size =  ImageSize.path('public'+ @photo.picture.url).size %>
-
+	<% @size =  ImageSize.path('public'+ @photo.picture.url).size %>
 <% end %>
 
 <% if @size %>
@@ -28,7 +26,7 @@
       </div>
       <% end %>
       
-      <%= image_tag @photo.picture, :class=>"list-group-item img-responsive center-bldock", :style => 'cursor:pointer;cursor:hand', :onclick=>"toggleFullScreen()", :id => 'fullmscreen', :alt =>"photo pic" %>
+      <%= image_tag @photo.picture, :class=>"list-group-item img-responsive center-blcock", :style => 'cursor:pointer;cursor:hand', :onclick=>"toggleFullScreen()", :id => 'fullscreen', :alt =>"photo pic" %>
       <%= "views: #{@photo.impressionist_count(:filter=>:ip_address).to_i }" %>
 
     </div>
@@ -48,7 +46,6 @@
 
   <% end %>
 	
-      	
- 
+
 </div>
 

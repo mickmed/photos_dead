@@ -1,178 +1,104 @@
 class PhotosController < ApplicationController
-  impressionist :actions=>[:show,:index]
-  require 'will_paginate/array'
+  impressionist :actions=>[:index, :show]
+  #require 'will_paginate'
   before_action :authenticate, except: [:index, :show]
   before_action :random_messages 
   before_action :categories
+  before_action :cat_names
 
 
   def index
     
-    
-    session.delete(:category_id)
     session.delete(:category)
-    session.delete(:photos)
-    session.delete(:abc)
-    session.delete(:color)
-    session.delete(:hard_cat)
-    session.delete(:category_name)
+    #session.delete(:photo_flick)
+    @category = params[:category] 
+    @imp=Impression.all.where(action_name: "index").count.to_i
+       
+    if @category == 'favorites'
+      favorites
+      @photo_flick = photo_flick_favorites
+    end        
+    
+    if @category == 'newest'
+      newest
+      @photo_flick = photo_flick_newest
+    end
+    
+    if @category !=  'favorites' && params[:category] != 'newest'
+      photo_category
+      @photo_flick = photo_flick_category
+    end
+    
+    if request.xhr?
+      
+    end
+     
+    
+    session[:photo_flick] = @photo_flick
+    
+    # session[:current_page] = @photos.current_page
+    # @ogphoto = @photos.shuffle[1].picture 
+    # @ogtype = "website"
+    # @about_message = @messages.shuffle[1].message
+    # @ogtitle = "nyc snaps"
     # ahoy.track "Home Views", title: "Home page viewed"
     # @home_views = Ahoy::Event.where(name: "Home Views").count
-    
-    
-    
-    @imp=Impression.all.where(action_name: "index").count.to_i
-   
-   
-    
-    
-    @count = Photo.all.count.to_s
-    
-    
-    
- 
-    if params[:category] 
-      
-        if params[:category] == 'favorites'
-          
-           @photos = Photo.all.joins(:impressions).group('photos.id').order('count(photos.id) desc').paginate(:page => params[:page], :per_page => 60) 
-           @photos = Photo.select("photos.id, title, picture, count(impressions.impressionable_id) AS listens_count").
-    joins("LEFT OUTER JOIN impressions ON impressions.impressionable_id = photos.id AND impressions.impressionable_type = 'Photo'").group("photos.id").order("listens_count DESC").paginate(:page => params[:page], :per_page => 6)
-
-          @photo_flick = photo_flick_newest
-        end
-        
-        if params[:category] == 'newest'
-           newest
-          
-       
-           @photo_flick = photo_flick_newest
-        end
-        session[:category] = params[:category]
-        session[:category_name] = params[:category]
-    
-    else params[:category_id]
-        photo_category
-        session[:category] = Category.find(params[:category_id])
-        session[:category_id] = session[:category].id
-        session[:category_name] = session[:category].name
-        @photo_flick = photo_flick_category
-    end
-    
-    
-    if session[:category] && session[:category] != 'random'
-        session[:current_page] = @photos.current_page
-    end
-    session[:photo_flick] = @photo_flick
-    session[:color] = 'green'
-
-    
-    @ogphoto = @photos.shuffle[1].picture 
-    @ogtype = "website"
-    @about_message = @messages.shuffle[1].message
-    @ogtitle = "nyc snaps"
-    
-  
-  end
+end
 
 
   def show
-    @photos = session[:photo_flick]
-    @photo = Photo.find(params[:id])
-  
-    
-    
-    @photos.each_with_index do |(photo, key, value), index| 
-        "#{index}: #{key} => #{value}" + photo.id.to_s 
-        #IF SELECTED PHOTO ID MATCHES ID OF PHOTO IN ARRAY @PHOTOS
-         if @photo.id == photo.id 
-             "#{index}: #{key} => #{value}" + photo.id.to_s
-             #THEN SET @INDEX TO THE THE NEXT INDEX IN THE ARRAY 
-             @indexnext = index + 1
-             
-         end 
-         #SELECT NEXT IN ARRAY
-         if index == @indexnext 
-             @photonext = photo.id 
-         end 
-         
-         if !Photo.exists?(@photonext) 
-             @photonext = @photo.id
-         end
-    end 
-    
-    
-    
-    @photos.reverse.each_with_index do |(photo, key, value), index| 
-          "#{index}: #{key} => #{value}" + photo.id.to_s 
-          #IF SELECTED PHOTO ID MATCHES ID OF PHOTO IN ARRAY @PHOTOS
-           if @photo.id == photo.id 
-               "#{index}: #{key} => #{value}" + photo.id.to_s
-               #THEN SET @INDEX TO THE THE NEXT INDEX IN THE ARRAY 
-               @indexback = index+1
-           end 
-           #SELECT NEXT IN ARRAY
-           if index == @indexback 
-               @photoback = photo.id 
-           end 
-           if !Photo.exists?(@photoback) 
-               @photoback = @photo.id
-           end
-     end   
-    
-  
-    
-    
-    
-    
  
-    @photo_categories = @cats.where(photos: {id: params[:id]}).includes(:photos)
-    @current_cat = session[:category_id]
     
-    
-    
-    @current_page = session[:current_page]
-    @ogtitle = @photo.description
-    @ogphoto = @photo.picture.url
-    @message = @messages.shuffle[1].message
-    
+    @photo = Photo.find(params[:id])
+    @photos = session[:photo_flick]
+    flicker
+
     @i = @photos.index(@photo)
     @i = @i.to_i
     @from_id = @photos[@i..-1]
     @i = @i-1
-    
+
     @to_id = @photos[0..@i]
     @i = @i+2
-    
+
     @fullscreen_photos = @from_id + @to_id
-    @fullscreen_photos = @fullscreen_photos.paginate(:page => params[:page], :per_page => 200)
-  
-    session[:photos] = @photos
     
+
+    
+#    
+    # @messages.each do |message|
+      # message.message
+      # @messages = [message.message] 
+    # end
+#     
+    # @message = @messages.fetch(0)
+#     
+#     
+    # @count = Photo.all.count.to_s
+#     
+#     
+    # if @message == Message.find_by(id: 1).message
+      # @message = @message 
+#      
+    # elsif @message == Message.find_by(id: 2).message
+      # @message =   @count + ' ' + @message 
+    # elsif @message == Message.find_by(id: 3).message
+      # @message =  @count + ' ' + @message
+    # end
+#     # @photo_categories = @categories.where(photos: {id: params[:id]}).includes(:photos)
+    # @current_cat = session[:category_id]
+#     
+#     
+#     
    
-    @messages.each do |message|
-      message.message
-      @messages = [message.message] 
-    end
-    
-    @message = @messages.fetch(0)
-    
-    
-    @count = Photo.all.count.to_s
-    
-    
-    if @message == Message.find_by(id: 1).message
-      @message = @message 
-     
-    elsif @message == Message.find_by(id: 2).message
-      @message =   @count + ' ' + @message 
-    elsif @message == Message.find_by(id: 3).message
-      @message =  @count + ' ' + @message
-    end
-    
-     @ogtitle = "nyc snaps"
-     @ogtype = "article"
-     @about_message = Message.find_by(id: 1).message
+#      
+     # @ogtitle = "nyc snaps"
+     # @ogtype = "article"
+     # @about_message = Message.find_by(id: 1).message
+      # @current_page = session[:current_page]
+    # @ogtitle = @photo.description
+    # @ogphoto = @photo.picture.url
+    # @message = @messages.shuffle[1].message
     
   end
   
@@ -228,7 +154,7 @@ class PhotosController < ApplicationController
 
   
   def categories
-    @cats = Category.where.not(id: 1)
+    @categories = Category.where.not(id: 1)
   end
   
   def authenticate
@@ -237,11 +163,19 @@ class PhotosController < ApplicationController
     end
   end
   def newest
-    @photos = Photo.all.where.not(categories: {id: 1}).includes(:categories).order('date_taken desc').paginate(:page => params[:page], :per_page => 6)
+    @photos = Photo.all.includes(:categories).order('date_taken asc').paginate(:page => params[:page], :per_page => 12)
   end
   
+  
+  def favorites
+    #@photos = Photo.all.joins(:impressions).group('photos.id').order('count(photos.id) desc').paginate(:page => params[:page], :per_page => 60) 
+      @photos = Photo.select("photos.id, title, picture, count(impressions.impressionable_id) AS listens_count").joins("LEFT OUTER JOIN impressions ON impressions.impressionable_id = photos.id AND impressions.impressionable_type = 'Photo'").group("photos.id").order("listens_count DESC").paginate(:page => params[:page], :per_page => 12)
+      
+  end
+  
+  
   def photo_category
-     @photos = Photo.where(categories: {id: params[:category_id]}).includes(:categories).order('date_taken desc').paginate(:page => params[:page], :per_page => 6)
+     @photos = Photo.where(categories: {name: params[:category]}).includes(:categories).order('date_taken desc').paginate(:page => params[:page], :per_page => 12)
   end
 
   def photo_flick_favorites
@@ -249,11 +183,59 @@ class PhotosController < ApplicationController
   end
   
   def photo_flick_newest
-    Photo.all.where.not(categories: {id: 1}).includes(:categories).order('date_taken desc')
+    Photo.all.includes(:categories).order('date_taken desc')
   end
   
   def photo_flick_category
-     Photo.where(categories: {id: params[:category_id]}).includes(:categories).order('date_taken desc')
+     Photo.where(categories: {name: params[:category]}).includes(:categories).order('date_taken desc')
+  end
+  
+  def cat_names
+    @cat_names = []
+    @categories.each do |cats|
+      @cat_names = @cat_names.push(cats.name)
+    end
   end
 end
-  
+  def flicker
+   
+    @photos.each_with_index do |(photo, key, value), index| 
+        "#{index}: #{key} => #{value}" + photo.id.to_s 
+        #IF SELECTED PHOTO ID MATCHES ID OF PHOTO IN ARRAY @PHOTOS
+         if @photo.id == photo.id 
+             @hey = "#{index}: #{key} => #{value}" + photo.id.to_s
+             #THEN SET @INDEX TO THE THE NEXT INDEX IN THE ARRAY 
+             @index = index
+             @indexnext = index + 1
+             
+         end 
+         #SELECT NEXT IN ARRAY
+         if index == @indexnext 
+             @photonext = photo.id 
+         end 
+#          
+         if !Photo.exists?(@photonext) 
+             @photonext = @photo.id
+         end
+    end 
+    
+    
+    
+    @photos.reverse.each_with_index do |(photo, key, value), index| 
+          "#{index}: #{key} => #{value}" + photo.id.to_s 
+          #IF SELECTED PHOTO ID MATCHES ID OF PHOTO IN ARRAY @PHOTOS
+           if @photo.id == photo.id 
+               "#{index}: #{key} => #{value}" + photo.id.to_s
+               #THEN SET @INDEX TO THE THE NEXT INDEX IN THE ARRAY 
+               @indexback = index+1
+           end 
+           #SELECT NEXT IN ARRAY
+           if index == @indexback 
+               @photoback = photo.id 
+           end 
+           if !Photo.exists?(@photoback) 
+               @photoback = @photo.id
+           end
+      end   
+    
+  end

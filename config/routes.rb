@@ -3,9 +3,9 @@ Rails.application.routes.draw do
 
   
   
-  resources :messages
-  root to: 'photos#index', category: 'newest'
+
   
+  root to: 'photos#index', category: 'favorites'
     
   resources :photos
   resources :categories

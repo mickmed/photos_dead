@@ -1,70 +1,35 @@
-<header class="navbar navbar-default navbar-static-top">
-  <div class="container"  onclick= "untoggle()" >
+<header class="navbar navbar-default navbar-fixed-top">
+	
+<div class="container"  onclick= "untoggle()" >
     <%= link_to image_tag('MAM11bc.png',  :alt => 'mick medium', height: '46', id: 'logo', align: 'center', margin: '1px'), root_path, id: "logo", onclick: "untoggle()" %>
     <div><a href = <%= root_path %> style='color:orange;font-size: 35px;float:left;padding-top:5px;line-height:40px'>nyc snaps&nbsp</a></div> 
-    <div style="padding-top:5px">
+    <div id="nav" style="padding-top:5px">
 
-      &nbsp&nbsp 
-      
-     
-
-
-
-
-      <% @hard_cats = ['favorites', 'newest']  %>
-      <% @hard_cats.each do |hard_cat| %>
-          <% if hard_cat == session[:category]%>
-              <% @color = session[:color]%>
-              <% @count = ' -' + '' %>
-          <% else %>
-              <% @color = '' %>
-              <% @count = '' %>
-          <% end %>
-          <a href = <%= photos_path(category: hard_cat)%> style='color:<%= @color %>'><%= hard_cat + @count %></a>&nbsp&nbsp&nbsp
-      <% end %>
-        
-      <% if session[:category_id] %>
-          <% @photos_count = @photos.count %>
-          <% @c = session[:category] %>
-          <% @ci = @cats.index(@c) %>
-          <% @ci = @ci.to_i %>
-          <% @to_id = @cats[0..@ci] %>
-          <% @to_id = @to_id.reverse.drop(1).reverse %>
-          <%# @ci %>
-          <% @ci = @ci+1   %>
-          <% @from_id = @cats[@ci..-1] %>
-          <% @from_id = @from_id.drop(0) %>
-          <% @cats = @to_id + @from_id %>
-    
-          <% @to_id.each do |cat| %>
-              <span class="cats"><%= link_to cat.name, photos_path(category_id: cat.id) %></span>
-          <% end %>
-
-          &nbsp<span><%= link_to @c.name + ' -' +  @photos.count.to_s, photos_path(category_id: session[:category_id]), :class => "cats"%></span>&nbsp
+   		<% @names = @cat_names.unshift('favorites', 'newest') %>
+   		 		
+    	<% @cat_names.each do |name| %>
+    		<% if name == @category %>
+    			<% @class = 'catson' %>
+    			<% @name = name + '-'+ @photos.count.to_s %>
+    		<% else %>
+    			<% @class = 'cats' %>
+    			<% @name = name %>
+   			<% end %>
+   			<% if name == 'favorites' %>
+    			<% @name = name %>
+    	   	<% end %>
+    	   	
+    	   	<span style="color:green" class="<%= @class %>"><%= link_to @name, photos_path(category: name) %></span>	
+    	 <% end %>
   
-          <% @from_id.each do |cat| %>
-              <span class="cats"><%= link_to cat.name, photos_path(category_id: cat.id) %></span>
-          <% end %>
-
-      <% else %>
-          <% @cats.each do |cat| %>
-              <span class="cats"><%= link_to cat.name, photos_path(category_id: cat.id) %></span>
-          <% end %>
-      <%end%>
-        &nbsp&nbsp
-        <%= link_to "more pics", "http://more.mickmedium.com" %>&nbsp&nbsp&nbsp&nbsp;
-        <!-- Trigger/Open The Modal -->
-        &nbsp&nbsp&nbsp
-      
-      	
-      	<%= link_to "contact", "http://facebook.com/mickmedium", class: "black" %>
+         <%= link_to "more pics", "http://more.mickmedium.com" %>&nbsp&nbsp&nbsp&nbsp;
+         <%= link_to "contact", "http://facebook.com/mickmedium", class: "black" %>
       	&nbsp&nbsp&nbsp
-      	  <span id="myBtn" class="black" style="cursor:pointer;cursor:hand">About</span>
-      	 <%# current_visit %>
-  	 
+      	 <span id="myBtn" class="black" style="cursor:pointer;cursor:hand">About</span>
+  
     </div>
     
-  </div>
+</div>
 
 </header>
 

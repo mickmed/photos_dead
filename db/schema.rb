@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161230004558) do
+ActiveRecord::Schema.define(version: 20170105053524) do
 
   create_table "ahoy_events", force: :cascade do |t|
     t.integer  "visit_id"
@@ -50,7 +50,7 @@ ActiveRecord::Schema.define(version: 20161230004558) do
     t.string   "session_hash"
     t.string   "message"
     t.string   "referrer"
-    t.string    "params"
+    t.text     "params"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -79,6 +79,13 @@ ActiveRecord::Schema.define(version: 20161230004558) do
     t.text     "description"
     t.date     "date_taken"
     t.integer  "photo_views"
+  end
+
+  create_table "posts", force: :cascade do |t|
+    t.string   "title"
+    t.text     "body"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "scraperinfos", force: :cascade do |t|

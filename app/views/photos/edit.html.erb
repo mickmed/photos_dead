@@ -13,7 +13,7 @@
 	<%= f.text_field :date_taken, class: 'form-control' %>
 
   <%= f.label "categories" %><br /><br />
-  <%= f.collection_check_boxes :category_ids, @cats, :id, :name do |b| %>
+  <%= f.collection_check_boxes :category_ids, @categories, :id, :name do |b| %>
   <div class="collection-check-box">
    <%# b.check_box %>
    <%= b.label %>

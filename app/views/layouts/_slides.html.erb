@@ -1,27 +1,26 @@
-<div id="slides" style="display:none;">
-      <div class = "height-fill">
-        <div class="slides-container">
-        	
-          <% if @photo %>
-	          <% @fullscreen_photos.each do |photo| %>
-	
-	          <%= photo[:title] %>
-	
-		          <%= link_to photo_path(id: photo.id) do %>
-		          	<div onclick="untoggle()" class="shoonga" style="background-image: url(<%= photo.picture %>)"></div>
-		
-		          <% end %>
-	
-	          <% end %>
+<div id="slides" style="display:none;padding-top:52px;">
+	<div class = "height-fill">
+		<div class="slides-container">
+		<% if @photo %>
+			<% @fullscreen_photos.each do |photo| %>
+				<%= link_to photo_path(id: photo.id) do %>
+					<div onclick="untoggle()" class="shoonga" style="background-image: url(<%= photo.picture %>)"></div>
+				<% end %>
+			<% end %>
+		<% end %>
+		</div>
+	</div>
 
-          <% end %>
-        </div>
-      </div>
+	<div id="fullNav">
+		<nav class="slides-navigation">
+			<a href="#" class="next fullnext">>></a>
+			<a href="#" class="prev fullprev"><<</a>
+		</nav>
+	</div>
+</div>
 
-      <div id="fullNav">
-        <nav class="slides-navigation">
-          <a href="#" class="next fullnext">>></a>
-          <a href="#" class="prev fullprev"><<</a>
-        </nav>
-      </div>
-    </div>
+<% if @fullscreen_photos %>
+<% @fullscreen_photos.each do |fs| %>
+	<%= fs.id %>
+<% end %><br>
+<% end %>

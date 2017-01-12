@@ -1,0 +1,9 @@
+-@photos.each do |photo|
+  div style="height:250px"
+    label
+      | id 
+      =photo.id
+    div
+      =photo.picture
+#infinite-scrolling
+=will_paginate(@photos)

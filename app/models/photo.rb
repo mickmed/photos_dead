@@ -8,6 +8,12 @@ class Photo < ActiveRecord::Base
  mount_uploader :picture, PictureUploader
  validate  :picture_size
 
+
+
+
+
+
+
  private
  # Validates the size of an uploaded picture.
   def picture_size

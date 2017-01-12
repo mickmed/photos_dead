@@ -1,4 +1,4 @@
-<div class="menu-category list-group">
+<div class="menu-category list-group >
 	<span>
 	<% if File.exist?('public'+photo.picture.url) %>
 		<% @size =  ImageSize.path('public'+ photo.picture.url).size %>
@@ -21,9 +21,9 @@
 	</div>
 	<div style="float:right">
 		<%# photo.impressionist_count(:filter=>:ip_address) %>
-		<%= photo.impressionist_count() %>
-		<%# photo.id %>
-		<%# photo.id %>
+		<%= photo.impressionist_count(:filter=>:ip_address) %>
+		
+	
 	</div></a>
 	
 </div>

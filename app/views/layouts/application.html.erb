@@ -28,30 +28,26 @@
     <script src="/assets/javascripts/jquery.easing.1.3.js"></script>
     <script src="/assets/javascripts/jquery.animate-enhanced.min.js"></script>
     <script src="/assets/javascripts/jquery.superslides.js" type="text/javascript" charset="utf-8"></script>  -->
-
+	<%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+</script>
   </head>
 
   <body>
   		 
-  	
-     <%= render 'layouts/header' %>
-
+  	<%= render 'layouts/header' %>
     <%= render 'layouts/slides'%>
-    
-    <div class="container">
-    <% if session[:category] !=	  'favorites'%>
-       <%= render 'layouts/paginator'%>
-    <% end %>
+    <div class="main_container">
+    	<% if session[:category] != 'favorites' %>
+    		<%= render 'layouts/paginator'%>
+    	<% end %>
         <br>   
-       <%= yield %>
-
-       <%= render 'layouts/footer' %>
+        <%= yield %>
+		<%# @photos.each_with_index do |photo, index| %>
+			<%# "index=#{index} photo id=#{photo.id} photo name=#{photo.title}" %><br>
+		<%# end %>
+        <%# render 'layouts/footer' %>
     </div>
-    
-    <%= render 'layouts/modal' %>
-    
-
   </body>
 </html>
-
-      

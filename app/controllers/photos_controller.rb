@@ -163,19 +163,19 @@ end
     end
   end
   def newest
-    @photos = Photo.all.includes(:categories).order('date_taken asc').paginate(:page => params[:page], :per_page => 12)
+    @photos = Photo.all.includes(:categories).order('date_taken asc').paginate(:page => params[:page], :per_page => 6)
   end
   
   
   def favorites
     #@photos = Photo.all.joins(:impressions).group('photos.id').order('count(photos.id) desc').paginate(:page => params[:page], :per_page => 60) 
-      @photos = Photo.select("photos.id, title, picture, count(impressions.impressionable_id) AS listens_count").joins("LEFT OUTER JOIN impressions ON impressions.impressionable_id = photos.id AND impressions.impressionable_type = 'Photo'").group("photos.id").order("listens_count DESC").paginate(:page => params[:page], :per_page => 12)
+      @photos = Photo.select("photos.id, title, picture, count(impressions.impressionable_id) AS listens_count").joins("LEFT OUTER JOIN impressions ON impressions.impressionable_id = photos.id AND impressions.impressionable_type = 'Photo'").group("photos.id").order("listens_count DESC").paginate(:page => params[:page], :per_page => 6)
       
   end
   
   
   def photo_category
-     @photos = Photo.where(categories: {name: params[:category]}).includes(:categories).order('date_taken desc').paginate(:page => params[:page], :per_page => 12)
+     @photos = Photo.where(categories: {name: params[:category]}).includes(:categories).order('date_taken desc').paginate(:page => params[:page], :per_page => 6)
   end
 
   def photo_flick_favorites

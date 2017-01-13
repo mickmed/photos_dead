@@ -19,6 +19,11 @@
 
 //= require_tree .
 
+
+function myFunction() {
+    document.getElementById("screensaver")
+    toggleFullScreen();
+}
 function slider() {
 	var windowHeight = $(window).height();
 	document.getElementById('slides').style.display = "block";
@@ -32,6 +37,8 @@ function slider() {
 			//inherit_height_from : '.height-fill',
 			hashchange : true,
 			play : 10000,
+			
+			pagination: false
 			//animation : 'fade'
 		});
 		$('#slides').on('mouseenter', function() {

@@ -14,9 +14,9 @@
 	<% if controller.action_name == "show" && @photo %>
 		<div class = "pagination">
 		<%= session[:category_name]  %>&nbsp
-		<%= link_to @photoback.to_s + "<---    ", photo_path(id: @photoback.to_s), :style => "margin-left:55px" %>&nbsp
-		<%= @index.to_s %>&nbsp
-		<%= link_to "    --->" + @photonext.to_s, photo_path(id: @photonext.to_s) %>
+		<%# link_to "<---    ", photo_path(id: @photoback.to_s), :style => "margin-left:55px" %>&nbsp
+		<%# @index.to_s %>&nbsp
+		<%# link_to "    --->", photo_path(id: @photonext.to_s) %>
   		</div>
   	<% end %>
 <% end %>

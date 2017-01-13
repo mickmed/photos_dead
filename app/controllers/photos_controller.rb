@@ -33,7 +33,7 @@ class PhotosController < ApplicationController
       
     end
      
-    
+    @slider_photos = @photos
     session[:photo_flick] = @photo_flick
     
     # session[:current_page] = @photos.current_page
@@ -41,7 +41,9 @@ class PhotosController < ApplicationController
     # @ogtype = "website"
     # @about_message = @messages.shuffle[1].message
     # @ogtitle = "nyc snaps"
-    # ahoy.track "Home Views", title: "Home page viewed"
+     # ahoy.track "Home Views", title: "Home page viewed"
+     # Visit.group(:search_keyword).count
+     # current_visit
     # @home_views = Ahoy::Event.where(name: "Home Views").count
 end
 
@@ -61,7 +63,7 @@ end
     @to_id = @photos[0..@i]
     @i = @i+2
 
-    @fullscreen_photos = @from_id + @to_id
+    @slider_photos = @from_id + @to_id
     
 
     
@@ -163,31 +165,32 @@ end
     end
   end
   def newest
-    @photos = Photo.all.includes(:categories).order('date_taken asc').paginate(:page => params[:page], :per_page => 8)
+    @photos = Photo.all.includes(:categories).order('date_taken desc').paginate(:page => params[:page], :per_page => 9)
   end
   
   
   def favorites
     #@photos = Photo.all.joins(:impressions).group('photos.id').order('count(photos.id) desc').paginate(:page => params[:page], :per_page => 60) 
-      @photos = Photo.select("photos.id, title, picture, count(impressions.impressionable_id) AS listens_count").joins("LEFT OUTER JOIN impressions ON impressions.impressionable_id = photos.id AND impressions.impressionable_type = 'Photo'").group("photos.id").order("listens_count DESC").paginate(:page => params[:page], :per_page => 8)
+      @photos = Photo.all.order("photo_views DESC").paginate(:page => params[:page], :per_page => 8)
+      #@photos = Photo.select("photos.id, title, picture, count(impressions.impressionable_id) AS listens_count").joins("LEFT OUTER JOIN impressions ON impressions.impressionable_id = photos.id AND impressions.impressionable_type = 'Photo'").group("photos.id").order("listens_count DESC").paginate(:page => params[:page], :per_page => 8)
       
   end
   
   
   def photo_category
-     @photos = Photo.where(categories: {name: params[:category]}).includes(:categories).order('date_taken desc').paginate(:page => params[:page], :per_page => 8)
+     @photos = Photo.where(categories: {name: params[:category]}).includes(:categories).order('photo_views desc').paginate(:page => params[:page], :per_page => 8)
   end
 
   def photo_flick_favorites
-    Photo.all.where.not(categories: {id: 1}).includes(:categories).order('date_taken desc')
+    Photo.all.where.not(categories: {id: 1}).includes(:categories).order('photo_views desc')
   end
   
   def photo_flick_newest
-    Photo.all.includes(:categories).order('date_taken asc')
+    Photo.all.includes(:categories).order('date_taken desc')
   end
   
   def photo_flick_category
-     Photo.where(categories: {name: params[:category]}).includes(:categories).order('date_taken desc')
+     Photo.where(categories: {name: params[:category]}).includes(:categories).order('photo_views DESC')
   end
   
   def cat_names

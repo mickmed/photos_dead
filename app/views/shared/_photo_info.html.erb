@@ -13,7 +13,7 @@
 
 <div class='menu row' style="-moz-column-width:<%= @width %>;-webkit-column-width: <%= @width %>;width:85%;margin: 0 auto;padding-top:0px">
 	<span>
-		<%= link_to "<---    ", photo_path(id: @photoback.to_s), :style => "margin-left:55px" %>&nbsp
+		
 		<div style="display:inline-block">
 			<%= @photo.title %>
 			<% if @photo.date_taken %>
@@ -21,10 +21,12 @@
 					<%= @photo.date_taken.strftime("%m/%d/%y") %>
 				</div>
 			<% end %>
-			<%= image_tag @photo.picture, :class=>"list-group-item img-responsive center-blcock", :style => 'cursor:pointer;cursor:hand', :onclick=>"slider()", :id => 'fullscreen', :alt =>"photo pic" %>
+			<%= image_tag @photo.picture, :class=>"list-group-item img-responsive center-blcock", :style => 'cursor:pointer;cursor:hand', :onclick=>"slider()", :id => 'slider', :alt =>"photo pic" %>
 			<%= "views: #{@photo.photo_views}" %>
+			<%= link_to "<---    ", photo_path(id: @photoback.to_s), :style => "margin-left:55px" %>&nbsp
+			<%= link_to "    --->", photo_path(id: @photonext.to_s) %>
 		</div> 
-		<%= link_to "    --->", photo_path(id: @photonext.to_s) %>
+		
 		<div class="list-group-item" style="margin:20px">
 			<%= @photo.description%>
 		</div> 

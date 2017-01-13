@@ -1,13 +1,13 @@
 <div id="slides" style="display:none;padding-top:52px;">
 	<div class = "height-fill">
 		<div class="slides-container">
-		<% if @slider_photos %>
+	
 			<% @slider_photos.each do |photo| %>
 				<%= link_to photo_path(id: photo.id) do %>
 					<div onclick="untoggle()" class="shoonga" style="background-image: url(<%= photo.picture %>)"></div>
 				<% end %>
 			<% end %>
-		<% end %>
+		
 		
 		</div>
 	</div>
@@ -23,5 +23,5 @@
 <% if @fullscreen_photos %>
 <% @fullscreen_photos.each do |fs| %>
 	<%# fs.id %>
-<% end %><br>
+<% end %>
 <% end %>

@@ -20,8 +20,8 @@
 //= require_tree .
 
 
-function myFunction() {
-    document.getElementById("screensaver")
+function gallery() {
+    //document.getElementById("gallery")
     toggleFullScreen();
 }
 function slider() {
@@ -36,17 +36,17 @@ function slider() {
 		$('#slides').superslides({
 			//inherit_height_from : '.height-fill',
 			hashchange : true,
-			//play : 10000,
+			play : 10000,
 			pagination: false
 			//animation : 'fade'
 		});
-		// $('#slides').on('mouseenter', function() {
-			// $(this).superslides('stop');
-			// console.log('Stopped')
-		// });
-		// $('#slides').on('mouseleave', function() {
-			// $(this).superslides('start');
-			// console.log('Started')
+		$('#slides').on('mouseenter', function() {
+			$(this).superslides('stop');
+			console.log('Stopped')
+		});
+		$('#slides').on('mouseleave', function() {
+			$(this).superslides('start');
+			console.log('Started')
 		});
 	});
 }

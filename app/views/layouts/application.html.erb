@@ -52,7 +52,9 @@
 		<% if params[:action] == "show" %>
         	<%= render 'layouts/footer' %>
         <% end %>
+        <% if params[:action] ==  'show' || params[:action] == 'index'%>
           <%= render 'layouts/modal' %>
+         <% end %>
     </div>
   </body>
 </html>

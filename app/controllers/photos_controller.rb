@@ -1,7 +1,7 @@
 class PhotosController < ApplicationController
   impressionist :actions=>[:index, :show]
   before_action :authenticate, except: [:index, :show]
-  before_action
+
   def index
     @category = params[:category] 
     @cat_names = Category.pluck(:name)

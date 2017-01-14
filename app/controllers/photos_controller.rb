@@ -1,17 +1,10 @@
 class PhotosController < ApplicationController
   impressionist :actions=>[:index, :show]
-  #require 'will_paginate'
   before_action :authenticate, except: [:index, :show]
-  before_action :random_messages 
-  before_action :categories
-  before_action :cat_names
-
-
+  
   def index
-    
-    session.delete(:category)
-    #session.delete(:photo_flick)
     @category = params[:category] 
+    @cat_names = Category.pluck(:name)
     @imp=Impression.all.where(action_name: "index").count.to_i
        
     if @category == 'favorites'
@@ -34,23 +27,18 @@ class PhotosController < ApplicationController
     end
      
     @slider_photos = @photos
+    @og = @photos.shuffle[1]
+    @og_image = @og.picture
+    @og_title = @og.title
+    @og_message = Message.all.shuffle[1].message
     session[:photo_flick] = @photo_flick
-    
     # session[:current_page] = @photos.current_page
-    # @ogphoto = @photos.shuffle[1].picture 
-    # @ogtype = "website"
-    # @about_message = @messages.shuffle[1].message
-    # @ogtitle = "nyc snaps"
-     # ahoy.track "Home Views", title: "Home page viewed"
-     # Visit.group(:search_keyword).count
-     # current_visit
+    # ahoy.track "Home Views", title: "Home page viewed"
     # @home_views = Ahoy::Event.where(name: "Home Views").count
-end
+  end
 
 
   def show
- 
-    
     @photo = Photo.find(params[:id])
     @photos = session[:photo_flick]
     flicker
@@ -65,43 +53,9 @@ end
 
     @slider_photos = @from_id + @to_id
     
-
-    
-#    
-    # @messages.each do |message|
-      # message.message
-      # @messages = [message.message] 
-    # end
-#     
-    # @message = @messages.fetch(0)
-#     
-#     
-    # @count = Photo.all.count.to_s
-#     
-#     
-    # if @message == Message.find_by(id: 1).message
-      # @message = @message 
-#      
-    # elsif @message == Message.find_by(id: 2).message
-      # @message =   @count + ' ' + @message 
-    # elsif @message == Message.find_by(id: 3).message
-      # @message =  @count + ' ' + @message
-    # end
-#     # @photo_categories = @categories.where(photos: {id: params[:id]}).includes(:photos)
-    # @current_cat = session[:category_id]
-#     
-#     
-#     
-   
-#      
-     # @ogtitle = "nyc snaps"
-     # @ogtype = "article"
-     # @about_message = Message.find_by(id: 1).message
-      # @current_page = session[:current_page]
-    # @ogtitle = @photo.description
-    # @ogphoto = @photo.picture.url
-    # @message = @messages.shuffle[1].message
-    
+    # @current_page = session[:current_page]
+    @ogtitle = @photo.description
+    @ogphoto = @photo.picture.url
   end
   
   def new
@@ -139,24 +93,11 @@ end
     redirect_to root_path
   end
   
+  
   private
   
   def photo_params
     params.require(:photo).permit(:title, :description, :picture, :date_taken, category_ids:[])
-  end
-  
-  def random_messages
-    if Rails.env.production?
-      @messages = Message.all.order("RAND()").limit(6)
-    else
-      @messages = Message.all.order("RANDOM()").limit(6)
-    end
-  end
-  
-
-  
-  def categories
-    @categories = Category.where.not(id: 1)
   end
   
   def authenticate
@@ -164,18 +105,16 @@ end
         username == "we8vds" && password == "4vght"
     end
   end
+  
   def newest
     @photos = Photo.all.includes(:categories).order('date_taken desc').paginate(:page => params[:page], :per_page => 9)
   end
-  
   
   def favorites
     #@photos = Photo.all.joins(:impressions).group('photos.id').order('count(photos.id) desc').paginate(:page => params[:page], :per_page => 60) 
       @photos = Photo.all.order("photo_views DESC").paginate(:page => params[:page], :per_page => 8)
       #@photos = Photo.select("photos.id, title, picture, count(impressions.impressionable_id) AS listens_count").joins("LEFT OUTER JOIN impressions ON impressions.impressionable_id = photos.id AND impressions.impressionable_type = 'Photo'").group("photos.id").order("listens_count DESC").paginate(:page => params[:page], :per_page => 8)
-      
   end
-  
   
   def photo_category
      @photos = Photo.where(categories: {name: params[:category]}).includes(:categories).order('photo_views desc').paginate(:page => params[:page], :per_page => 8)
@@ -193,12 +132,7 @@ end
      Photo.where(categories: {name: params[:category]}).includes(:categories).order('photo_views DESC')
   end
   
-  def cat_names
-    @cat_names = []
-    @categories.each do |cats|
-      @cat_names = @cat_names.push(cats.name)
-    end
-  end
+
 end
   def flicker
    
@@ -216,7 +150,7 @@ end
          if index == @indexnext 
              @photonext = photo.id 
          end 
-#          
+        
          if !Photo.exists?(@photonext) 
              @photonext = @photo.id
          end

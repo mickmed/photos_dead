@@ -15,10 +15,10 @@
 
     <meta property="fb:app_id" content="fbappid"/>
     <meta property="og:type" content= "website" />
-    <meta property="og:image" content= <%= @ogphoto %> />
+    <meta property="og:image" content= <%= @og_image %> />
 
-    <meta property="og:title" content= "<%= @ogtitle %>" />
-    <meta property="og:description" content= "<%= @message %>" />
+    <meta property="og:title" content= "<%= @og_title %>" />
+    <meta property="og:description" content= "<%= @og_message %>" />
 	<meta name="description" content="Mick Medium takes snap shots of NYC using a pocket camera. A new take on the east river, the manhattan sklyine, and more mundane fanfare that paints the scenery of NYC (mostly east side)">
   
 	<meta name="keywords" content="new york city photography, manhattan sklyine, mick medium photography, east river new york city, art deco, tidbits of history">
@@ -35,10 +35,12 @@
   </head>
 
   <body>
-  		 
+  		
   	<%= render 'layouts/header' %>
     <%= render 'layouts/slides'%>
     <div class="main_container">
+    	<%# @cat_names %>
+    	<span style= "color:black;float:right;font-size:8px;line-height:8px">by mick medium</span>
     	<% if session[:category] != 'favorites' %>
     		<%= render 'layouts/paginator'%>
     	<% end %>
@@ -50,6 +52,7 @@
 		<% if params[:action] == "show" %>
         	<%= render 'layouts/footer' %>
         <% end %>
+          <%= render 'layouts/modal' %>
     </div>
   </body>
 </html>

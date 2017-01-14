@@ -1,38 +1,36 @@
+
 <header class="navbar navbar-default navbar-fixed-top">
-	
+
 <div class="container"  onclick= "untoggle()" >
     <%= link_to image_tag('MAM11bc.png',  :alt => 'mick medium', height: '46', id: 'logo', align: 'center', margin: '1px'), root_path, id: "logo", onclick: "untoggle()" %>
-    <div><a href = <%= root_path %> style='color:orange;font-size: 35px;float:left;padding-top:5px;line-height:40px'>nyc snaps&nbsp</a></div> 
+    <div><a href = <%= root_path %> style='color:orange;font-size: 35px;float:left;padding-top:5px;line-height:40px'>nyc snaps&nbsp</a></div>
     <div id="nav" style="padding-top:5px">
 
-   		<% @names = @cat_names.unshift('favorites', 'newest') %>
-   		 		
-    	<% @cat_names.each do |name| %>
-    		<% if name == @category %>
-    			<% @class = 'catson' %>
-    			<% @name = name + '-'+ @photos.count.to_s %>
-    		<% else %>
-    			<% @class = 'cats' %>
-    			<% @name = name %>
-   			<% end %>
-   			<% if name == 'favorites' %>
-    			<% @name = name %>
-    	   	<% end %>
-    	   	
-    	   	<span style="color:green" class="<%= @class %>"><%= link_to @name, photos_path(category: name) %></span>	
-    	 <% end %>
-  
+                <% @names = @cat_names.unshift('favorites', 'newest') %>
+
+        <% @names.each do |name| %>
+                <% if name == @category %>
+                        <% @class = 'catson' %>
+                        <% @name = name + '-'+ @photos.count.to_s %>
+                <% else %>
+                        <% @class = 'cats' %>
+                        <% @name = name %>
+                        <% end %>
+                        <% if name == 'favorites' %>
+                        <% @name = name %>
+                <% end %>
+
+                <span style="color:green" class="<%= @class %>"><%= link_to @name, photos_path(category: name) %></span>
+         <% end %>
+
          <%= link_to "more pics", "http://more.mickmedium.com" %>&nbsp&nbsp&nbsp&nbsp;
-       
+
          <span style="color:purple;cursor:pointer;cursor:hand" onclick="gallery()">gallery</span>&nbsp&nbsp&nbsp
-      	 <%= link_to "contact", "http://facebook.com/mickmedium", class: "black" %>&nbsp&nbsp&nbsp
-      	 <span id="myBtn" class="black" style="cursor:pointer;cursor:hand">About</span>
-  
+         <%= link_to "contact", "http://facebook.com/mickmedium", class: "black" %>&nbsp&nbsp&nbsp
+         <span id="myBtn" class="black" style="cursor:pointer;cursor:hand">About</span>
+
     </div>
-    
+
 </div>
 
 </header>
-
-
-

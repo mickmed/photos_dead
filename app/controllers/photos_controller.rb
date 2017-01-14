@@ -1,7 +1,7 @@
 class PhotosController < ApplicationController
   impressionist :actions=>[:index, :show]
   before_action :authenticate, except: [:index, :show]
- 
+  before_action
   def index
     @category = params[:category] 
     @cat_names = Category.pluck(:name)
@@ -31,7 +31,9 @@ class PhotosController < ApplicationController
     @og_image = @og.picture
     @og_title = @og.title
     @og_message = Message.all.shuffle[1].message
+    @about = Message.find(1).message
     session[:photo_flick] = @photo_flick
+    session[:category] = @category
     # session[:current_page] = @photos.current_page
     # ahoy.track "Home Views", title: "Home page viewed"
     # @home_views = Ahoy::Event.where(name: "Home Views").count
@@ -41,6 +43,7 @@ class PhotosController < ApplicationController
   def show
     @photo = Photo.find(params[:id])
     @photos = session[:photo_flick]
+    @category = session[:category]
     flicker
 
     @i = @photos.index(@photo)

@@ -58,7 +58,7 @@ class PhotosController < ApplicationController
     
     # @current_page = session[:current_page]
     @ogtitle = @photo.description
-    @ogphoto = @photo.picture.url
+    @ogimage = @photo.picture.url
   end
   
   def new

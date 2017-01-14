@@ -57,8 +57,8 @@ class PhotosController < ApplicationController
     @slider_photos = @from_id + @to_id
     
     # @current_page = session[:current_page]
-    @ogtitle = @photo.description
-    @ogimage = @photo.picture.url
+    @og_title = @photo.description
+    @og_image = @photo.picture.url
   end
   
   def new

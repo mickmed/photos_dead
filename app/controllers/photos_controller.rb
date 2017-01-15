@@ -63,6 +63,7 @@ class PhotosController < ApplicationController
   
   def new
     @photo_new = Photo.new
+    @categories = Category.all
   end
   
   def create

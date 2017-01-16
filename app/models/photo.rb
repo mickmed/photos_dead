@@ -1,9 +1,9 @@
 class Photo < ActiveRecord::Base
 
- is_impressionable :counter_cache => true, :column_name => :photo_views, :unique => true
+ is_impressionable :counter_cache => true, :column_name => :photo_views
  require 'image_size'
  #has_many :categories_photos
- has_many :impressions, foreign_key: "impressionable_id"
+ #has_many :impressions, foreign_key: "impressionable_id"
  has_and_belongs_to_many :categories
  mount_uploader :picture, PictureUploader
  validate  :picture_size

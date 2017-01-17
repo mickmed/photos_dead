@@ -40,14 +40,14 @@ function slider() {
 			pagination: false
 			//animation : 'fade'
 		});
-		$('#slides').on('mouseenter', function() {
-			$(this).superslides('stop');
-			console.log('Stopped')
-		});
-		$('#slides').on('mouseleave', function() {
-			$(this).superslides('start');
-			console.log('Started')
-		});
+		// $('#slides').on('mouseenter', function() {
+			// $(this).superslides('stop');
+			// console.log('Stopped')
+		// });
+		// $('#slides').on('mouseleave', function() {
+			// $(this).superslides('start');
+			// console.log('Started')
+		// });
 	});
 }
 

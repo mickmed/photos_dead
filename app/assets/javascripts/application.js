@@ -36,7 +36,7 @@ function slider() {
 		$('#slides').superslides({
 			//inherit_height_from : '.height-fill',
 			hashchange : true,
-			play : 10000,
+			//play : 10000,
 			pagination: false
 			//animation : 'fade'
 		});

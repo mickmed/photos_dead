@@ -28,8 +28,8 @@ class PhotosController < ApplicationController
      
     @slider_photos = @photos
     @og = @photos.shuffle[1]
-    #@og_image = @og.picture
-    # @og_title = @og.title
+    @og_image = @og.picture
+    @og_title = @og.title
     @og_message = Message.all.shuffle[1].message
     @about = Message.find(1).message
     session[:photo_flick] = @photo_flick

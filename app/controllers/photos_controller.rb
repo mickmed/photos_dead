@@ -4,10 +4,12 @@ class PhotosController < ApplicationController
   before_action :authenticate, except: [:index, :show]
 
   def index
+    
     @category = params[:category] 
     @cat_names = Category.pluck(:name)
-           
+      # render :text => @cat_names       
     if @category == 'favorites'
+      
       favorites
       @photo_flick = photo_flick_favorites
     end        
@@ -26,12 +28,12 @@ class PhotosController < ApplicationController
       
     end
      
-    @slider_photos = @photos
-    @og = @photos.shuffle[1]
-    @og_image = @og.picture
-    @og_title = @og.title
-    @og_message = Message.all.shuffle[1].message
-    @about = Message.find(1).message
+    # @slider_photos = @photos
+    # @og = @photos.shuffle[1]
+    # @og_image = @og.picture
+    # @og_title = @og.title
+    # @og_message = Message.all.shuffle[1].message
+    # @about = Message.find(1).message
     session[:photo_flick] = @photo_flick
     session[:category] = @category
     # session[:current_page] = @photos.current_page

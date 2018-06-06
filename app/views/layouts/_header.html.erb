@@ -6,7 +6,7 @@
     <div><a href = <%= root_path %> style='color:orange;font-size: 35px;float:left;padding-top:5px;line-height:40px'>nyc snaps&nbsp</a></div>
     <div id="nav" style="padding-top:5px">
 
-                <% @names = Category.pluck(:name).unshift('favorites', 'newest') %>
+        <% @names = Category.pluck(:name).unshift('favorites', 'newest') %>
 
         <% @names.each do |name| %>
                 <% if name == @category %>
@@ -23,10 +23,10 @@
                 <span style="color:green" class="<%= @class %>"><%= link_to @name, photos_path(category: name) %></span>
          <% end %>
 
-         <%= link_to "more pics", "http://more.mickmedium.com" %>&nbsp&nbsp&nbsp&nbsp;
+         <%# link_to "more pics", "http://more.mickmedium.com" %>&nbsp&nbsp&nbsp&nbsp;
 
          <span style="color:purple;cursor:pointer;cursor:hand" onclick="gallery()">gallery</span>&nbsp&nbsp&nbsp
-         <%= link_to "music", "http://www.mickymedium.com", style: "color:olive" %>&nbsp&nbsp&nbsp
+         <%# link_to "music", "http://www.mickymedium.com", style: "color:olive" %>&nbsp&nbsp&nbsp
          <%= link_to "contact", "http://facebook.com/mickmedium", style: "color:olive" %>&nbsp&nbsp&nbsp
          <span id="myBtn" class="black" style="color:black;cursor:pointer;cursor:hand">About</span>
 

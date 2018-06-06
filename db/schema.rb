@@ -50,7 +50,7 @@ ActiveRecord::Schema.define(version: 20170105053524) do
     t.string   "session_hash"
     t.string   "message"
     t.string   "referrer"
-    t.text     "params"
+    t.string   "params"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -72,9 +72,9 @@ ActiveRecord::Schema.define(version: 20170105053524) do
   end
 
   create_table "photos", force: :cascade do |t|
-    t.datetime "created_at",              null: false
-    t.datetime "updated_at",              null: false
-    t.string   "picture",     limit: 255
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.string   "picture"
     t.text     "title"
     t.text     "description"
     t.date     "date_taken"
@@ -84,12 +84,6 @@ ActiveRecord::Schema.define(version: 20170105053524) do
   create_table "posts", force: :cascade do |t|
     t.string   "title"
     t.text     "body"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "scraperinfos", force: :cascade do |t|
-    t.text     "message"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
